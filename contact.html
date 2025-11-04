@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Contact — Ashtrayudh</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      background: #14141f;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.4);
+    }
+    input, textarea, button {
+      font: inherit;
+      padding: 0.7rem;
+      border-radius: 5px;
+      border: none;
+    }
+    input, textarea {
+      background: #1d1d2b;
+      color: #fff;
+    }
+    button {
+      background: var(--accent);
+      color: white;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.2s;
+    }
+    button:hover {
+      opacity: 0.9;
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <h1 class="brand"><a href="index.html">Ashtrayudh</a></h1>
+      <nav class="nav">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="apps.html">Apps</a>
+        <a href="blog.html">Blog</a>
+        <a href="contact.html" style="text-decoration:underline;">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <h2>Contact Us</h2>
+    <p>If you’d like to reach out, share ideas, or collaborate, fill out the form below. Your message will come directly to our team inbox.</p>
+
+    <form action="https://formspree.io/f/abcdxyz" method="POST">
+      <label>
+        Your Name:
+        <input type="text" name="name" required>
+      </label>
+      <label>
+        Your Email:
+        <input type="email" name="_replyto" required>
+      </label>
+      <label>
+        Message:
+        <textarea name="message" rows="5" required></textarea>
+      </label>
+      <button type="submit">Send Message</button>
+    </form>
+
+    <p style="margin-top:1.5rem;font-size:0.9rem;color:#888;">We never share your email. Messages are securely forwarded to our internal team inbox.</p>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© 2025 Ashtrayudh — Built with care. <a href="https://github.com/ashtrayudh/ashtrayudh.github.io">Source</a></p>
+    </div>
+  </footer>
+</body>
+</html>
