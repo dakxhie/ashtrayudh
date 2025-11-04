@@ -1,134 +1,199 @@
-/* 🌸 Global Reset */
+/* ======= Global Styles ======= */
+:root {
+  --bg-color: #f9e8e3; /* soft beige-pink background */
+  --card-bg: #fffaf8;  /* lighter ivory for cards */
+  --text-color: #4b3b39; /* warm brown-gray text */
+  --accent-color: #e6b8a2; /* peach accent */
+  --accent-hover: #d99a8f; /* slightly deeper hover */
+  --shadow-color: rgba(0, 0, 0, 0.05);
+  --font-main: "Poppins", "Inter", sans-serif;
+  --font-accent: "Playfair Display", serif;
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
 }
 
 body {
-  background-color: #f8f1f1; /* soft beige-pink */
-  color: #3d3d3d;
-  line-height: 1.6;
+  font-family: var(--font-main);
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  line-height: 1.7;
+  transition: all 0.3s ease;
 }
 
-/* 🌷 Header */
+/* ======= Header ======= */
 .site-header {
-  background-color: #f5d5d5;
-  padding: 1rem 0;
   text-align: center;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  padding: 2.5rem 1rem 1.5rem;
+  background-color: #fffaf8;
+  box-shadow: 0 2px 10px var(--shadow-color);
 }
 
 .site-header h1 {
-  color: #7a4c58;
-  font-size: 2rem;
+  font-family: var(--font-accent);
+  font-size: 2.2rem;
   letter-spacing: 1px;
-  margin-bottom: 0.3rem;
+  color: var(--text-color);
+  margin-bottom: 0.5rem;
+}
+
+.nav {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
 }
 
 .nav a {
-  margin: 0 10px;
   text-decoration: none;
-  color: #7a4c58;
+  color: var(--text-color);
   font-weight: 500;
-  transition: color 0.3s ease;
+  transition: 0.3s;
 }
 
 .nav a:hover,
-.nav .active {
-  color: #b05c7e;
+.nav a.active {
+  color: var(--accent-hover);
+  text-decoration: underline;
 }
 
-/* 🌸 Main Container */
+/* ======= Layout ======= */
 .container {
   max-width: 900px;
   margin: 2rem auto;
-  padding: 0 1rem;
+  padding: 0 1.2rem;
 }
 
-/* 🌸 Hero Section */
-#hero {
-  text-align: center;
-  margin-bottom: 2rem;
-}
-
-#hero h2 {
-  color: #7a4c58;
-  font-size: 1.8rem;
-  margin-bottom: 0.6rem;
-}
-
-#hero p {
-  color: #5a5a5a;
-  font-size: 1rem;
-}
-
-/* 🌷 Cards */
 .card {
-  background-color: #fff;
-  border-radius: 14px;
-  padding: 1.5rem;
-  margin-bottom: 1.5rem;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.06);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  background-color: var(--card-bg);
+  border-radius: 18px;
+  padding: 2rem;
+  box-shadow: 0 4px 15px var(--shadow-color);
+  margin-bottom: 2rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 6px 14px rgba(0,0,0,0.08);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
 }
 
-.card h3, .card h2 {
-  color: #7a4c58;
-  margin-bottom: 0.8rem;
-}
-
-.card p {
-  color: #444;
+.card h2 {
+  font-family: var(--font-accent);
+  color: var(--text-color);
+  font-size: 1.8rem;
   margin-bottom: 1rem;
 }
 
-/* 🌸 Buttons */
-.cta, .back-btn {
+.card p {
+  margin-bottom: 1rem;
+  font-size: 1.05rem;
+}
+
+/* ======= Buttons ======= */
+button,
+.back-btn,
+a.button {
   display: inline-block;
-  background-color: #f5d5d5;
-  color: #7a4c58;
-  text-decoration: none;
-  padding: 0.6rem 1rem;
+  padding: 0.6rem 1.2rem;
   border-radius: 8px;
+  background-color: var(--accent-color);
+  color: #fff;
+  border: none;
+  text-decoration: none;
+  cursor: pointer;
+  transition: 0.3s;
   font-weight: 500;
-  transition: background 0.3s, transform 0.2s;
 }
 
-.cta:hover, .back-btn:hover {
-  background-color: #f3b5c5;
-  transform: scale(1.03);
+button:hover,
+.back-btn:hover,
+a.button:hover {
+  background-color: var(--accent-hover);
+  transform: translateY(-2px);
 }
 
-/* 🌿 Footer */
+/* ======= Contact Form ======= */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+input,
+textarea {
+  padding: 0.8rem;
+  border: 1px solid #e4cfc7;
+  border-radius: 8px;
+  background-color: #fff;
+  color: var(--text-color);
+  font-family: var(--font-main);
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+input:focus,
+textarea:focus {
+  border-color: var(--accent-hover);
+  background-color: #fffaf8;
+  outline: none;
+}
+
+/* ======= Footer ======= */
 .site-footer {
-  background-color: #f5d5d5;
   text-align: center;
-  padding: 1rem;
-  color: #7a4c58;
+  padding: 1.5rem;
   font-size: 0.9rem;
-  box-shadow: 0 -2px 6px rgba(0,0,0,0.05);
+  color: var(--text-color);
+  background-color: #fffaf8;
+  box-shadow: 0 -1px 10px var(--shadow-color);
 }
 
-/* 📱 Responsive */
-@media (max-width: 600px) {
-  .nav a {
-    display: inline-block;
-    margin: 5px;
-  }
+/* ======= Blog Grid (if used) ======= */
+.blog-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
 
+/* ======= Links & Hover ======= */
+a {
+  color: var(--accent-hover);
+}
+
+a:hover {
+  color: var(--accent-color);
+}
+
+/* ======= Animations ======= */
+.fade-in {
+  opacity: 0;
+  transform: translateY(15px);
+  animation: fadeUp 0.7s ease forwards;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ======= Responsive ======= */
+@media (max-width: 768px) {
   .card {
-    padding: 1.2rem;
+    padding: 1.5rem;
   }
-
-  #hero h2 {
-    font-size: 1.5rem;
+  .site-header h1 {
+    font-size: 1.8rem;
+  }
+  .nav {
+    flex-wrap: wrap;
+    gap: 0.8rem;
   }
 }
-
