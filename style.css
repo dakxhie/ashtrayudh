@@ -1,18 +1,19 @@
-/* --- Ashtrayudh Website Theme --- */
+/* --- Ashtrayudh Aesthetic Theme --- */
 
 :root {
-  --royal-blue: #0a3d91;
-  --dark-bg: #0b0b14;
-  --light-text: #f3f3f3;
-  --accent: #0099ff;
+  --bg: #fff7f4;
+  --accent: #f4b6b6;
+  --text: #3b3b3b;
+  --card-bg: #ffffffcc;
+  --link: #d98686;
 }
 
 body {
-  font-family: "Segoe UI", Roboto, sans-serif;
+  font-family: "Poppins", "Segoe UI", sans-serif;
+  background: var(--bg);
+  color: var(--text);
   margin: 0;
-  background: var(--dark-bg);
-  color: var(--light-text);
-  line-height: 1.6;
+  line-height: 1.7;
 }
 
 .container {
@@ -23,57 +24,82 @@ body {
 
 /* Header */
 .site-header {
-  background: var(--royal-blue);
+  background: var(--accent);
   color: white;
+  text-align: center;
   padding: 1rem 0;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
 
-.site-header .brand a {
+.site-header a {
   color: white;
-  text-decoration: none;
-}
-
-.nav a {
-  color: white;
-  margin: 0 0.5rem;
   text-decoration: none;
   font-weight: 500;
 }
 
-.nav a:hover {
-  text-decoration: underline;
+.nav {
+  margin-top: 0.5rem;
 }
 
-/* Hero Section */
+.nav a {
+  margin: 0 0.4rem;
+  padding: 0.3rem 0.6rem;
+  border-radius: 5px;
+  transition: background 0.2s;
+}
+
+.nav a:hover {
+  background: rgba(255,255,255,0.2);
+}
+
+/* Hero & Content */
 #hero {
   text-align: center;
-  margin: 3rem 0;
+  margin: 2rem 0;
 }
 
-#hero h2 {
-  font-size: 1.6rem;
-  color: var(--accent);
-}
-
-.cta {
-  color: var(--accent);
-  text-decoration: none;
-  font-weight: bold;
+h2, h3 {
+  color: var(--link);
 }
 
 .card {
-  background: #14141f;
+  background: var(--card-bg);
   border-radius: 10px;
   padding: 1.5rem;
-  margin-top: 1.5rem;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+  margin: 1.5rem 0;
+  box-shadow: 0 0 10px rgba(0,0,0,0.05);
 }
 
 /* Footer */
 .site-footer {
   text-align: center;
-  padding: 1rem;
-  background: #0d0d18;
-  margin-top: 3rem;
+  padding: 1.5rem;
+  background: #fde9e9;
+  color: #555;
   font-size: 0.9rem;
+  margin-top: 3rem;
+}
+
+a.cta, a {
+  color: var(--link);
+  text-decoration: none;
+}
+
+a.cta:hover {
+  text-decoration: underline;
+}
+
+button {
+  background: var(--accent);
+  border: none;
+  color: white;
+  font-weight: bold;
+  padding: 0.6rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+button:hover {
+  opacity: 0.85;
 }
