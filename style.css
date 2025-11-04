@@ -1,15 +1,21 @@
-/* ======= Global Styles ======= */
+/* ===========================
+   ASHTRAYUDH THEME — LUXURY CREATIVE
+   Elegant, warm, minimalist
+   =========================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Poppins:wght@300;400;500&display=swap');
+
 :root {
-  --bg-color: #f9e8e3; /* soft beige-pink background */
-  --card-bg: #fffaf8;  /* lighter ivory for cards */
-  --text-color: #4b3b39; /* warm brown-gray text */
-  --accent-color: #e6b8a2; /* peach accent */
-  --accent-hover: #d99a8f; /* slightly deeper hover */
-  --shadow-color: rgba(0, 0, 0, 0.05);
-  --font-main: "Poppins", "Inter", sans-serif;
-  --font-accent: "Playfair Display", serif;
+  --background: #f8f3f1;
+  --card-bg: #ffffff;
+  --accent: #d6a5b0; /* rose gold */
+  --accent-hover: #c48f9b;
+  --text: #2e2e2e;
+  --muted-text: #5a5a5a;
+  --shadow: rgba(0, 0, 0, 0.05);
 }
 
+/* Global reset */
 * {
   margin: 0;
   padding: 0;
@@ -17,149 +23,176 @@
 }
 
 body {
-  font-family: var(--font-main);
-  background-color: var(--bg-color);
-  color: var(--text-color);
+  font-family: 'Poppins', sans-serif;
+  background-color: var(--background);
+  color: var(--text);
   line-height: 1.7;
-  transition: all 0.3s ease;
 }
 
-/* ======= Header ======= */
+/* Header */
 .site-header {
-  text-align: center;
-  padding: 2.5rem 1rem 1.5rem;
-  background-color: #fffaf8;
-  box-shadow: 0 2px 10px var(--shadow-color);
+  background: var(--card-bg);
+  padding: 20px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 2px 8px var(--shadow);
 }
 
 .site-header h1 {
-  font-family: var(--font-accent);
-  font-size: 2.2rem;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem;
+  color: var(--accent);
   letter-spacing: 1px;
-  color: var(--text-color);
-  margin-bottom: 0.5rem;
-}
-
-.nav {
-  display: flex;
-  justify-content: center;
-  gap: 1.5rem;
 }
 
 .nav a {
+  color: var(--text);
+  margin-left: 20px;
   text-decoration: none;
-  color: var(--text-color);
   font-weight: 500;
-  transition: 0.3s;
+  transition: 0.3s ease;
 }
 
-.nav a:hover,
-.nav a.active {
-  color: var(--accent-hover);
-  text-decoration: underline;
+.nav a:hover {
+  color: var(--accent);
 }
 
-/* ======= Hero Section ======= */
+/* Hero section */
 #hero {
-  background: linear-gradient(180deg, #f9e8e3 0%, #fffaf8 100%);
   text-align: center;
-  padding: 6rem 1rem 5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.hero-content {
-  max-width: 750px;
+  padding: 80px 20px 60px;
+  background: linear-gradient(180deg, #f9f6f4, #fdfdfd);
 }
 
 #hero h2 {
-  font-family: var(--font-accent);
-  font-size: 2.5rem;
-  color: var(--text-color);
-  margin-bottom: 1rem;
+  font-family: 'Playfair Display', serif;
+  font-size: 2.2rem;
+  color: var(--accent);
+  margin-bottom: 15px;
 }
 
 #hero p {
-  font-size: 1.1rem;
-  color: var(--text-color);
-  margin-bottom: 1.3rem;
+  color: var(--muted-text);
+  font-size: 1.05rem;
+  max-width: 650px;
+  margin: 0 auto;
 }
 
-/* ======= Card Section ======= */
+/* Container */
 .container {
-  max-width: 900px;
-  margin: 2rem auto;
-  padding: 0 1.2rem;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 40px 20px;
 }
 
+/* Cards */
 .card {
-  background-color: var(--card-bg);
-  border-radius: 18px;
-  padding: 2rem;
-  box-shadow: 0 4px 15px var(--shadow-color);
-  margin-bottom: 2rem;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background: var(--card-bg);
+  padding: 25px 30px;
+  border-radius: 14px;
+  margin-bottom: 25px;
+  box-shadow: 0 3px 10px var(--shadow);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
 }
 
 .card h3 {
-  font-family: var(--font-accent);
-  color: var(--text-color);
-  font-size: 1.6rem;
-  margin-bottom: 1rem;
+  font-family: 'Playfair Display', serif;
+  color: var(--accent);
+  margin-bottom: 10px;
 }
 
 .card p {
-  margin-bottom: 1rem;
-  font-size: 1.05rem;
+  color: var(--muted-text);
+  font-size: 1rem;
+  margin-bottom: 15px;
 }
 
-/* ======= Footer ======= */
+.cta {
+  display: inline-block;
+  background: var(--accent);
+  color: #fff;
+  text-decoration: none;
+  padding: 8px 18px;
+  border-radius: 25px;
+  font-weight: 500;
+  transition: background 0.3s ease;
+}
+
+.cta:hover {
+  background: var(--accent-hover);
+}
+
+/* Contact form */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  background: var(--card-bg);
+  padding: 30px;
+  border-radius: 14px;
+  box-shadow: 0 4px 10px var(--shadow);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+input, textarea {
+  padding: 12px 15px;
+  border: 1px solid #e5d2d8;
+  border-radius: 8px;
+  font-family: inherit;
+  background: #fdfdfd;
+}
+
+input:focus, textarea:focus {
+  border-color: var(--accent);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(214, 165, 176, 0.2);
+}
+
+button {
+  background: var(--accent);
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.3s ease;
+}
+
+button:hover {
+  background: var(--accent-hover);
+}
+
+/* Footer */
 .site-footer {
   text-align: center;
-  padding: 1.5rem;
+  padding: 25px;
+  color: var(--muted-text);
+  background: #f4eeec;
   font-size: 0.9rem;
-  color: var(--text-color);
-  background-color: #fffaf8;
-  box-shadow: 0 -1px 10px var(--shadow-color);
+  margin-top: 60px;
 }
 
-/* ======= Animations ======= */
-.fade-in {
-  opacity: 0;
-  transform: translateY(15px);
-  animation: fadeUp 0.7s ease forwards;
-}
-
-@keyframes fadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(15px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* ======= Responsive ======= */
+/* Responsive */
 @media (max-width: 768px) {
-  .card {
-    padding: 1.5rem;
+  .site-header {
+    flex-direction: column;
+    text-align: center;
   }
-  .site-header h1 {
-    font-size: 1.8rem;
+
+  .nav a {
+    display: inline-block;
+    margin: 10px;
   }
+
   #hero h2 {
-    font-size: 2rem;
-  }
-  .nav {
-    flex-wrap: wrap;
-    gap: 0.8rem;
+    font-size: 1.8rem;
   }
 }
