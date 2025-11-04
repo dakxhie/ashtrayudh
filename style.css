@@ -1,0 +1,79 @@
+/* --- Ashtrayudh Website Theme --- */
+
+:root {
+  --royal-blue: #0a3d91;
+  --dark-bg: #0b0b14;
+  --light-text: #f3f3f3;
+  --accent: #0099ff;
+}
+
+body {
+  font-family: "Segoe UI", Roboto, sans-serif;
+  margin: 0;
+  background: var(--dark-bg);
+  color: var(--light-text);
+  line-height: 1.6;
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 1.5rem;
+}
+
+/* Header */
+.site-header {
+  background: var(--royal-blue);
+  color: white;
+  padding: 1rem 0;
+}
+
+.site-header .brand a {
+  color: white;
+  text-decoration: none;
+}
+
+.nav a {
+  color: white;
+  margin: 0 0.5rem;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.nav a:hover {
+  text-decoration: underline;
+}
+
+/* Hero Section */
+#hero {
+  text-align: center;
+  margin: 3rem 0;
+}
+
+#hero h2 {
+  font-size: 1.6rem;
+  color: var(--accent);
+}
+
+.cta {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.card {
+  background: #14141f;
+  border-radius: 10px;
+  padding: 1.5rem;
+  margin-top: 1.5rem;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+}
+
+/* Footer */
+.site-footer {
+  text-align: center;
+  padding: 1rem;
+  background: #0d0d18;
+  margin-top: 3rem;
+  font-size: 0.9rem;
+}
