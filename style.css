@@ -1,6 +1,6 @@
 /* ===========================
    ASHTRAYUDH THEME — LUXURY CREATIVE
-   Elegant, warm, minimalist
+   Unified global style
    =========================== */
 
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Poppins:wght@300;400;500&display=swap');
@@ -8,25 +8,26 @@
 :root {
   --background: #f8f3f1;
   --card-bg: #ffffff;
-  --accent: #d6a5b0; /* rose gold */
+  --accent: #d6a5b0;
   --accent-hover: #c48f9b;
   --text: #2e2e2e;
   --muted-text: #5a5a5a;
-  --shadow: rgba(0, 0, 0, 0.05);
+  --shadow: rgba(0, 0, 0, 0.06);
 }
 
-/* Global reset */
+/* Reset + Base */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-body {
+html, body {
   font-family: 'Poppins', sans-serif;
-  background-color: var(--background);
+  background: var(--background);
   color: var(--text);
   line-height: 1.7;
+  scroll-behavior: smooth;
 }
 
 /* Header */
@@ -37,6 +38,9 @@ body {
   align-items: center;
   justify-content: space-between;
   box-shadow: 0 2px 8px var(--shadow);
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 
 .site-header h1 {
@@ -51,18 +55,20 @@ body {
   margin-left: 20px;
   text-decoration: none;
   font-weight: 500;
-  transition: 0.3s ease;
+  transition: color 0.3s ease;
 }
 
-.nav a:hover {
+.nav a:hover,
+.nav a.active {
   color: var(--accent);
 }
 
-/* Hero section */
+/* Hero */
 #hero {
   text-align: center;
   padding: 80px 20px 60px;
-  background: linear-gradient(180deg, #f9f6f4, #fdfdfd);
+  background: linear-gradient(180deg, #f9f6f4, #fff);
+  border-bottom: 1px solid #f1e5e8;
 }
 
 #hero h2 {
@@ -79,11 +85,11 @@ body {
   margin: 0 auto;
 }
 
-/* Container */
+/* Main container */
 .container {
   max-width: 1000px;
   margin: 0 auto;
-  padding: 40px 20px;
+  padding: 60px 20px;
 }
 
 /* Cards */
@@ -113,22 +119,26 @@ body {
   margin-bottom: 15px;
 }
 
-.cta {
+/* Buttons & CTAs */
+.cta, button {
   display: inline-block;
   background: var(--accent);
   color: #fff;
   text-decoration: none;
-  padding: 8px 18px;
+  padding: 10px 22px;
   border-radius: 25px;
   font-weight: 500;
   transition: background 0.3s ease;
+  border: none;
+  cursor: pointer;
 }
 
-.cta:hover {
+.cta:hover,
+button:hover {
   background: var(--accent-hover);
 }
 
-/* Contact form */
+/* Forms */
 form {
   display: flex;
   flex-direction: column;
@@ -155,21 +165,6 @@ input:focus, textarea:focus {
   box-shadow: 0 0 0 3px rgba(214, 165, 176, 0.2);
 }
 
-button {
-  background: var(--accent);
-  color: white;
-  border: none;
-  padding: 12px 20px;
-  border-radius: 25px;
-  cursor: pointer;
-  font-weight: 500;
-  transition: background 0.3s ease;
-}
-
-button:hover {
-  background: var(--accent-hover);
-}
-
 /* Footer */
 .site-footer {
   text-align: center;
@@ -189,10 +184,14 @@ button:hover {
 
   .nav a {
     display: inline-block;
-    margin: 10px;
+    margin: 8px;
   }
 
   #hero h2 {
     font-size: 1.8rem;
+  }
+
+  .container {
+    padding: 40px 15px;
   }
 }
