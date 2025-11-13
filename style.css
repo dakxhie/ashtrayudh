@@ -1,21 +1,16 @@
-/* ===========================
-   ASHTRAYUDH THEME — LUXURY CREATIVE
-   Elegant, warm, minimalist
-   =========================== */
-
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Poppins:wght@300;400;500&display=swap');
+/* =============================
+   ASTRAYUDH — Global Style
+   Consistent across all pages
+   ============================= */
 
 :root {
-  --background: #f8f3f1;
-  --card-bg: #ffffff;
-  --accent: #d6a5b0; /* rose gold */
-  --accent-hover: #c48f9b;
-  --text: #2e2e2e;
-  --muted-text: #5a5a5a;
-  --shadow: rgba(0, 0, 0, 0.05);
+  --primary: #121212;
+  --accent: #007bff;
+  --bg: #f9f9f9;
+  --text: #222;
+  --font: "Poppins", sans-serif;
 }
 
-/* Global reset */
 * {
   margin: 0;
   padding: 0;
@@ -23,187 +18,180 @@
 }
 
 body {
-  font-family: 'Poppins', sans-serif;
-  background-color: var(--background);
+  font-family: var(--font);
   color: var(--text);
-  line-height: 1.7;
-  overflow-x: hidden;
+  background: var(--bg);
+  line-height: 1.6;
 }
 
 /* Header */
 .site-header {
-  background: var(--card-bg);
-  padding: 20px 40px;
+  background: var(--primary);
+  color: white;
+  padding: 1.2rem 2rem;
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  box-shadow: 0 2px 8px var(--shadow);
+  align-items: center;
 }
 
 .site-header h1 {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.8rem;
-  color: var(--accent);
+  font-size: 1.6rem;
   letter-spacing: 1px;
 }
 
 .nav a {
-  color: var(--text);
-  margin-left: 20px;
+  color: white;
   text-decoration: none;
+  margin: 0 1rem;
   font-weight: 500;
-  transition: 0.3s ease;
+  transition: color 0.3s;
 }
 
-.nav a:hover,
-.nav a.active {
+.nav a:hover {
   color: var(--accent);
 }
 
-/* Hero Section with background image */
-.hero-image {
-  background: url('https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1400&q=80') center/cover no-repeat;
-  height: 85vh;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.hero-image .overlay {
-  background: rgba(0, 0, 0, 0.45);
-  position: absolute;
-  inset: 0;
-}
-
-.hero-image .hero-content {
-  position: relative;
-  color: #fff;
+/* Hero Section */
+#hero {
+  background: url("hero.jpg") center/cover no-repeat;
+  color: white;
   text-align: center;
-  max-width: 800px;
-  padding: 20px;
+  padding: 8rem 1rem;
+  position: relative;
 }
 
-.hero-image .hero-content h2 {
-  font-family: 'Playfair Display', serif;
-  font-size: 2.4rem;
-  margin-bottom: 15px;
+#hero::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.45);
 }
 
-.hero-image .hero-content p {
+#hero h2,
+#hero p,
+#hero a {
+  position: relative;
+  z-index: 2;
+}
+
+#hero h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+#hero p {
   font-size: 1.1rem;
-  line-height: 1.8;
+  max-width: 650px;
+  margin: 0 auto 1.5rem;
 }
 
-/* Container */
-.container {
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 40px 20px;
-}
-
-/* Cards */
-.card {
-  background: var(--card-bg);
-  padding: 25px 30px;
-  border-radius: 14px;
-  margin-bottom: 25px;
-  box-shadow: 0 3px 10px var(--shadow);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
-}
-
-.card h3 {
-  font-family: 'Playfair Display', serif;
-  color: var(--accent);
-  margin-bottom: 10px;
-}
-
-.card p {
-  color: var(--muted-text);
-  font-size: 1rem;
-  margin-bottom: 15px;
-}
-
-/* Call-to-Action Button */
 .cta {
   display: inline-block;
   background: var(--accent);
-  color: #fff;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 30px;
   text-decoration: none;
-  padding: 10px 22px;
-  border-radius: 25px;
-  font-weight: 500;
-  transition: background 0.3s ease;
+  font-weight: 600;
+  transition: background 0.3s;
 }
 
 .cta:hover {
-  background: var(--accent-hover);
+  background: #0056c7;
+}
+
+/* Blogs Page */
+.blogs {
+  max-width: 1100px;
+  margin: 3rem auto;
+  padding: 0 1rem;
+}
+
+.blog-card {
+  background: white;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.blog-card:hover {
+  transform: translateY(-6px);
+}
+
+.blog-card img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+}
+
+.blog-card-content {
+  padding: 1.5rem;
+}
+
+.blog-card h3 {
+  margin-bottom: 0.5rem;
+  color: var(--primary);
+}
+
+.blog-card p {
+  color: #555;
+  margin-bottom: 1rem;
+}
+
+.read-more {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.read-more:hover {
+  text-decoration: underline;
+}
+
+/* Article Pages */
+.article {
+  max-width: 850px;
+  margin: 3rem auto;
+  padding: 0 1rem;
+}
+
+.article h2 {
+  margin-bottom: 1rem;
+  font-size: 1.8rem;
+  color: var(--primary);
+}
+
+.article p {
+  margin-bottom: 1rem;
+  color: #333;
+  font-size: 1.05rem;
 }
 
 /* Footer */
 .site-footer {
+  background: var(--primary);
+  color: white;
   text-align: center;
-  padding: 25px;
-  color: var(--muted-text);
-  background: #f4eeec;
+  padding: 1.2rem 0;
+  margin-top: 3rem;
   font-size: 0.9rem;
-  margin-top: 60px;
 }
 
-/* Blog Layout */
-.blogs-container {
-  max-width: 900px;
-  margin: 60px auto;
-  padding: 20px;
-}
-
-.blog {
-  background: var(--card-bg);
-  border-radius: 14px;
-  box-shadow: 0 3px 10px var(--shadow);
-  padding: 30px;
-  margin-bottom: 30px;
-  transition: transform 0.2s ease;
-}
-
-.blog:hover {
-  transform: translateY(-3px);
-}
-
-.blog h2 {
-  font-family: 'Playfair Display', serif;
-  color: var(--accent);
-  margin-bottom: 15px;
-}
-
-.blog p {
-  color: var(--muted-text);
-  font-size: 1.05rem;
-  line-height: 1.8;
-}
-
-/* Responsive */
 @media (max-width: 768px) {
-  .site-header {
-    flex-direction: column;
-    text-align: center;
+  .nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
   }
 
-  .nav a {
-    display: inline-block;
-    margin: 10px;
+  #hero {
+    padding: 5rem 1rem;
   }
 
-  .hero-image {
-    height: 65vh;
-  }
-
-  .hero-image .hero-content h2 {
-    font-size: 1.8rem;
+  .blog-card img {
+    height: 200px;
   }
 }
