@@ -1,6 +1,6 @@
 /* ===========================
    ASHTRAYUDH THEME — LUXURY CREATIVE
-   Unified global style
+   Elegant, warm, minimalist
    =========================== */
 
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Poppins:wght@300;400;500&display=swap');
@@ -8,26 +8,26 @@
 :root {
   --background: #f8f3f1;
   --card-bg: #ffffff;
-  --accent: #d6a5b0;
+  --accent: #d6a5b0; /* rose gold */
   --accent-hover: #c48f9b;
   --text: #2e2e2e;
   --muted-text: #5a5a5a;
-  --shadow: rgba(0, 0, 0, 0.06);
+  --shadow: rgba(0, 0, 0, 0.05);
 }
 
-/* Reset + Base */
+/* Global reset */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-html, body {
+body {
   font-family: 'Poppins', sans-serif;
-  background: var(--background);
+  background-color: var(--background);
   color: var(--text);
   line-height: 1.7;
-  scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 /* Header */
@@ -38,9 +38,6 @@ html, body {
   align-items: center;
   justify-content: space-between;
   box-shadow: 0 2px 8px var(--shadow);
-  position: sticky;
-  top: 0;
-  z-index: 100;
 }
 
 .site-header h1 {
@@ -55,7 +52,7 @@ html, body {
   margin-left: 20px;
   text-decoration: none;
   font-weight: 500;
-  transition: color 0.3s ease;
+  transition: 0.3s ease;
 }
 
 .nav a:hover,
@@ -63,33 +60,46 @@ html, body {
   color: var(--accent);
 }
 
-/* Hero */
-#hero {
-  text-align: center;
-  padding: 80px 20px 60px;
-  background: linear-gradient(180deg, #f9f6f4, #fff);
-  border-bottom: 1px solid #f1e5e8;
+/* Hero Section with background image */
+.hero-image {
+  background: url('https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1400&q=80') center/cover no-repeat;
+  height: 85vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-#hero h2 {
+.hero-image .overlay {
+  background: rgba(0, 0, 0, 0.45);
+  position: absolute;
+  inset: 0;
+}
+
+.hero-image .hero-content {
+  position: relative;
+  color: #fff;
+  text-align: center;
+  max-width: 800px;
+  padding: 20px;
+}
+
+.hero-image .hero-content h2 {
   font-family: 'Playfair Display', serif;
-  font-size: 2.2rem;
-  color: var(--accent);
+  font-size: 2.4rem;
   margin-bottom: 15px;
 }
 
-#hero p {
-  color: var(--muted-text);
-  font-size: 1.05rem;
-  max-width: 650px;
-  margin: 0 auto;
+.hero-image .hero-content p {
+  font-size: 1.1rem;
+  line-height: 1.8;
 }
 
-/* Main container */
+/* Container */
 .container {
   max-width: 1000px;
   margin: 0 auto;
-  padding: 60px 20px;
+  padding: 40px 20px;
 }
 
 /* Cards */
@@ -119,8 +129,8 @@ html, body {
   margin-bottom: 15px;
 }
 
-/* Buttons & CTAs */
-.cta, button {
+/* Call-to-Action Button */
+.cta {
   display: inline-block;
   background: var(--accent);
   color: #fff;
@@ -129,40 +139,10 @@ html, body {
   border-radius: 25px;
   font-weight: 500;
   transition: background 0.3s ease;
-  border: none;
-  cursor: pointer;
 }
 
-.cta:hover,
-button:hover {
+.cta:hover {
   background: var(--accent-hover);
-}
-
-/* Forms */
-form {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  background: var(--card-bg);
-  padding: 30px;
-  border-radius: 14px;
-  box-shadow: 0 4px 10px var(--shadow);
-  max-width: 600px;
-  margin: 0 auto;
-}
-
-input, textarea {
-  padding: 12px 15px;
-  border: 1px solid #e5d2d8;
-  border-radius: 8px;
-  font-family: inherit;
-  background: #fdfdfd;
-}
-
-input:focus, textarea:focus {
-  border-color: var(--accent);
-  outline: none;
-  box-shadow: 0 0 0 3px rgba(214, 165, 176, 0.2);
 }
 
 /* Footer */
@@ -175,6 +155,38 @@ input:focus, textarea:focus {
   margin-top: 60px;
 }
 
+/* Blog Layout */
+.blogs-container {
+  max-width: 900px;
+  margin: 60px auto;
+  padding: 20px;
+}
+
+.blog {
+  background: var(--card-bg);
+  border-radius: 14px;
+  box-shadow: 0 3px 10px var(--shadow);
+  padding: 30px;
+  margin-bottom: 30px;
+  transition: transform 0.2s ease;
+}
+
+.blog:hover {
+  transform: translateY(-3px);
+}
+
+.blog h2 {
+  font-family: 'Playfair Display', serif;
+  color: var(--accent);
+  margin-bottom: 15px;
+}
+
+.blog p {
+  color: var(--muted-text);
+  font-size: 1.05rem;
+  line-height: 1.8;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
   .site-header {
@@ -184,14 +196,14 @@ input:focus, textarea:focus {
 
   .nav a {
     display: inline-block;
-    margin: 8px;
+    margin: 10px;
   }
 
-  #hero h2 {
+  .hero-image {
+    height: 65vh;
+  }
+
+  .hero-image .hero-content h2 {
     font-size: 1.8rem;
-  }
-
-  .container {
-    padding: 40px 15px;
   }
 }
