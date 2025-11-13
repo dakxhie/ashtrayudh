@@ -3,70 +3,210 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Astrayudh Blogs</title>
+  <title>Vortix | Blogs</title>
   <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f9f9f9;
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+
+    header {
+      background: linear-gradient(135deg, #4b000f, #7c0a26);
+      color: white;
+      padding: 20px 0;
+      text-align: center;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+      margin-top: 10px;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #ffb6c1;
+    }
+
+    .hero {
+      position: relative;
+      background: url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+      height: 300px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(75, 0, 15, 0.6);
+    }
+
+    .hero h1 {
+      position: relative;
+      z-index: 2;
+      font-size: 3rem;
+      text-align: center;
+    }
+
+    .blogs-section {
+      padding: 60px 10%;
+      background-color: #fff;
+    }
+
+    .blogs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 40px;
+      margin-top: 40px;
+    }
+
+    .blog-card {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .blog-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    }
+
+    .blog-card img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+    }
+
+    .blog-content {
+      padding: 20px;
+    }
+
+    .blog-content h3 {
+      margin: 0 0 10px;
+      color: #4b000f;
+    }
+
+    .blog-content p {
+      font-size: 0.95rem;
+      color: #666;
+      line-height: 1.6;
+    }
+
+    .read-more {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 10px 18px;
+      background: #7c0a26;
+      color: #fff;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: background 0.3s;
+    }
+
+    .read-more:hover {
+      background: #4b000f;
+    }
+
+    footer {
+      text-align: center;
+      background: #4b000f;
+      color: white;
+      padding: 20px;
+      margin-top: 60px;
+      font-size: 0.9rem;
+    }
+
+  </style>
 </head>
 <body>
-  <header class="site-header">
-    <h1>Astrayudh</h1>
-    <nav class="nav">
+
+  <header>
+    <h1>Vortix</h1>
+    <nav>
       <a href="index.html">Home</a>
       <a href="about.html">About</a>
       <a href="apps.html">Apps</a>
-      <a href="blogs.html" class="active">Blogs</a>
+      <a href="blogs.html">Blogs</a>
       <a href="contact.html">Contact</a>
     </nav>
   </header>
 
-  <section class="blogs">
-    <div class="blog-card">
-      <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085" alt="Vortix App">
-      <div class="blog-card-content">
-        <h3>Vortix — Where Ideas Turn Into Action</h3>
-        <p>Discover our latest app Vortix — built to connect, engage, and elevate creators. This is more than an app — it’s a movement.</p>
-        <a href="blog1.html" class="read-more">Read More</a>
-      </div>
-    </div>
+  <section class="hero">
+    <h1>Insights & Updates</h1>
+  </section>
 
-    <div class="blog-card">
-      <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d" alt="Creative Minds">
-      <div class="blog-card-content">
-        <h3>The Art of Digital Calm</h3>
-        <p>In a world of endless noise, we explore the quiet beauty of mindful technology — where design breathes and code flows effortlessly.</p>
-        <a href="blog2.html" class="read-more">Read More</a>
-      </div>
-    </div>
+  <section class="blogs-section">
+    <div class="blogs-grid">
 
-    <div class="blog-card">
-      <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085" alt="Developers working">
-      <div class="blog-card-content">
-        <h3>Building Experiences, Not Just Apps</h3>
-        <p>Our philosophy is simple — every product should feel like an extension of your thoughts. Here’s how we build experiences that last.</p>
-        <a href="blog3.html" class="read-more">Read More</a>
+      <div class="blog-card">
+        <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=900&q=80" alt="Tech Blog">
+        <div class="blog-content">
+          <h3>The Future of Creative Tech</h3>
+          <p>Exploring how technology is redefining creativity and empowering creators to build immersive digital experiences...</p>
+          <a href="blog1.html" class="read-more">Read More</a>
+        </div>
       </div>
-    </div>
 
-    <div class="blog-card">
-      <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0" alt="Future of Tech">
-      <div class="blog-card-content">
-        <h3>The Future is Human-Centered</h3>
-        <p>Technology is evolving fast, but empathy remains timeless. Learn how human-centered design drives our vision forward.</p>
-        <a href="blog4.html" class="read-more">Read More</a>
+      <div class="blog-card">
+        <img src="https://images.unsplash.com/photo-1556157382-97eda2d62296?auto=format&fit=crop&w=900&q=80" alt="App Design">
+        <div class="blog-content">
+          <h3>Designing Apps That Inspire</h3>
+          <p>Discover the art of blending minimalism with functionality — how great design can elevate the user experience...</p>
+          <a href="blog2.html" class="read-more">Read More</a>
+        </div>
       </div>
-    </div>
 
-    <div class="blog-card">
-      <img src="https://images.unsplash.com/photo-1485217988980-11786ced9454" alt="Creative Process">
-      <div class="blog-card-content">
-        <h3>Creating with Purpose</h3>
-        <p>Every color, every pixel, every line of text — everything we build carries a purpose. Here’s what guides our creative process.</p>
-        <a href="blog5.html" class="read-more">Read More</a>
+      <div class="blog-card">
+        <img src="https://images.unsplash.com/photo-1492724441997-5dc865305da7?auto=format&fit=crop&w=900&q=80" alt="Community">
+        <div class="blog-content">
+          <h3>Building Digital Communities</h3>
+          <p>Online spaces are evolving fast — here’s how platforms like Vortix create meaningful engagement and trust...</p>
+          <a href="blog3.html" class="read-more">Read More</a>
+        </div>
       </div>
+
+      <div class="blog-card">
+        <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=900&q=80" alt="Innovation">
+        <div class="blog-content">
+          <h3>Innovation that Connects</h3>
+          <p>At Vortix, we focus on innovation that unites — connecting creators and audiences across the globe seamlessly...</p>
+          <a href="blog4.html" class="read-more">Read More</a>
+        </div>
+      </div>
+
+      <div class="blog-card">
+        <img src="https://images.unsplash.com/photo-1525186402429-b4ff38bedbec?auto=format&fit=crop&w=900&q=80" alt="Vision">
+        <div class="blog-content">
+          <h3>The Vision Behind Vortix</h3>
+          <p>Our story, our mission, and how we aim to change how content gets shared, seen, and celebrated worldwide...</p>
+          <a href="blog5.html" class="read-more">Read More</a>
+        </div>
+      </div>
+
     </div>
   </section>
 
-  <footer class="site-footer">
-    © 2025 Astrayudh — Crafted with creativity and calm.
+  <footer>
+    © 2025 Vortix. All rights reserved.
   </footer>
+
 </body>
 </html>
