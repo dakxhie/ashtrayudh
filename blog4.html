@@ -3,27 +3,85 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Digital Minimalism Movement — Why Less Tech Makes Life Better</title>
-    <link rel="stylesheet" href="../styles.css">
+    <title>The Digital Minimalism Movement — Astrayudh Blog</title>
+    <link rel="stylesheet" href="style.css"> 
+    
+    <style>
+        /* Scoped styling for article pages (Consistent with blog1-3) */
+        .article-wrapper {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 50px 20px 80px;
+        }
+
+        .article-wrapper h1 {
+            font-family: 'Playfair Display', serif;
+            color: var(--accent);
+            margin-bottom: 25px;
+            font-size: 2.4rem;
+        }
+
+        .article-wrapper h2, .article-wrapper h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--accent);
+            margin-top: 35px;
+            margin-bottom: 15px;
+        }
+        
+        .article-wrapper h2 {
+            font-size: 1.8rem;
+        }
+
+        .article-wrapper h3 {
+            font-size: 1.4rem;
+        }
+
+        .article-wrapper p {
+            font-size: 1.08rem;
+            color: var(--text);
+            line-height: 1.85;
+            margin-bottom: 22px;
+        }
+
+        .article-wrapper strong {
+            color: var(--accent);
+        }
+
+        .article-wrapper ul {
+            margin-left: 20px; 
+            line-height: 1.7; 
+            color: var(--text);
+            list-style: disc;
+            padding-left: 20px;
+        }
+        
+        .blog-main-img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            margin-bottom: 35px;
+            display: block;
+        }
+    </style>
 </head>
 <body>
 
-<header class="sub-header">
-    <nav>
-        <a href="../index.html" class="logo">Vortix</a>
-        <ul>
-            <li><a href="../index.html">Home</a></li>
-            <li><a href="../apps.html">Apps</a></li>
-            <li><a href="../blogs.html">Blogs</a></li>
-            <li><a href="../contact.html">Contact</a></li>
-        </ul>
+<header class="site-header">
+    <h1>Astrayudh</h1>
+    <nav class="nav">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="apps.html">Apps</a>
+        <a href="blogs.html">Blogs</a>
+        <a href="contact.html">Contact</a>
     </nav>
-    <h1>The Digital Minimalism Movement — Why Less Tech Makes Life Better</h1>
 </header>
 
-<section class="blog-content-section">
-    <div class="blog-container">
-        <img src="../assets/blog4.jpg" class="blog-main-img" alt="Minimalism Image">
+<main class="article-wrapper">
+    <article>
+        <h1>The Digital Minimalism Movement — Why Less Tech Makes Life Better</h1>
+        
+        <img src="assets/blog4.jpg" class="blog-main-img" alt="Illustration of digital minimalism">
 
         <h2>A Modern Lifestyle Built on Intentional Technology Use</h2>
 
@@ -35,8 +93,8 @@
         </p>
 
         <p>
-            This is where <strong>digital minimalism</strong> enters, a movement built on one simple idea:
-            <em>Use technology with purpose, not excess.</em>
+            This is where **digital minimalism** enters, a movement built on one simple idea:
+            *Use technology with purpose, not excess.*
         </p>
 
         <h3>1. The Problem With Unlimited Connectivity</h3>
@@ -62,7 +120,7 @@
 
         <h3>2. Reclaiming Focus in a Distracted World</h3>
         <p>
-            Focus has become a rare superpower.  
+            Focus has become a rare superpower.
             With distractions everywhere, the ability to control one’s attention
             is more valuable than ever.
         </p>
@@ -83,7 +141,7 @@
 
         <h3>3. The Beauty of Doing Less, Better</h3>
         <p>
-            Many people assume that being productive means doing more.  
+            Many people assume that being productive means doing more.
             In reality, people who practice minimalism discover the opposite:
             the less clutter they carry, the better they perform.
         </p>
@@ -138,12 +196,12 @@
             With less clutter and more clarity, life becomes surprisingly lighter, calmer, and richer.
         </p>
 
-        <a href="../blogs.html" class="back-button">← Back to Blogs</a>
-    </div>
-</section>
+        <a href="blogs.html" class="cta">← Back to Blogs</a>
+    </article>
+</main>
 
-<footer>
-    <p>© 2025 Vortix. All Rights Reserved.</p>
+<footer class="site-footer">
+    © 2025 Astrayudh — Crafted with creativity and calm.
 </footer>
 
 </body>
