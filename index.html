@@ -5,7 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Astrayudh — Building Apps & Stories</title>
   <link rel="stylesheet" href="style.css" />
+
+  <!-- ANDROID APP LINK FALLBACK -->
+  <script>
+    (function () {
+      const isAndroid = /Android/i.test(navigator.userAgent);
+      const path = window.location.pathname;
+
+      // Only redirect for deep links like /task/123
+      if (isAndroid && path.startsWith("/task/")) {
+        window.location.href =
+          "https://play.google.com/store/apps/details?id=com.vortix";
+      }
+    })();
+  </script>
 </head>
+
 <body>
   <!-- Header -->
   <header class="site-header">
@@ -22,7 +37,10 @@
   <!-- Hero -->
   <section id="hero">
     <h2>We design digital stories that feel human.</h2>
-    <p>At <strong>Astrayudh</strong>, creativity meets calm — we craft elegant apps, write meaningful blogs, and create experiences that connect.</p>
+    <p>
+      At <strong>Astrayudh</strong>, creativity meets calm — we craft elegant apps,
+      write meaningful blogs, and create experiences that connect.
+    </p>
     <a href="about.html" class="cta">Explore More</a>
   </section>
 
@@ -30,12 +48,18 @@
   <div class="container">
     <div class="card">
       <h3>Our Vision</h3>
-      <p>We believe technology and storytelling should coexist beautifully — thoughtful, modern, and built to inspire connection rather than distraction.</p>
+      <p>
+        We believe technology and storytelling should coexist beautifully —
+        thoughtful, modern, and built to inspire connection rather than distraction.
+      </p>
     </div>
 
     <div class="card">
       <h3>What We Do</h3>
-      <p>We build apps like <strong>Vortix</strong> — a platform born from curiosity and creativity. Every project carries a soul, crafted with care and simplicity.</p>
+      <p>
+        We build apps like <strong>Vortix</strong> — a platform born from curiosity
+        and creativity. Every project carries a soul, crafted with care and simplicity.
+      </p>
     </div>
   </div>
 
@@ -45,6 +69,3 @@
   </footer>
 </body>
 </html>
-
-<!-- rebuild -->
-
