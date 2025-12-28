@@ -3,74 +3,115 @@
 <head>
   <meta charset="UTF-8" />
   <title>Vortix Admin Panel</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <style>
     body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      font-family: system-ui, sans-serif;
       background: #0f172a;
-      color: #e5e7eb;
-      margin: 0;
-      padding: 0;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
     }
-
-    .container {
-      max-width: 900px;
-      margin: 60px auto;
-      padding: 24px;
+    .box {
+      width: 360px;
+      background: #020617;
+      padding: 20px;
+      border-radius: 10px;
     }
-
-    .card {
-      background: #111827;
-      border-radius: 12px;
-      padding: 24px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    input, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
     }
-
-    h1 {
-      margin-top: 0;
-      font-size: 26px;
-    }
-
-    p {
-      color: #9ca3af;
-      margin-top: 8px;
-    }
-
-    .badge {
-      display: inline-block;
+    button {
       background: #2563eb;
-      color: #fff;
-      padding: 6px 12px;
-      border-radius: 999px;
-      font-size: 12px;
-      margin-top: 12px;
+      color: white;
+      border: none;
+      cursor: pointer;
     }
-
-    .status {
-      margin-top: 16px;
-      font-weight: 500;
-    }
+    .error { color: #f87171; }
+    .success { color: #4ade80; }
   </style>
 </head>
-
 <body>
-  <div class="container">
-    <div class="card">
-      <h1>Vortix Admin Panel</h1>
 
-      <p>This panel is restricted to administrators only.</p>
+<div class="box" id="app">
+  <h2>Admin Login</h2>
 
-      <span class="badge">Admin Access Required</span>
+  <input id="email" type="email" placeholder="Email" />
+  <input id="password" type="password" placeholder="Password" />
+  <button onclick="login()">Login</button>
 
-      <!-- ADMIN STATUS -->
-      <p id="admin-status" class="status">
-        Checking admin access...
-      </p>
-    </div>
-  </div>
+  <p id="msg"></p>
+</div>
 
-  <!-- ADMIN AUTH CHECK -->
-  <script type="module" src="admin.js"></script>
+<script>
+  // 🔁 REPLACE THESE WITH YOUR REAL VALUES
+  const SUPABASE_URL = "https://rdfkcxzmleoodahnxgst.supabase.co";
+  const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJkZmtjeHptbGVvb2RhaG54Z3N0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjI4MjcyOTksImV4cCI6MjA3ODQwMzI5OX0.SXsMOMRUZ8OvCLOt-rBcfNEYo-flHUb6-_3_aC4veOY";
+
+  const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  const msg = document.getElementById("msg");
+
+  async function login() {
+    msg.textContent = "Logging in...";
+
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email,
+      password
+    });
+
+    if (error) {
+      msg.textContent = error.message;
+      msg.className = "error";
+      return;
+    }
+
+    checkAdmin();
+  }
+
+  async function checkAdmin() {
+    const { data: { user } } = await supabase.auth.getUser();
+
+    if (!user) {
+      msg.textContent = "Not logged in.";
+      msg.className = "error";
+      return;
+    }
+
+    // 🔒 CORRECT ADMIN CHECK (THIS IS THE FIX)
+    const { data: profile, error } = await supabase
+      .from("profiles")
+      .select("is_admin")
+      .eq("id", user.id)
+      .single();
+
+    if (error) {
+      msg.textContent = "Profile fetch failed.";
+      msg.className = "error";
+      console.error(error);
+      return;
+    }
+
+    if (profile.is_admin === true) {
+      msg.textContent = "✅ Admin access granted";
+      msg.className = "success";
+    } else {
+      msg.textContent = "❌ You are not admin. Access denied.";
+      msg.className = "error";
+    }
+  }
+
+  // Auto-check if already logged in
+  checkAdmin();
+</script>
+
 </body>
 </html>
