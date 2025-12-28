@@ -34,6 +34,7 @@
 
     p {
       color: #9ca3af;
+      margin-top: 8px;
     }
 
     .badge {
@@ -45,6 +46,11 @@
       font-size: 12px;
       margin-top: 12px;
     }
+
+    .status {
+      margin-top: 16px;
+      font-weight: 500;
+    }
   </style>
 </head>
 
@@ -52,9 +58,19 @@
   <div class="container">
     <div class="card">
       <h1>Vortix Admin Panel</h1>
+
       <p>This panel is restricted to administrators only.</p>
+
       <span class="badge">Admin Access Required</span>
+
+      <!-- ADMIN STATUS -->
+      <p id="admin-status" class="status">
+        Checking admin access...
+      </p>
     </div>
   </div>
+
+  <!-- ADMIN AUTH CHECK -->
+  <script type="module" src="admin.js"></script>
 </body>
 </html>
