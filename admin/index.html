@@ -38,47 +38,67 @@
 </head>
 <body>
 
-<div class="box" id="app">
+<div class="box">
   <h2>Admin Login</h2>
 
   <input id="email" type="email" placeholder="Email" />
   <input id="password" type="password" placeholder="Password" />
-  <button onclick="login()">Login</button>
+  <button id="loginBtn">Login</button>
 
   <p id="msg"></p>
 </div>
 
 <script>
-  // 🔁 REPLACE THESE WITH YOUR REAL VALUES
+  // 🔁 PUT YOUR REAL VALUES HERE
   const SUPABASE_URL = "https://rdfkcxzmleoodahnxgst.supabase.co";
   const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJkZmtjeHptbGVvb2RhaG54Z3N0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjI4MjcyOTksImV4cCI6MjA3ODQwMzI5OX0.SXsMOMRUZ8OvCLOt-rBcfNEYo-flHUb6-_3_aC4veOY";
 
-  const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  // ✅ FIX: use a DIFFERENT variable name
+  const supabaseClient = supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_ANON_KEY
+  );
 
   const msg = document.getElementById("msg");
+  const loginBtn = document.getElementById("loginBtn");
+
+  loginBtn.addEventListener("click", login);
 
   async function login() {
     msg.textContent = "Logging in...";
+    msg.className = "";
 
-    const email = document.getElementById("email").value;
-    const password = document.getElementById("password").value;
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value.trim();
 
-    const { data, error } = await supabase.auth.signInWithPassword({
+    if (!email || !password) {
+      msg.textContent = "Email and password required.";
+      msg.className = "error";
+      return;
+    }
+
+    console.log("Attempting login:", email);
+
+    const { data, error } = await supabaseClient.auth.signInWithPassword({
       email,
       password
     });
 
     if (error) {
+      console.error("Login error:", error);
       msg.textContent = error.message;
       msg.className = "error";
       return;
     }
 
+    console.log("Login success");
     checkAdmin();
   }
 
   async function checkAdmin() {
-    const { data: { user } } = await supabase.auth.getUser();
+    const { data: { user } } = await supabaseClient.auth.getUser();
+
+    console.log("Logged in user:", user);
 
     if (!user) {
       msg.textContent = "Not logged in.";
@@ -86,17 +106,17 @@
       return;
     }
 
-    // 🔒 CORRECT ADMIN CHECK (THIS IS THE FIX)
-    const { data: profile, error } = await supabase
+    const { data: profile, error } = await supabaseClient
       .from("profiles")
       .select("is_admin")
       .eq("id", user.id)
       .single();
 
+    console.log("Profile result:", profile, error);
+
     if (error) {
       msg.textContent = "Profile fetch failed.";
       msg.className = "error";
-      console.error(error);
       return;
     }
 
@@ -109,7 +129,7 @@
     }
   }
 
-  // Auto-check if already logged in
+  // Auto-check on refresh
   checkAdmin();
 </script>
 
