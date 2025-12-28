@@ -1,8 +1,8 @@
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
 const supabase = createClient(
-  "SUPABASE_URL",
-  "SUPABASE_ANON_KEY"
+  "https://rdfkcxzmleoodahnxgst.supabase.co",
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJkZmtjeHptbGVvb2RhaG54Z3N0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjI4MjcyOTksImV4cCI6MjA3ODQwMzI5OX0.SXsMOMRUZ8OvCLOt-rBcfNEYo-flHUb6-_3_aC4veOY"
 );
 
 const statusEl = document.getElementById("admin-status");
