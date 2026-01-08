@@ -2,42 +2,31 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Opening Vortix…</title>
-
-  <script>
-    (function () {
-      const isAndroid = /Android/i.test(navigator.userAgent);
-
-      // Extract taskId from /t/{taskId}
-      const parts = window.location.pathname.split("/");
-      const taskId = parts.length > 2 ? parts[2] : null;
-
-      if (!taskId) {
-        // If no taskId, go home
-        window.location.replace("https://astrayudh.xyz");
-        return;
-      }
-
-      if (isAndroid) {
-        // Try to open app via App Link
-        window.location.href = "https://astrayudh.xyz/task/" + taskId;
-
-        // Fallback to Play Store if app not installed
-        setTimeout(function () {
-          window.location.href =
-            "https://play.google.com/store/apps/details?id=com.vortix";
-        }, 1500);
-      } else {
-        // Non-Android → show website
-        window.location.replace("https://astrayudh.xyz");
-      }
-    })();
-  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
 <body>
-  <p style="text-align:center;font-family:sans-serif;">
-    Opening Vortix…
-  </p>
+  <p>Opening Vortix app…</p>
+
+  <script>
+    // Extract taskId from URL path
+    const pathParts = window.location.pathname.split('/');
+    const taskId = pathParts[pathParts.length - 1];
+
+    if (taskId) {
+      // Try opening the app
+      window.location.href = `vortix://task/${taskId}`;
+
+      // Fallback to Play Store after 1 second
+      setTimeout(() => {
+        window.location.href =
+          'https://play.google.com/store/apps/details?id=com.vortix';
+      }, 1000);
+    } else {
+      // Safety fallback
+      window.location.href =
+        'https://play.google.com/store/apps/details?id=com.vortix';
+    }
+  </script>
 </body>
 </html>
