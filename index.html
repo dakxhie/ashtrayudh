@@ -5,6 +5,100 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Astrayudh — Building Apps & Stories</title>
   <link rel="stylesheet" href="style.css">
+
+  <!-- Additional CSS for Home enhancements -->
+  <style>
+    /* Hero enhancements */
+    #hero {
+      background: linear-gradient(
+          rgba(124, 16, 41, 0.5),
+          rgba(124, 16, 41, 0.5)
+        ),
+        url('https://images.unsplash.com/photo-1581090700227-1e37b190418e?auto=format&fit=crop&w=1400&q=80') center/cover no-repeat;
+      color: #fff;
+      text-align: center;
+      padding: 140px 20px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Subtle floating animation for hero overlay text */
+    #hero h2, #hero p, #hero .cta {
+      animation: floatIn 1s ease forwards;
+      opacity: 0;
+    }
+    #hero h2 { animation-delay: 0.3s; }
+    #hero p { animation-delay: 0.6s; }
+    #hero .cta { animation-delay: 0.9s; }
+
+    @keyframes floatIn {
+      0% { opacity: 0; transform: translateY(20px);}
+      100% { opacity: 1; transform: translateY(0);}
+    }
+
+    /* Hero CTAs alignment */
+    #hero .cta-container {
+      margin-top: 30px;
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    /* Featured cards with thumbnails */
+    .card-featured {
+      display: flex;
+      flex-direction: column;
+      border-radius: 16px;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card-featured img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+    .card-featured .card-content {
+      padding: 20px;
+      background: var(--card-bg);
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .card-featured .card-content h3 {
+      margin-bottom: 12px;
+    }
+    .card-featured .card-content p {
+      flex: 1;
+      margin-bottom: 15px;
+      color: var(--muted-text);
+    }
+    .card-featured .card-content a.cta {
+      align-self: flex-start;
+    }
+    .card-featured:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+    }
+
+    /* Featured Grid */
+    .featured-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 28px;
+      margin-top: 40px;
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
+      #hero {
+        padding: 100px 15px 60px;
+      }
+      #hero h2 { font-size: 2rem; }
+      #hero p { font-size: 1rem; }
+      .card-featured img { height: 150px; }
+    }
+  </style>
 </head>
 <body>
 
@@ -28,48 +122,60 @@
       At <strong>Astrayudh</strong>, creativity meets calm. We craft elegant apps, write meaningful blogs,
       and create experiences that connect people in a natural, thoughtful way.
     </p>
-    <a href="stories.html" class="cta">Explore Stories</a>
-    <a href="apps.html" class="cta" style="margin-left:15px;">Our Apps</a>
+    <div class="cta-container">
+      <a href="stories.html" class="cta">Explore Stories</a>
+      <a href="apps.html" class="cta">Our Apps</a>
+    </div>
   </section>
 
   <!-- Featured Sections -->
-  <div class="container">
+  <div class="container featured-grid">
 
     <!-- Vision Card -->
-    <div class="card">
-      <h3>Our Vision</h3>
-      <p>
-        Technology and storytelling should coexist beautifully — thoughtful, modern, and built
-        to inspire connection rather than distraction.
-      </p>
+    <div class="card card-featured">
+      <div class="card-content">
+        <h3>Our Vision</h3>
+        <p>
+          Technology and storytelling should coexist beautifully — thoughtful, modern,
+          and built to inspire connection rather than distraction.
+        </p>
+      </div>
     </div>
 
     <!-- What We Do Card -->
-    <div class="card">
-      <h3>What We Do</h3>
-      <p>
-        We build apps like <strong>Vortix</strong> and craft stories that carry soul and simplicity.
-        Every project is thoughtfully designed to engage and delight.
-      </p>
+    <div class="card card-featured">
+      <div class="card-content">
+        <h3>What We Do</h3>
+        <p>
+          We build apps like <strong>Vortix</strong> and craft stories that carry soul and simplicity.
+          Every project is thoughtfully designed to engage and delight.
+        </p>
+      </div>
     </div>
 
-    <!-- Featured Story -->
-    <div class="card">
-      <h3>Featured Story: The Lost Pages</h3>
-      <p>
-        Dive into our most recent story release — chapters filled with mystery, emotion, and creativity.
-      </p>
-      <a href="stories.html#lost-pages" class="cta">Read Now</a>
+    <!-- Featured Story Card -->
+    <div class="card card-featured">
+      <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1400&q=80" alt="Featured Story Thumbnail">
+      <div class="card-content">
+        <h3>Featured Story: The Lost Pages</h3>
+        <p>
+          Dive into our most recent story release — chapters filled with mystery, emotion, and creativity.
+        </p>
+        <a href="stories.html#lost-pages" class="cta">Read Now</a>
+      </div>
     </div>
 
-    <!-- Featured App -->
-    <div class="card">
-      <h3>Featured App: Vortix</h3>
-      <p>
-        Explore <strong>Vortix</strong>, our upcoming platform designed to help creators engage meaningfully
-        with their audience.
-      </p>
-      <a href="apps.html" class="cta">Discover App</a>
+    <!-- Featured App Card -->
+    <div class="card card-featured">
+      <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1400&q=80" alt="Featured App Thumbnail">
+      <div class="card-content">
+        <h3>Featured App: Vortix</h3>
+        <p>
+          Explore <strong>Vortix</strong>, our upcoming platform designed to help creators engage meaningfully
+          with their audience.
+        </p>
+        <a href="apps.html" class="cta">Discover App</a>
+      </div>
     </div>
 
   </div>
