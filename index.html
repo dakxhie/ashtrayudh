@@ -1,71 +1,101 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Astrayudh - Creative Studio & Digital Platform</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Astrayudh — Creative Studio & Digital Stories</title>
+
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@400;500&display=swap" rel="stylesheet">
-  <!-- Stylesheet -->
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Poppins:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- Main CSS -->
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- Header / Navbar -->
-  <header>
-    <nav class="navbar">
-      <a href="index.html" class="logo">Astrayudh</a>
-      <ul class="nav-links">
-        <li><a href="about.html">About</a></li>
-        <li><a href="apps.html">Apps</a></li>
-        <li><a href="blogs.html">Blogs</a></li>
-        <li><a href="stories.html">Stories</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
-    </nav>
+
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <a href="index.html" class="logo">Astrayudh</a>
+    <ul class="nav-links">
+      <li><a href="about.html">About</a></li>
+      <li><a href="apps.html">Apps</a></li>
+      <li><a href="blogs.html">Blogs</a></li>
+      <li><a href="stories.html">Stories</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
   </header>
 
-  <!-- Hero Section -->
-  <section class="hero" style="background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1470&q=80') center/cover no-repeat;">
+  <!-- HERO -->
+  <section class="hero" style="background-image: url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=2000&auto=format&fit=crop');">
     <div class="hero-content">
       <h1>We design digital stories that feel human.</h1>
-      <p>Creating meaningful experiences through apps, blogs, and storytelling.</p>
-      <a href="about.html" class="btn-cta">Explore More</a>
+      <p>
+        Astrayudh is a creative studio crafting thoughtful apps,
+        reflective writing, and narrative-driven experiences.
+      </p>
+      <a href="about.html" class="btn-cta">Explore Our Vision</a>
     </div>
   </section>
 
-  <!-- Overview Section -->
-  <section class="overview">
+  <!-- VISION -->
+  <section>
     <div class="container">
       <h2>Our Vision</h2>
-      <p>Astrayudh is a creative studio and digital platform dedicated to crafting thoughtful experiences. We combine storytelling, design, and technology to create apps and content that resonate with humans.</p>
+      <p>
+        Astrayudh exists at the intersection of storytelling, design, and technology.
+        We believe digital products should feel intentional, emotionally grounded,
+        and quietly powerful — not loud, bloated, or disposable.
+      </p>
+    </div>
+  </section>
+
+  <!-- FOCUS AREAS -->
+  <section>
+    <div class="container">
+      <h2>What We Create</h2>
+
       <div class="cards">
+        <!-- Apps -->
         <div class="card">
+          <img src="https://images.unsplash.com/photo-1557821552-17105176677c?q=80&w=1200&auto=format&fit=crop" alt="Apps">
           <h3>Apps</h3>
-          <p>Innovative apps designed with purpose and simplicity, starting with our upcoming app, Vortix.</p>
+          <p>
+            Purpose-driven applications focused on clarity, mental space,
+            and meaningful interaction — starting with our upcoming app, Vortex.
+          </p>
         </div>
+
+        <!-- Blogs -->
         <div class="card">
+          <img src="https://images.unsplash.com/photo-1519682337058-a94d519337bc?q=80&w=1200&auto=format&fit=crop" alt="Blogs">
           <h3>Blogs</h3>
-          <p>Insights, stories, and reflections from our creative journey, thoughtfully written for curious minds.</p>
+          <p>
+            Essays, reflections, and insights on creativity, identity,
+            technology, and the quiet struggles of being human.
+          </p>
         </div>
+
+        <!-- Stories -->
         <div class="card">
+          <img src="https://images.unsplash.com/photo-1492724441997-5dc865305da7?q=80&w=1200&auto=format&fit=crop" alt="Stories">
           <h3>Stories</h3>
-          <p>Serialized stories and narratives that explore human experiences, crafted to captivate and inspire.</p>
+          <p>
+            Serialized narratives exploring emotion, memory, ambition,
+            and the unseen moments that shape our lives.
+          </p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Footer -->
+  <!-- FOOTER -->
   <footer>
-    <div class="container">
-      <p>&copy; 2026 Astrayudh. All rights reserved.</p>
-      <ul class="footer-links">
-        <li><a href="privacy.html">Privacy Policy</a></li>
-      </ul>
-    </div>
+    <p>© 2026 Astrayudh. All rights reserved.</p>
+    <p><a href="privacy.html">Privacy Policy</a></p>
   </footer>
 
-  <!-- Main JS -->
-  <script src="js/main.js"></script>
 </body>
 </html>
