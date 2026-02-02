@@ -1,235 +1,271 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin Panel - Astrayudh</title>
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
-  <style>
-    /* Admin-specific styling */
-    .admin-container { max-width: 1000px; margin: 2rem auto; padding: 2rem; background:#fff; border-radius:15px; box-shadow:0 4px 20px rgba(0,0,0,0.1); }
-    .admin-container h2 { font-family: 'Playfair Display', serif; margin-bottom:1rem; color:#7B1E3D; }
-    .admin-container label { display:block; margin-top:1rem; font-weight:500; }
-    .admin-container input, .admin-container textarea, .admin-container select { width:100%; padding:0.6rem; margin-top:0.5rem; border:1px solid #ccc; border-radius:8px; }
-    .btn-cta { margin-top:1rem; }
-    .tabs { display:flex; gap:1rem; margin-bottom:1rem; cursor:pointer; }
-    .tab { padding:0.6rem 1rem; border-radius:8px; background:#f4f4f4; transition: background 0.3s; }
-    .tab.active { background:#7B1E3D; color:#fff; }
-    .item-list { margin-top:2rem; }
-    .item-card { padding:1rem; border:1px solid #eee; border-radius:10px; margin-bottom:1rem; box-shadow:0 2px 10px rgba(0,0,0,0.05); }
-    .item-card button { margin-right:0.5rem; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Panel - Astrayudh</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<style>
+/* === Admin Specific Styling === */
+.admin-container { max-width: 1200px; margin: 2rem auto; padding: 2rem; background:#fff; border-radius:15px; box-shadow:0 6px 25px rgba(0,0,0,0.1);}
+.admin-container h2 { font-family: 'Playfair Display', serif; margin-bottom:1rem; color:#7B1E3D; }
+#password-section label { font-weight:500; display:block; margin-top:1rem; }
+#password-section input { width: 100%; padding:0.6rem; margin-top:0.5rem; border-radius:10px; border:1px solid #ccc; }
+#password-section button { margin-top:1rem; }
+
+.tabs { display:flex; gap:1rem; margin-bottom:1rem; cursor:pointer; flex-wrap:wrap; }
+.tab { padding:0.7rem 1.2rem; border-radius:12px; background:#f4f4f4; transition:0.3s; }
+.tab.active { background:#7B1E3D; color:#fff; }
+
+.item-list { margin-top:2rem; }
+.item-card { padding:1rem; border:1px solid #eee; border-radius:12px; margin-bottom:1rem; box-shadow:0 2px 15px rgba(0,0,0,0.05); display:flex; justify-content:space-between; align-items:center; transition:0.3s;}
+.item-card:hover { transform: translateY(-3px); box-shadow:0 6px 20px rgba(0,0,0,0.08); }
+
+.item-info { flex:1; }
+.item-actions button { margin-left:0.5rem; }
+
+.btn-add { background:#7B1E3D; color:#fff; border:none; border-radius:50px; padding:0.6rem 1.2rem; cursor:pointer; transition:0.3s;}
+.btn-add:hover { background:#5c1430; }
+
+.btn-edit { background:#F4A261; color:#fff; border:none; border-radius:50px; padding:0.5rem 1rem; cursor:pointer; transition:0.3s;}
+.btn-edit:hover { background:#d08043; }
+
+.btn-delete { background:#E63946; color:#fff; border:none; border-radius:50px; padding:0.5rem 1rem; cursor:pointer; transition:0.3s;}
+.btn-delete:hover { background:#b12a33; }
+
+input, textarea { padding:0.6rem; margin-top:0.5rem; border-radius:10px; border:1px solid #ccc; width:100%; }
+
+.search-bar { margin-bottom:1rem; }
+</style>
 </head>
 <body>
-  <header>
-    <nav class="navbar">
-      <a href="index.html" class="logo">Astrayudh</a>
-      <ul class="nav-links">
-        <li><a href="about.html">About</a></li>
-        <li><a href="apps.html">Apps</a></li>
-        <li><a href="blogs.html">Blogs</a></li>
-        <li><a href="stories.html">Stories</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
-    </nav>
-  </header>
 
-  <section class="admin-section">
-    <div class="container admin-container">
-      <h2>Admin Panel</h2>
-      
-      <!-- Password Section -->
-      <div id="password-section">
-        <label for="admin-password">Enter Admin Password:</label>
-        <input type="password" id="admin-password" placeholder="Password">
-        <button class="btn-cta" id="password-submit">Enter</button>
-        <p id="password-error" style="color:red; margin-top:0.5rem;"></p>
-      </div>
+<header>
+<nav class="navbar">
+  <a href="index.html" class="logo">Astrayudh</a>
+  <ul class="nav-links">
+    <li><a href="about.html">About</a></li>
+    <li><a href="apps.html">Apps</a></li>
+    <li><a href="blogs.html">Blogs</a></li>
+    <li><a href="stories.html">Stories</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+</nav>
+</header>
 
-      <!-- Admin Content -->
-      <div id="admin-content" style="display:none;">
-        <div class="tabs">
-          <div class="tab active" data-tab="blogs">Blogs</div>
-          <div class="tab" data-tab="stories">Stories</div>
-        </div>
+<section class="admin-section">
+<div class="container admin-container">
+  <h2>Admin Panel</h2>
 
-        <!-- Blogs Section -->
-        <div id="blogs-tab">
-          <h3>Add New Blog</h3>
-          <label>Title</label>
-          <input type="text" id="blog-title">
-          <label>Excerpt</label>
-          <textarea id="blog-excerpt" rows="2"></textarea>
-          <label>Content (HTML allowed)</label>
-          <textarea id="blog-content" rows="4"></textarea>
-          <label>Featured Image URL</label>
-          <input type="text" id="blog-image">
-          <button class="btn-cta" id="add-blog">Add Blog</button>
+  <!-- Password Section -->
+  <div id="password-section">
+    <label for="admin-password">Enter Admin Password:</label>
+    <input type="password" id="admin-password" placeholder="Password">
+    <label><input type="checkbox" id="toggle-password"> Show Password</label>
+    <button class="btn-add" id="password-submit">Enter</button>
+    <p id="password-error" style="color:red; margin-top:0.5rem;"></p>
+  </div>
 
-          <div class="item-list" id="blog-list">
-            <!-- Blogs will be listed here -->
-          </div>
-        </div>
-
-        <!-- Stories Section -->
-        <div id="stories-tab" style="display:none;">
-          <h3>Add New Story</h3>
-          <label>Story Title</label>
-          <input type="text" id="story-title">
-          <label>Description</label>
-          <textarea id="story-description" rows="2"></textarea>
-          <button class="btn-cta" id="add-story">Add Story</button>
-
-          <div class="item-list" id="story-list">
-            <!-- Stories will be listed here -->
-          </div>
-        </div>
-      </div>
+  <!-- Admin Content -->
+  <div id="admin-content" style="display:none;">
+    <div class="tabs">
+      <div class="tab active" data-tab="blogs">Blogs</div>
+      <div class="tab" data-tab="stories">Stories</div>
     </div>
-  </section>
 
-  <script>
-    // Password verification
-    const ADMIN_PASSWORD = "astrayudh123"; // Change your password here
-    const passwordSubmit = document.getElementById('password-submit');
-    const passwordInput = document.getElementById('admin-password');
-    const passwordError = document.getElementById('password-error');
-    const adminContent = document.getElementById('admin-content');
-    const passwordSection = document.getElementById('password-section');
+    <!-- Blogs Tab -->
+    <div id="blogs-tab">
+      <input type="text" id="blog-search" class="search-bar" placeholder="Search Blogs by Title...">
+      <h3>Add New Blog</h3>
+      <label>Title</label><input type="text" id="blog-title">
+      <label>Excerpt</label><textarea id="blog-excerpt" rows="2"></textarea>
+      <label>Content (HTML allowed)</label><textarea id="blog-content" rows="4"></textarea>
+      <label>Featured Image URL</label><input type="text" id="blog-image">
+      <button class="btn-add" id="add-blog">Add Blog</button>
+      <div class="item-list" id="blog-list"></div>
+    </div>
 
-    passwordSubmit.addEventListener('click', () => {
-      if(passwordInput.value === ADMIN_PASSWORD){
-        passwordSection.style.display = 'none';
-        adminContent.style.display = 'block';
-      } else {
-        passwordError.textContent = "Incorrect password!";
-      }
-    });
+    <!-- Stories Tab -->
+    <div id="stories-tab" style="display:none;">
+      <input type="text" id="story-search" class="search-bar" placeholder="Search Stories...">
+      <h3>Add New Story</h3>
+      <label>Story Title</label><input type="text" id="story-title">
+      <label>Description</label><textarea id="story-description" rows="2"></textarea>
+      <button class="btn-add" id="add-story">Add Story</button>
+      <div class="item-list" id="story-list"></div>
+    </div>
+  </div>
+</div>
+</section>
 
-    // Tabs
-    const tabs = document.querySelectorAll('.tab');
-    const blogsTab = document.getElementById('blogs-tab');
-    const storiesTab = document.getElementById('stories-tab');
+<script>
+// === Password ===
+const ADMIN_PASSWORD = "astrayudh123";
+const passwordSubmit = document.getElementById('password-submit');
+const passwordInput = document.getElementById('admin-password');
+const togglePassword = document.getElementById('toggle-password');
+const passwordError = document.getElementById('password-error');
+const adminContent = document.getElementById('admin-content');
+const passwordSection = document.getElementById('password-section');
 
-    tabs.forEach(tab => {
-      tab.addEventListener('click', () => {
-        tabs.forEach(t => t.classList.remove('active'));
-        tab.classList.add('active');
-        if(tab.dataset.tab === 'blogs'){
-          blogsTab.style.display = 'block';
-          storiesTab.style.display = 'none';
-        } else {
-          blogsTab.style.display = 'none';
-          storiesTab.style.display = 'block';
-        }
-      });
-    });
+passwordSubmit.addEventListener('click', () => {
+  if(passwordInput.value === ADMIN_PASSWORD){
+    passwordSection.style.display = 'none';
+    adminContent.style.display = 'block';
+  } else {
+    passwordError.textContent = "Incorrect password!";
+    setTimeout(()=>{passwordError.textContent='';},3000);
+  }
+});
 
-    // In-memory data
-    let blogs = [];
-    let stories = [];
+togglePassword.addEventListener('change', ()=>{
+  passwordInput.type = togglePassword.checked ? 'text':'password';
+});
 
-    // Blog CRUD
-    const blogList = document.getElementById('blog-list');
-    const addBlogBtn = document.getElementById('add-blog');
+// === Tabs ===
+const tabs = document.querySelectorAll('.tab');
+const blogsTab = document.getElementById('blogs-tab');
+const storiesTab = document.getElementById('stories-tab');
+tabs.forEach(tab=>{
+  tab.addEventListener('click',()=>{
+    tabs.forEach(t=>t.classList.remove('active'));
+    tab.classList.add('active');
+    blogsTab.style.display = tab.dataset.tab==='blogs'?'block':'none';
+    storiesTab.style.display = tab.dataset.tab==='stories'?'block':'none';
+  });
+});
 
-    function renderBlogs(){
-      blogList.innerHTML = '';
-      blogs.forEach((b, idx) => {
-        const card = document.createElement('div');
-        card.className = 'item-card';
-        card.innerHTML = `
-          <strong>${b.title}</strong><br>
-          <small>${b.excerpt}</small><br>
-          <button onclick="editBlog(${idx})">Edit</button>
-          <button onclick="deleteBlog(${idx})">Delete</button>
-        `;
-        blogList.appendChild(card);
-      });
-    }
+// === In-memory Data ===
+let blogs = [];
+let stories = [];
 
-    addBlogBtn.addEventListener('click', () => {
-      const title = document.getElementById('blog-title').value;
-      const excerpt = document.getElementById('blog-excerpt').value;
-      const content = document.getElementById('blog-content').value;
-      const image = document.getElementById('blog-image').value;
-      if(title && excerpt && content && image){
-        blogs.push({id:'blog'+Date.now(), title, excerpt, content, featuredImage:image});
-        renderBlogs();
-        document.getElementById('blog-title').value = '';
-        document.getElementById('blog-excerpt').value = '';
-        document.getElementById('blog-content').value = '';
-        document.getElementById('blog-image').value = '';
-      }
-    });
+// === Blog CRUD ===
+const blogList = document.getElementById('blog-list');
+const addBlogBtn = document.getElementById('add-blog');
+const blogSearch = document.getElementById('blog-search');
 
-    window.editBlog = function(idx){
-      const blog = blogs[idx];
-      const newTitle = prompt("Edit Title:", blog.title);
-      const newExcerpt = prompt("Edit Excerpt:", blog.excerpt);
-      const newContent = prompt("Edit Content (HTML):", blog.content);
-      const newImage = prompt("Edit Image URL:", blog.featuredImage);
-      if(newTitle && newExcerpt && newContent && newImage){
-        blogs[idx] = {...blog, title:newTitle, excerpt:newExcerpt, content:newContent, featuredImage:newImage};
-        renderBlogs();
-      }
-    }
+function renderBlogs(filter=''){
+  blogList.innerHTML='';
+  blogs.filter(b=>b.title.toLowerCase().includes(filter.toLowerCase())).forEach((b,idx)=>{
+    const card = document.createElement('div'); card.className='item-card';
+    card.innerHTML=`
+      <div class="item-info"><strong>${b.title}</strong><br><small>${b.excerpt}</small></div>
+      <div class="item-actions">
+        <button class="btn-edit" onclick="editBlog(${idx})">Edit</button>
+        <button class="btn-delete" onclick="deleteBlog(${idx})">Delete</button>
+      </div>
+    `;
+    blogList.appendChild(card);
+  });
+}
 
-    window.deleteBlog = function(idx){
-      if(confirm("Are you sure you want to delete this blog?")){
-        blogs.splice(idx,1);
-        renderBlogs();
-      }
-    }
+addBlogBtn.addEventListener('click',()=>{
+  const title=document.getElementById('blog-title').value;
+  const excerpt=document.getElementById('blog-excerpt').value;
+  const content=document.getElementById('blog-content').value;
+  const image=document.getElementById('blog-image').value;
+  if(title && excerpt && content && image){
+    blogs.push({id:'blog'+Date.now(), title, excerpt, content, featuredImage:image});
+    renderBlogs();
+    document.getElementById('blog-title').value='';
+    document.getElementById('blog-excerpt').value='';
+    document.getElementById('blog-content').value='';
+    document.getElementById('blog-image').value='';
+  }
+});
 
-    // Story CRUD
-    const storyList = document.getElementById('story-list');
-    const addStoryBtn = document.getElementById('add-story');
+window.editBlog = function(idx){
+  const blog=blogs[idx];
+  const form=document.createElement('div');
+  form.innerHTML=`
+    <input type="text" id="edit-title" value="${blog.title}">
+    <textarea id="edit-excerpt" rows="2">${blog.excerpt}</textarea>
+    <textarea id="edit-content" rows="4">${blog.content}</textarea>
+    <input type="text" id="edit-image" value="${blog.featuredImage}">
+    <button class="btn-add" id="save-blog">Save</button>
+    <button class="btn-delete" id="cancel-blog">Cancel</button>
+  `;
+  blogList.innerHTML=''; blogList.appendChild(form);
 
-    function renderStories(){
-      storyList.innerHTML = '';
-      stories.forEach((s, idx) => {
-        const card = document.createElement('div');
-        card.className = 'item-card';
-        card.innerHTML = `
-          <strong>${s.title}</strong><br>
-          <small>${s.description}</small><br>
-          <button onclick="editStory(${idx})">Edit</button>
-          <button onclick="deleteStory(${idx})">Delete</button>
-        `;
-        storyList.appendChild(card);
-      });
-    }
+  document.getElementById('save-blog').addEventListener('click',()=>{
+    blog.title=document.getElementById('edit-title').value;
+    blog.excerpt=document.getElementById('edit-excerpt').value;
+    blog.content=document.getElementById('edit-content').value;
+    blog.featuredImage=document.getElementById('edit-image').value;
+    renderBlogs();
+  });
+  document.getElementById('cancel-blog').addEventListener('click',()=>renderBlogs());
+}
 
-    addStoryBtn.addEventListener('click', () => {
-      const title = document.getElementById('story-title').value;
-      const description = document.getElementById('story-description').value;
-      if(title && description){
-        stories.push({id:'story'+Date.now(), title, description, chapters:[]});
-        renderStories();
-        document.getElementById('story-title').value = '';
-        document.getElementById('story-description').value = '';
-      }
-    });
+window.deleteBlog=function(idx){
+  if(confirm("Are you sure you want to delete this blog?")){
+    blogs.splice(idx,1);
+    renderBlogs();
+  }
+}
 
-    window.editStory = function(idx){
-      const story = stories[idx];
-      const newTitle = prompt("Edit Story Title:", story.title);
-      const newDescription = prompt("Edit Description:", story.description);
-      if(newTitle && newDescription){
-        stories[idx] = {...story, title:newTitle, description:newDescription};
-        renderStories();
-      }
-    }
+// === Story CRUD ===
+const storyList = document.getElementById('story-list');
+const addStoryBtn = document.getElementById('add-story');
+const storySearch = document.getElementById('story-search');
 
-    window.deleteStory = function(idx){
-      if(confirm("Are you sure you want to delete this story?")){
-        stories.splice(idx,1);
-        renderStories();
-      }
-    }
-  </script>
+function renderStories(filter=''){
+  storyList.innerHTML='';
+  stories.filter(s=>s.title.toLowerCase().includes(filter.toLowerCase())).forEach((s,idx)=>{
+    const card=document.createElement('div'); card.className='item-card';
+    card.innerHTML=`
+      <div class="item-info"><strong>${s.title}</strong><br><small>${s.description}</small></div>
+      <div class="item-actions">
+        <button class="btn-edit" onclick="editStory(${idx})">Edit</button>
+        <button class="btn-delete" onclick="deleteStory(${idx})">Delete</button>
+      </div>
+    `;
+    storyList.appendChild(card);
+  });
+}
+
+addStoryBtn.addEventListener('click',()=>{
+  const title=document.getElementById('story-title').value;
+  const description=document.getElementById('story-description').value;
+  if(title && description){
+    stories.push({id:'story'+Date.now(), title, description, chapters:[]});
+    renderStories();
+    document.getElementById('story-title').value='';
+    document.getElementById('story-description').value='';
+  }
+});
+
+window.editStory=function(idx){
+  const story=stories[idx];
+  const form=document.createElement('div');
+  form.innerHTML=`
+    <input type="text" id="edit-title" value="${story.title}">
+    <textarea id="edit-description" rows="2">${story.description}</textarea>
+    <button class="btn-add" id="save-story">Save</button>
+    <button class="btn-delete" id="cancel-story">Cancel</button>
+  `;
+  storyList.innerHTML=''; storyList.appendChild(form);
+
+  document.getElementById('save-story').addEventListener('click',()=>{
+    story.title=document.getElementById('edit-title').value;
+    story.description=document.getElementById('edit-description').value;
+    renderStories();
+  });
+  document.getElementById('cancel-story').addEventListener('click',()=>renderStories());
+}
+
+window.deleteStory=function(idx){
+  if(confirm("Are you sure you want to delete this story?")){
+    stories.splice(idx,1);
+    renderStories();
+  }
+}
+
+// === Search ===
+blogSearch.addEventListener('input',()=>renderBlogs(blogSearch.value));
+storySearch.addEventListener('input',()=>renderStories(storySearch.value));
+</script>
+
 </body>
 </html>
