@@ -1,0 +1,25 @@
+{
+  "stories": [
+    {
+      "id": "red-chronicles",
+      "title": "The Red Chronicles",
+      "description": "A thrilling tale of mystery, courage, and discovery spanning multiple chapters.",
+      "heroImage": "https://images.unsplash.com/photo-1524985069026-dd778a71c7b4?auto=format&fit=crop&w=1600&q=80",
+      "chapters": [
+        {
+          "id": "chapter-red-1",
+          "title": "Chapter 1 — The Awakening",
+          "excerpt": "The adventure begins with an unexpected event that changes everything for our protagonist."
+        }
+      ]
+    }
+  ],
+  "blogs": [
+    {
+      "id": "blog1",
+      "title": "The Spark Behind Vortix",
+      "excerpt": "Why Vortix exists, the thinking behind its design, and how it aims to reframe engagement into meaningful exchanges.",
+      "heroImage": "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1400&q=80"
+    }
+  ]
+}
