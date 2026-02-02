@@ -1,196 +1,199 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Blogs — Astrayudh</title>
-    <link rel="stylesheet" href="style.css" />
-    <style>
-        .blogs-hero {
-            /* reuse #hero look but smaller height for blog index */
-            background: linear-gradient(
-                rgba(124,16,41,0.55),
-                rgba(124,16,41,0.55)
-                ),
-                url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
-            color: #fff;
-            text-align: center;
-            padding: 80px 20px;
-            margin-bottom: 30px;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blogs — Astrayudh</title>
+  <link rel="stylesheet" href="style.css">
 
-        .blogs-hero h2 {
-            font-family:'Playfair Display',serif; 
-            font-size:2.2rem; 
-            margin-bottom:8px;
-        }
+  <style>
+    /* Hero section for blogs */
+    #sub-hero {
+      padding: 100px 20px 60px;
+      text-align: center;
+      background: linear-gradient(rgba(124,16,41,0.5), rgba(124,16,41,0.5)),
+                  url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+      color: #fff;
+      position: relative;
+    }
 
-        .blogs-hero p {
-            max-width:760px; 
-            margin:0 auto; 
-            color:rgba(255,255,255,0.95);
-        }
+    #sub-hero h2, #sub-hero p {
+      animation: floatIn 0.9s ease forwards;
+      opacity: 0;
+    }
+    #sub-hero h2 { animation-delay: 0.3s; }
+    #sub-hero p { animation-delay: 0.6s; }
 
-        .blogs-wrapper {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 30px 20px 80px;
-        }
+    @keyframes floatIn {
+      0% { opacity: 0; transform: translateY(20px);}
+      100% { opacity: 1; transform: translateY(0);}
+    }
 
-        .blogs-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 28px;
-            align-items: start;
-        }
+    #sub-hero h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      margin-bottom: 10px;
+    }
+    #sub-hero p {
+      max-width: 700px;
+      margin: 0 auto;
+      font-size: 1rem;
+      line-height: 1.6;
+    }
 
-        .blog-thumb {
-            width: 100%;
-            height: 220px;
-            object-fit: cover;
-            display: block;
-            border-top-left-radius: 14px;
-            border-top-right-radius: 14px;
-        }
+    /* Container grid for blogs */
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 50px 20px 80px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 28px;
+    }
 
-        .blog-card {
-            overflow: hidden;
-            border-radius: 14px;
-            background: var(--card-bg);
-            box-shadow: 0 6px 18px rgba(0,0,0,0.06);
-            transition: transform 0.25s ease, box-shadow 0.25s ease;
-            display: flex;
-            flex-direction: column;
-            min-height: 100%;
-        }
+    .blog-card {
+      background: var(--card-bg);
+      border-radius: 16px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
 
-        .blog-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 10px 26px rgba(0,0,0,0.10);
-        }
+    .blog-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 10px 26px rgba(0,0,0,0.12);
+    }
 
-        .blog-card .card-body {
-            padding: 20px;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-        }
+    .blog-thumb {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      display: block;
+    }
 
-        .blog-card h3 {
-            margin: 0 0 10px;
-            font-family: 'Playfair Display', serif;
-            color: var(--accent);
-            font-size: 1.25rem;
-        }
+    .blog-content {
+      padding: 20px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
 
-        .blog-card p.lead {
-            color: var(--muted-text);
-            margin-bottom: 14px;
-            line-height: 1.6;
-            flex: 1;
-        }
+    .blog-content h3 {
+      font-family: 'Playfair Display', serif;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
 
-        .read-more {
-            align-self: flex-start;
-            text-decoration: none;
-            background: var(--accent);
-            color: #fff;
-            padding: 8px 16px;
-            border-radius: 12px;
-            font-weight: 500;
-            transition: background 0.2s;
-        }
+    .blog-content p {
+      flex: 1;
+      margin-bottom: 15px;
+      color: var(--muted-text);
+      line-height: 1.6;
+    }
 
-        .read-more:hover { background: var(--accent-hover); }
+    .blog-content a.cta {
+      display: inline-block;
+      background: var(--accent);
+      color: #fff;
+      padding: 8px 18px;
+      border-radius: 25px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: background 0.3s ease;
+      align-self: flex-start;
+    }
 
-        @media (max-width: 720px) {
-            .blogs-hero { padding: 60px 14px; }
-            .blog-thumb { height: 180px; }
-        }
-    </style>
+    .blog-content a.cta:hover {
+      background: var(--accent-hover);
+    }
+
+    @media (max-width: 768px) {
+      #sub-hero { padding: 80px 15px 50px; }
+      #sub-hero h2 { font-size: 1.9rem; }
+      .blog-thumb { height: 150px; }
+    }
+  </style>
 </head>
 <body>
-    <header class="site-header">
-        <h1>Astrayudh</h1>
-        <nav class="nav">
-            <a href="index.html">Home</a>
-            <a href="about.html">About</a>
-            <a href="apps.html">Apps</a>
-            <a href="blogs.html">Blogs</a>
-            <a href="contact.html">Contact</a>
-        </nav>
-    </header>
 
-    <section class="blogs-hero" role="banner" aria-labelledby="blogs-title">
-        <h2 id="blogs-title">Insights & Updates</h2>
-        <p>
-            Thoughtful essays, practical notes, and deep dives on creativity, design, and building with purpose.
-        </p>
-    </section>
+  <!-- Header -->
+  <header class="site-header">
+    <h1><a href="index.html">Astrayudh</a></h1>
+    <nav class="nav">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="apps.html">Apps</a>
+      <a href="blogs.html" class="active">Blogs</a>
+      <a href="stories.html">Stories</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
 
-    <main class="blogs-wrapper" role="main">
-        <div class="blogs-grid">
+  <!-- Hero -->
+  <section id="sub-hero">
+    <h2>Insights & Updates</h2>
+    <p>Thoughtful essays, practical notes, and deep dives on creativity, design, and building with purpose.</p>
+  </section>
 
-            <article class="blog-card" aria-labelledby="b1">
-                <a href="blog1.html" aria-hidden="true">
-                    <img class="blog-thumb" src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1400&q=80" alt="Workspace and people collaborating">
-                </a>
-                <div class="card-body">
-                    <h3 id="b1">The Spark Behind Vortix</h3>
-                    <p class="lead">Why Vortix exists, the thinking behind its design, and how it aims to reframe engagement into meaningful exchanges.</p>
-                    <a class="read-more" href="blog1.html">Read full article</a>
-                </div>
-            </article>
+  <!-- Blogs Grid -->
+  <div class="container">
+    <!-- Blog 1 -->
+    <div class="blog-card">
+      <img class="blog-thumb" src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1400&q=80" alt="Workspace and people collaborating">
+      <div class="blog-content">
+        <h3>The Spark Behind Vortix</h3>
+        <p>Why Vortix exists, the thinking behind its design, and how it aims to reframe engagement into meaningful exchanges.</p>
+        <a href="blog1.html" class="cta">Read Full Article</a>
+      </div>
+    </div>
 
-            <article class="blog-card" aria-labelledby="b2">
-                <a href="blog2.html" aria-hidden="true">
-                    <img class="blog-thumb" src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1400&q=80" alt="Calm workspace design">
-                </a>
-                <div class="card-body">
-                    <h3 id="b2">Designing Calm in a Noisy World</h3>
-                    <p class="lead">A reflection on calm design: why simplicity matters and how it influences user well-being in digital products.</p>
-                    <a class="read-more" href="blog2.html">Read full article</a>
-                </div>
-            </article>
+    <!-- Blog 2 -->
+    <div class="blog-card">
+      <img class="blog-thumb" src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1400&q=80" alt="Calm workspace design">
+      <div class="blog-content">
+        <h3>Designing Calm in a Noisy World</h3>
+        <p>A reflection on calm design: why simplicity matters and how it influences user well-being in digital products.</p>
+        <a href="blog2.html" class="cta">Read Full Article</a>
+      </div>
+    </div>
 
-            <article class="blog-card" aria-labelledby="b3">
-                <a href="blog3.html" aria-hidden="true">
-                    <img class="blog-thumb" src="https://images.unsplash.com/photo-1492724441997-5dc865305da7?auto=format&fit=crop&w=1400&q=80" alt="Developers and creative thinking">
-                </a>
-                <div class="card-body">
-                    <h3 id="b3">When Ideas Breathe</h3>
-                    <p class="lead">On patience, creative flow, and the quiet practices that let ideas unfurl into meaningful work.</p>
-                    <a class="read-more" href="blog3.html">Read full article</a>
-                </div>
-            </article>
+    <!-- Blog 3 -->
+    <div class="blog-card">
+      <img class="blog-thumb" src="https://images.unsplash.com/photo-1492724441997-5dc865305da7?auto=format&fit=crop&w=1400&q=80" alt="Developers and creative thinking">
+      <div class="blog-content">
+        <h3>When Ideas Breathe</h3>
+        <p>On patience, creative flow, and the quiet practices that let ideas unfurl into meaningful work.</p>
+        <a href="blog3.html" class="cta">Read Full Article</a>
+      </div>
+    </div>
 
-            <article class="blog-card" aria-labelledby="b4">
-                <a href="blog4.html" aria-hidden="true">
-                    <img class="blog-thumb" src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit:crop&w=1400&q=80" alt="Future and innovation">
-                </a>
-                <div class="card-body">
-                    <h3 id="b4">The Digital Artisan’s Path</h3>
-                    <p class="lead">What it means to craft digital work like an artisan — the attention to detail that makes products feel timeless.</p>
-                    <a class="read-more" href="blog4.html">Read full article</a>
-                </div>
-            </article>
+    <!-- Blog 4 -->
+    <div class="blog-card">
+      <img class="blog-thumb" src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1400&q=80" alt="Future and innovation">
+      <div class="blog-content">
+        <h3>The Digital Artisan’s Path</h3>
+        <p>What it means to craft digital work like an artisan — the attention to detail that makes products feel timeless.</p>
+        <a href="blog4.html" class="cta">Read Full Article</a>
+      </div>
+    </div>
 
-            <article class="blog-card" aria-labelledby="b5">
-                <a href="blog5.html" aria-hidden="true">
-                    <img class="blog-thumb" src="https://images.unsplash.com/photo-1525186402429-b4ff38bedbec?auto=format&fit=crop&w=1400&q=80" alt="Slow creative process">
-                </a>
-                <div class="card-body">
-                    <h3 id="b5">The Art of Slow Creation</h3>
-                    <p class="lead">Why slowing down can be the most radical creative choice — and how to make work that lasts.</p>
-                    <a class="read-more" href="blog5.html">Read full article</a>
-                </div>
-            </article>
+    <!-- Blog 5 -->
+    <div class="blog-card">
+      <img class="blog-thumb" src="https://images.unsplash.com/photo-1525186402429-b4ff38bedbec?auto=format&fit=crop&w=1400&q=80" alt="Slow creative process">
+      <div class="blog-content">
+        <h3>The Art of Slow Creation</h3>
+        <p>Why slowing down can be the most radical creative choice — and how to make work that lasts.</p>
+        <a href="blog5.html" class="cta">Read Full Article</a>
+      </div>
+    </div>
+  </div>
 
-        </div>
-    </main>
+  <!-- Footer -->
+  <footer class="site-footer">
+    © 2025 Astrayudh — Crafted with creativity and calm.
+  </footer>
 
-    <footer class="site-footer" role="contentinfo">
-        © 2025 Astrayudh — Crafted with creativity and calm.
-    </footer>
 </body>
 </html>
