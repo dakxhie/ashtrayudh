@@ -1,0 +1,16 @@
+[
+  {
+    "id": "blog1",
+    "title": "The Art of Calm Design",
+    "excerpt": "Exploring how minimalism and intention create meaningful digital experiences.",
+    "content": "<p>At Astrayudh, we believe calm design is not just about aesthetics...</p><p>By focusing on simplicity, we create digital spaces that feel human and approachable.</p>",
+    "featuredImage": "https://images.unsplash.com/photo-1506765515384-028b60a970df?auto=format&fit=crop&w=800&q=80"
+  },
+  {
+    "id": "blog2",
+    "title": "Storytelling in the Digital Era",
+    "excerpt": "Why narrative and structure matter even in apps and platforms.",
+    "content": "<p>Storytelling isn’t limited to books and films. In the digital era, apps, websites, and platforms can all tell stories...</p>",
+    "featuredImage": "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=800&q=80"
+  }
+]
