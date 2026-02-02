@@ -3,53 +3,137 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Admin Panel — Astrayudh Stories</title>
+<title>Admin Panel — Astrayudh</title>
 <link rel="stylesheet" href="style.css">
 <style>
 body { font-family: 'Poppins', sans-serif; padding: 20px; background: var(--background); }
 h1 { font-family: 'Playfair Display', serif; color: var(--accent); margin-bottom: 20px; }
-.story-card, .chapter-card { background: var(--card-bg); padding: 20px; border-radius: 14px; box-shadow: 0 4px 12px var(--shadow); margin-bottom: 20px; }
+h2 { font-family: 'Playfair Display', serif; color: var(--accent); margin-top: 20px; }
+.card { background: var(--card-bg); padding: 20px; border-radius: 14px; box-shadow: 0 4px 12px var(--shadow); margin-bottom: 15px; }
 input, textarea { width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 8px; border: 1px solid #ccc; }
-button { background: var(--accent); color: #fff; border: none; padding: 10px 18px; border-radius: 20px; cursor: pointer; margin-top: 5px; }
+button { background: var(--accent); color: #fff; border: none; padding: 8px 16px; border-radius: 20px; cursor: pointer; margin-top: 5px; }
 button:hover { background: var(--accent-hover); }
-.chapter-list { margin-left: 20px; }
+.chapter-list, .blog-list { margin-left: 20px; }
+.chapter-card, .blog-card { background: #f5f5f5; padding: 10px; border-radius: 12px; margin-bottom: 10px; }
+.export-btn { margin-top: 20px; }
 </style>
 </head>
 <body>
 
-<h1>Stories Admin Panel</h1>
+<h1>Astrayudh Admin Panel</h1>
+
+<h2>Stories</h2>
 <div id="storiesContainer"></div>
 
-<script>
-let storiesData = {};
+<button class="export-btn" onclick="exportJSON()">Export Stories + Blogs JSON</button>
 
-async function loadStories() {
-    const res = await fetch('stories.json');
-    storiesData = await res.json();
+<h2>Blogs</h2>
+<div id="blogsContainer"></div>
+
+<script>
+let data = { stories: [], blogs: [] };
+
+// Load JSON
+async function loadData() {
+    const res = await fetch('data.json');
+    data = await res.json();
     renderStories();
+    renderBlogs();
 }
 
+// Render Stories
 function renderStories() {
     const container = document.getElementById('storiesContainer');
     container.innerHTML = '';
 
-    storiesData.stories.forEach(story => {
-        const storyDiv = document.createElement('div');
-        storyDiv.className = 'story-card';
-        storyDiv.innerHTML = `
-            <h2>${story.title}</h2>
-            <p>${story.description}</p>
-            <div class="chapter-list">
-                ${story.chapters.map(ch => `<div class="chapter-card"><strong>${ch.title}</strong><p>${ch.excerpt}</p></div>`).join('')}
-            </div>
+    data.stories.forEach((story, sIndex) => {
+        const div = document.createElement('div');
+        div.className = 'card';
+        div.innerHTML = `
+            <strong>Story:</strong> <input value="${story.title}" onchange="updateStoryTitle(${sIndex}, this.value)" />
+            <textarea onchange="updateStoryDesc(${sIndex}, this.value)">${story.description}</textarea>
+            <input value="${story.heroImage}" placeholder="Hero Image URL" onchange="updateStoryImage(${sIndex}, this.value)" />
+            <h4>Chapters:</h4>
+            <div class="chapter-list" id="chapters-${sIndex}"></div>
+            <button onclick="addChapter(${sIndex})">Add Chapter</button>
+            <button onclick="deleteStory(${sIndex})" style="background:#c0392b;">Delete Story</button>
         `;
-        container.appendChild(storyDiv);
+        container.appendChild(div);
+        renderChapters(sIndex);
     });
 }
 
-// Initial load
-loadStories();
+// Render Chapters
+function renderChapters(sIndex) {
+    const chaptersDiv = document.getElementById(`chapters-${sIndex}`);
+    chaptersDiv.innerHTML = '';
+    data.stories[sIndex].chapters.forEach((ch, cIndex) => {
+        const div = document.createElement('div');
+        div.className = 'chapter-card';
+        div.innerHTML = `
+            <input value="${ch.title}" onchange="updateChapterTitle(${sIndex}, ${cIndex}, this.value)" />
+            <textarea onchange="updateChapterExcerpt(${sIndex}, ${cIndex}, this.value)">${ch.excerpt}</textarea>
+            <button onclick="deleteChapter(${sIndex}, ${cIndex})" style="background:#c0392b;">Delete Chapter</button>
+        `;
+        chaptersDiv.appendChild(div);
+    });
+}
+
+// Story Functions
+function updateStoryTitle(i, val) { data.stories[i].title = val; }
+function updateStoryDesc(i, val) { data.stories[i].description = val; }
+function updateStoryImage(i, val) { data.stories[i].heroImage = val; }
+function addChapter(i) { 
+    const newCh = { id: 'chapter-' + Date.now(), title: 'New Chapter', excerpt: 'Chapter excerpt...' };
+    data.stories[i].chapters.push(newCh);
+    renderChapters(i);
+}
+function updateChapterTitle(sIndex, cIndex, val) { data.stories[sIndex].chapters[cIndex].title = val; }
+function updateChapterExcerpt(sIndex, cIndex, val) { data.stories[sIndex].chapters[cIndex].excerpt = val; }
+function deleteChapter(sIndex, cIndex) { data.stories[sIndex].chapters.splice(cIndex,1); renderChapters(sIndex); }
+function deleteStory(i) { data.stories.splice(i,1); renderStories(); }
+function addStory() { data.stories.push({id:'story-'+Date.now(), title:'New Story', description:'Description...', heroImage:'', chapters:[]}); renderStories(); }
+
+// Render Blogs
+function renderBlogs() {
+    const container = document.getElementById('blogsContainer');
+    container.innerHTML = '';
+    data.blogs.forEach((blog, bIndex) => {
+        const div = document.createElement('div');
+        div.className = 'card';
+        div.innerHTML = `
+            <input value="${blog.title}" onchange="updateBlogTitle(${bIndex}, this.value)" />
+            <textarea onchange="updateBlogExcerpt(${bIndex}, this.value)">${blog.excerpt}</textarea>
+            <input value="${blog.heroImage}" placeholder="Hero Image URL" onchange="updateBlogImage(${bIndex}, this.value)" />
+            <button onclick="deleteBlog(${bIndex})" style="background:#c0392b;">Delete Blog</button>
+        `;
+        container.appendChild(div);
+    });
+}
+
+// Blog Functions
+function updateBlogTitle(i,val){ data.blogs[i].title = val; }
+function updateBlogExcerpt(i,val){ data.blogs[i].excerpt = val; }
+function updateBlogImage(i,val){ data.blogs[i].heroImage = val; }
+function addBlog(){ data.blogs.push({id:'blog-'+Date.now(), title:'New Blog', excerpt:'Excerpt...', heroImage:''}); renderBlogs(); }
+function deleteBlog(i){ data.blogs.splice(i,1); renderBlogs(); }
+
+// Export JSON
+function exportJSON() {
+    const blob = new Blob([JSON.stringify(data, null, 2)], {type: "application/json"});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = "data.json";
+    a.click();
+    URL.revokeObjectURL(url);
+}
+
+loadData();
 </script>
+
+<button onclick="addStory()">Add New Story</button>
+<button onclick="addBlog()">Add New Blog</button>
 
 </body>
 </html>
