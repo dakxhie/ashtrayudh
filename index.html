@@ -3,187 +3,69 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Astrayudh — Building Apps & Stories</title>
-  <link rel="stylesheet" href="style.css">
-
-  <!-- Additional CSS for Home enhancements -->
-  <style>
-    /* Hero enhancements */
-    #hero {
-      background: linear-gradient(
-          rgba(124, 16, 41, 0.5),
-          rgba(124, 16, 41, 0.5)
-        ),
-        url('https://images.unsplash.com/photo-1581090700227-1e37b190418e?auto=format&fit=crop&w=1400&q=80') center/cover no-repeat;
-      color: #fff;
-      text-align: center;
-      padding: 140px 20px 80px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    /* Subtle floating animation for hero overlay text */
-    #hero h2, #hero p, #hero .cta {
-      animation: floatIn 1s ease forwards;
-      opacity: 0;
-    }
-    #hero h2 { animation-delay: 0.3s; }
-    #hero p { animation-delay: 0.6s; }
-    #hero .cta { animation-delay: 0.9s; }
-
-    @keyframes floatIn {
-      0% { opacity: 0; transform: translateY(20px);}
-      100% { opacity: 1; transform: translateY(0);}
-    }
-
-    /* Hero CTAs alignment */
-    #hero .cta-container {
-      margin-top: 30px;
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      flex-wrap: wrap;
-    }
-
-    /* Featured cards with thumbnails */
-    .card-featured {
-      display: flex;
-      flex-direction: column;
-      border-radius: 16px;
-      overflow: hidden;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    .card-featured img {
-      width: 100%;
-      height: 180px;
-      object-fit: cover;
-    }
-    .card-featured .card-content {
-      padding: 20px;
-      background: var(--card-bg);
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-    }
-    .card-featured .card-content h3 {
-      margin-bottom: 12px;
-    }
-    .card-featured .card-content p {
-      flex: 1;
-      margin-bottom: 15px;
-      color: var(--muted-text);
-    }
-    .card-featured .card-content a.cta {
-      align-self: flex-start;
-    }
-    .card-featured:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.12);
-    }
-
-    /* Featured Grid */
-    .featured-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 28px;
-      margin-top: 40px;
-    }
-
-    /* Responsive Adjustments */
-    @media (max-width: 768px) {
-      #hero {
-        padding: 100px 15px 60px;
-      }
-      #hero h2 { font-size: 2rem; }
-      #hero p { font-size: 1rem; }
-      .card-featured img { height: 150px; }
-    }
-  </style>
+  <title>Astrayudh - Creative Studio & Digital Platform</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@400;500&display=swap" rel="stylesheet">
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-
-  <!-- Header -->
-  <header class="site-header">
-    <h1><a href="index.html">Astrayudh</a></h1>
-    <nav class="nav">
-      <a href="index.html" class="active">Home</a>
-      <a href="about.html">About</a>
-      <a href="apps.html">Apps</a>
-      <a href="blogs.html">Blogs</a>
-      <a href="stories.html">Stories</a>
-      <a href="contact.html">Contact</a>
+  <!-- Header / Navbar -->
+  <header>
+    <nav class="navbar">
+      <a href="index.html" class="logo">Astrayudh</a>
+      <ul class="nav-links">
+        <li><a href="about.html">About</a></li>
+        <li><a href="apps.html">Apps</a></li>
+        <li><a href="blogs.html">Blogs</a></li>
+        <li><a href="stories.html">Stories</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
     </nav>
   </header>
 
   <!-- Hero Section -->
-  <section id="hero">
-    <h2>We design digital stories and apps that feel human.</h2>
-    <p>
-      At <strong>Astrayudh</strong>, creativity meets calm. We craft elegant apps, write meaningful blogs,
-      and create experiences that connect people in a natural, thoughtful way.
-    </p>
-    <div class="cta-container">
-      <a href="stories.html" class="cta">Explore Stories</a>
-      <a href="apps.html" class="cta">Our Apps</a>
+  <section class="hero" style="background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1470&q=80') center/cover no-repeat;">
+    <div class="hero-content">
+      <h1>We design digital stories that feel human.</h1>
+      <p>Creating meaningful experiences through apps, blogs, and storytelling.</p>
+      <a href="about.html" class="btn-cta">Explore More</a>
     </div>
   </section>
 
-  <!-- Featured Sections -->
-  <div class="container featured-grid">
-
-    <!-- Vision Card -->
-    <div class="card card-featured">
-      <div class="card-content">
-        <h3>Our Vision</h3>
-        <p>
-          Technology and storytelling should coexist beautifully — thoughtful, modern,
-          and built to inspire connection rather than distraction.
-        </p>
+  <!-- Overview Section -->
+  <section class="overview">
+    <div class="container">
+      <h2>Our Vision</h2>
+      <p>Astrayudh is a creative studio and digital platform dedicated to crafting thoughtful experiences. We combine storytelling, design, and technology to create apps and content that resonate with humans.</p>
+      <div class="cards">
+        <div class="card">
+          <h3>Apps</h3>
+          <p>Innovative apps designed with purpose and simplicity, starting with our upcoming app, Vortix.</p>
+        </div>
+        <div class="card">
+          <h3>Blogs</h3>
+          <p>Insights, stories, and reflections from our creative journey, thoughtfully written for curious minds.</p>
+        </div>
+        <div class="card">
+          <h3>Stories</h3>
+          <p>Serialized stories and narratives that explore human experiences, crafted to captivate and inspire.</p>
+        </div>
       </div>
     </div>
-
-    <!-- What We Do Card -->
-    <div class="card card-featured">
-      <div class="card-content">
-        <h3>What We Do</h3>
-        <p>
-          We build apps like <strong>Vortix</strong> and craft stories that carry soul and simplicity.
-          Every project is thoughtfully designed to engage and delight.
-        </p>
-      </div>
-    </div>
-
-    <!-- Featured Story Card -->
-    <div class="card card-featured">
-      <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1400&q=80" alt="Featured Story Thumbnail">
-      <div class="card-content">
-        <h3>Featured Story: The Lost Pages</h3>
-        <p>
-          Dive into our most recent story release — chapters filled with mystery, emotion, and creativity.
-        </p>
-        <a href="stories.html#lost-pages" class="cta">Read Now</a>
-      </div>
-    </div>
-
-    <!-- Featured App Card -->
-    <div class="card card-featured">
-      <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1400&q=80" alt="Featured App Thumbnail">
-      <div class="card-content">
-        <h3>Featured App: Vortix</h3>
-        <p>
-          Explore <strong>Vortix</strong>, our upcoming platform designed to help creators engage meaningfully
-          with their audience.
-        </p>
-        <a href="apps.html" class="cta">Discover App</a>
-      </div>
-    </div>
-
-  </div>
+  </section>
 
   <!-- Footer -->
-  <footer class="site-footer">
-    © 2025 Astrayudh — Crafted with creativity and calm.
+  <footer>
+    <div class="container">
+      <p>&copy; 2026 Astrayudh. All rights reserved.</p>
+      <ul class="footer-links">
+        <li><a href="privacy.html">Privacy Policy</a></li>
+      </ul>
+    </div>
   </footer>
 
+  <!-- Main JS -->
+  <script src="js/main.js"></script>
 </body>
 </html>
