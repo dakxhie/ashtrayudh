@@ -1,21 +1,6 @@
-/* ===========================
-   ASTRAYUDH THEME — PROFESSIONAL & RESPONSIVE
-   =========================== */
-
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Poppins:wght@300;400;500&display=swap');
-
-/* --- Variables --- */
-:root {
-  --background: #f9f7f6;
-  --card-bg: #ffffff;
-  --accent: #7c1029; /* Wine Red */
-  --accent-hover: #5e0d1f;
-  --text: #1f1f1f;
-  --muted-text: #6b6b6b;
-  --shadow: rgba(0,0,0,0.08);
-}
-
-/* --- Reset --- */
+/* -----------------------------
+   Global Styles
+----------------------------- */
 * {
   margin: 0;
   padding: 0;
@@ -24,10 +9,14 @@
 
 body {
   font-family: 'Poppins', sans-serif;
-  background: var(--background);
-  color: var(--text);
-  line-height: 1.7;
-  scroll-behavior: smooth;
+  color: #1a1a1a;
+  background-color: #fafafa;
+  line-height: 1.6;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
 }
 
 img {
@@ -35,263 +24,200 @@ img {
   display: block;
 }
 
-/* --- Header --- */
-.site-header {
-  background: rgba(255,255,255,0.9);
-  padding: 18px 40px;
+/* -----------------------------
+   Navbar
+----------------------------- */
+.navbar {
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  box-shadow: 0 2px 8px var(--shadow);
-  backdrop-filter: blur(8px);
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
   position: sticky;
   top: 0;
   z-index: 100;
 }
 
-.site-header h1 {
+.navbar .logo {
   font-family: 'Playfair Display', serif;
-  font-size: 1.9rem;
-  color: var(--accent);
-  letter-spacing: 1px;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #7B1E3D; /* Wine red accent */
 }
 
-.site-header h1 a {
-  color: var(--accent);
-  text-decoration: none;
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
 }
 
-.nav a {
-  color: var(--text);
-  margin-left: 20px;
-  text-decoration: none;
+.nav-links li a {
   font-weight: 500;
-  transition: color 0.3s ease;
+  transition: color 0.3s;
 }
 
-.nav a.active,
-.nav a:hover {
-  color: var(--accent);
+.nav-links li a:hover {
+  color: #7B1E3D;
 }
 
-/* --- Hero Sections --- */
-#hero,
-#sub-hero,
-.article-hero {
+/* -----------------------------
+   Hero Section
+----------------------------- */
+.hero {
+  height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   color: #fff;
   text-align: center;
-  position: relative;
-  background-size: cover;
-  background-position: center;
-  padding: 120px 20px 80px;
+  padding: 0 1rem;
 }
 
-#hero h2,
-#sub-hero h2,
-.article-hero h2 {
+.hero h1 {
   font-family: 'Playfair Display', serif;
-  font-size: 2.4rem;
-  margin-bottom: 15px;
+  font-size: 3rem;
+  margin-bottom: 1rem;
 }
 
-#hero p,
-#sub-hero p,
-.article-hero p {
+.hero p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+}
+
+.btn-cta {
+  background-color: #7B1E3D;
+  color: #fff;
+  padding: 0.8rem 2rem;
+  border-radius: 30px;
+  font-weight: 500;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.btn-cta:hover {
+  background-color: #5d1530;
+  transform: translateY(-3px);
+}
+
+/* -----------------------------
+   Overview Section
+----------------------------- */
+.overview {
+  padding: 6rem 2rem;
+  background-color: #fff;
+}
+
+.overview .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.overview h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+  color: #1a1a1a;
+}
+
+.overview p {
   max-width: 700px;
-  margin: 0 auto;
-  font-size: 1.05rem;
-  line-height: 1.6;
-  opacity: 0.95;
-}
-
-.cta {
-  display: inline-block;
-  margin-top: 25px;
-  background: var(--accent);
-  color: #fff;
-  text-decoration: none;
-  padding: 10px 24px;
-  border-radius: 25px;
-  font-weight: 500;
-  transition: background 0.3s ease;
-}
-
-.cta:hover {
-  background: var(--accent-hover);
-}
-
-/* --- Container & Cards --- */
-.container {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 60px 20px;
-  display: grid;
-  gap: 30px;
-}
-
-.card, .blog-card {
-  background: var(--card-bg);
-  padding: 30px;
-  border-radius: 16px;
-  box-shadow: 0 4px 12px var(--shadow);
-  transition: transform 0.2s ease, box-shadow 0.3s ease;
-}
-
-.card:hover,
-.blog-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 6px 16px rgba(0,0,0,0.1);
-}
-
-.card h3,
-.blog-card h3 {
-  font-family: 'Playfair Display', serif;
-  color: var(--accent);
-  margin-bottom: 12px;
-}
-
-.card p,
-.blog-card p {
-  color: var(--muted-text);
-  line-height: 1.7;
-}
-
-/* --- Blog Card Specifics --- */
-.blog-card {
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-}
-
-.blog-thumb {
-  width: 100%;
-  height: 180px;
-  object-fit: cover;
-}
-
-.blog-content {
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-}
-
-.blog-content a.cta {
-  align-self: flex-start;
-}
-
-/* --- Article Content --- */
-.article-wrapper {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 50px 20px 80px;
-  line-height: 1.8;
-}
-
-.article-wrapper h1, .article-wrapper h2 {
-  font-family: 'Playfair Display', serif;
-  color: var(--accent);
-  margin-top: 40px;
-  margin-bottom: 20px;
-}
-
-.article-wrapper h1 { font-size: 2.4rem; }
-.article-wrapper h2 { font-size: 1.8rem; }
-
-.article-wrapper p {
-  font-size: 1.05rem;
-  color: var(--text);
-  margin-bottom: 20px;
-}
-
-.article-wrapper ul {
-  margin-left: 20px;
-  line-height: 1.7;
-  list-style: disc;
-  padding-left: 20px;
-  margin-bottom: 20px;
-}
-
-.article-wrapper strong {
-  color: var(--accent);
-}
-
-/* CTA Back Button for Article */
-.cta-back {
-  display: inline-block;
-  background: var(--accent);
-  color: #fff;
-  padding: 10px 22px;
-  border-radius: 25px;
-  text-decoration: none;
-  font-weight: 500;
-  margin-top: 30px;
-  transition: background 0.3s ease;
-}
-
-.cta-back:hover {
-  background: var(--accent-hover);
-}
-
-/* --- Forms --- */
-form {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  padding: 30px;
-  background: var(--card-bg);
-  border-radius: 14px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-}
-
-input[type="text"], input[type="email"], textarea {
-  padding: 15px;
-  border: 1px solid var(--shadow);
-  border-radius: 8px;
-  font-size: 1rem;
-  color: var(--text);
-  background: var(--background);
-  transition: border-color 0.2s;
-}
-
-input:focus, textarea:focus {
-  outline: none;
-  border-color: var(--accent);
-}
-
-textarea { resize: vertical; }
-
-button[type="submit"] {
-  background: var(--accent);
-  color: #fff;
-  padding: 14px 20px;
-  border: none;
-  border-radius: 12px;
+  margin: 0 auto 3rem;
   font-size: 1.1rem;
-  cursor: pointer;
-  font-weight: 600;
-  transition: background 0.3s;
+  color: #333;
 }
 
-button[type="submit"]:hover { background: var(--accent-hover); }
+/* Overview Cards */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
 
-/* --- Footer --- */
-.site-footer {
-  background: #fff;
+.card {
+  background-color: #fafafa;
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card h3 {
+  font-family: 'Playfair Display', serif;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  color: #7B1E3D;
+}
+
+.card p {
+  color: #555;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+}
+
+/* -----------------------------
+   Footer
+----------------------------- */
+footer {
+  background-color: #fff;
+  padding: 2rem 1rem;
   text-align: center;
-  padding: 25px;
-  color: var(--muted-text);
-  font-size: 0.95rem;
-  box-shadow: 0 -1px 6px var(--shadow);
-  margin-top: 60px;
+  border-top: 1px solid #eee;
+  margin-top: 4rem;
 }
 
-/* --- Responsive --- */
+footer p {
+  margin-bottom: 0.5rem;
+  color: #777;
+}
+
+.footer-links {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.footer-links li a {
+  color: #7B1E3D;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.footer-links li a:hover {
+  color: #5d1530;
+}
+
+/* -----------------------------
+   Responsive Styles
+----------------------------- */
 @media (max-width: 768px) {
-  .site-header { flex-direction: column; padding: 15px 20px; }
-  .nav a { margin: 10px; }
-  #hero, #sub-hero, .article-hero { padding: 90px 15px 60px; }
-  #hero h2, #sub-hero h2, .article-hero h2 { font-size: 1.9rem; }
-  .article-wrapper { padding: 40px 15px 60px; }
-  .blog-thumb { height: 150px; }
+  .hero h1 {
+    font-size: 2.2rem;
+  }
+
+  .hero p {
+    font-size: 1rem;
+  }
+
+  .nav-links {
+    display: none; /* Hide nav on mobile for simplicity (can add burger menu later) */
+  }
+
+  .cards {
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero h1 {
+    font-size: 1.8rem;
+  }
+
+  .overview h2 {
+    font-size: 2rem;
+  }
 }
