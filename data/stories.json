@@ -1,0 +1,36 @@
+[
+  {
+    "id": "story1",
+    "title": "Vortix Chronicles",
+    "description": "A serialized adventure exploring human connections and technology.",
+    "chapters": [
+      {
+        "chapterNumber": 1,
+        "title": "The Awakening",
+        "content": "<p>The first light of dawn revealed the city’s hidden edges...</p>"
+      },
+      {
+        "chapterNumber": 2,
+        "title": "The Encounter",
+        "content": "<p>In the quiet alleys, unexpected paths crossed...</p>"
+      }
+    ]
+  },
+  {
+    "id": "story2",
+    "title": "Digital Whispers",
+    "description": "Short stories reflecting on life, tech, and creativity.",
+    "chapters": [
+      {
+        "chapterNumber": 1,
+        "title": "Signals",
+        "content": "<p>Messages flickered across the interface, hinting at deeper truths...</p>"
+      },
+      {
+        "chapterNumber": 2,
+        "title": "Echoes",
+        "content": "<p>Every action created ripples, sometimes louder than intended...</p>"
+      }
+    ]
+  }
+]
