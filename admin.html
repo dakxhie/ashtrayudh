@@ -6,134 +6,239 @@
 <title>Admin Panel — Astrayudh</title>
 <link rel="stylesheet" href="style.css">
 <style>
-body { font-family: 'Poppins', sans-serif; padding: 20px; background: var(--background); }
-h1 { font-family: 'Playfair Display', serif; color: var(--accent); margin-bottom: 20px; }
-h2 { font-family: 'Playfair Display', serif; color: var(--accent); margin-top: 20px; }
-.card { background: var(--card-bg); padding: 20px; border-radius: 14px; box-shadow: 0 4px 12px var(--shadow); margin-bottom: 15px; }
-input, textarea { width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 8px; border: 1px solid #ccc; }
-button { background: var(--accent); color: #fff; border: none; padding: 8px 16px; border-radius: 20px; cursor: pointer; margin-top: 5px; }
+body {
+    font-family: 'Poppins', sans-serif;
+    background: var(--background);
+    color: var(--text);
+    margin: 0;
+    padding: 0;
+}
+.site-header {
+    background: var(--card-bg);
+    padding: 15px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 8px var(--shadow);
+}
+.site-header h1 {
+    font-family: 'Playfair Display', serif;
+    color: var(--accent);
+}
+.nav a { display:none; } /* Hide nav in admin */
+
+.container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+h2 { color: var(--accent); margin-bottom: 20px; }
+
+.panel-section {
+    background: var(--card-bg);
+    padding: 20px;
+    border-radius: 14px;
+    box-shadow: 0 4px 12px var(--shadow);
+    margin-bottom: 40px;
+}
+
+.panel-section h3 {
+    font-family: 'Playfair Display', serif;
+    margin-bottom: 15px;
+}
+
+input, textarea, select {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+}
+
+textarea { resize: vertical; }
+
+button {
+    padding: 10px 20px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 12px;
+    background: var(--accent);
+    color: #fff;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background 0.2s;
+}
 button:hover { background: var(--accent-hover); }
-.chapter-list, .blog-list { margin-left: 20px; }
-.chapter-card, .blog-card { background: #f5f5f5; padding: 10px; border-radius: 12px; margin-bottom: 10px; }
-.export-btn { margin-top: 20px; }
+
+.list-item {
+    border-bottom: 1px solid #eee;
+    padding: 10px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.list-item span { font-weight: 500; }
+.list-item button { background: #e74c3c; }
+.list-item button:hover { background: #c0392b; }
+
+.chapter-container {
+    margin-left: 20px;
+    border-left: 2px dashed #ccc;
+    padding-left: 15px;
+}
 </style>
 </head>
 <body>
 
-<h1>Astrayudh Admin Panel</h1>
+<header class="site-header">
+<h1>Admin Panel</h1>
+</header>
 
-<h2>Stories</h2>
-<div id="storiesContainer"></div>
+<div class="container">
 
-<button class="export-btn" onclick="exportJSON()">Export Stories + Blogs JSON</button>
+<!-- STORIES MANAGEMENT -->
+<section class="panel-section" id="storiesPanel">
+    <h2>Stories & Chapters</h2>
 
-<h2>Blogs</h2>
-<div id="blogsContainer"></div>
+    <div>
+        <h3>Add New Story</h3>
+        <input type="text" id="storyTitle" placeholder="Story Title">
+        <textarea id="storyDesc" placeholder="Story Description"></textarea>
+        <input type="text" id="storyCover" placeholder="Cover Image URL">
+        <button onclick="addStory()">Add Story</button>
+    </div>
+
+    <div id="storiesList">
+        <!-- Existing stories will appear here -->
+    </div>
+</section>
+
+<!-- BLOGS MANAGEMENT -->
+<section class="panel-section" id="blogsPanel">
+    <h2>Blogs</h2>
+
+    <div>
+        <h3>Add New Blog</h3>
+        <input type="text" id="blogTitle" placeholder="Blog Title">
+        <input type="text" id="blogExcerpt" placeholder="Blog Excerpt">
+        <input type="text" id="blogCover" placeholder="Cover Image URL">
+        <textarea id="blogContent" placeholder="Full Blog HTML content"></textarea>
+        <button onclick="addBlog()">Add Blog</button>
+    </div>
+
+    <div id="blogsList">
+        <!-- Existing blogs will appear here -->
+    </div>
+</section>
+
+</div>
 
 <script>
-let data = { stories: [], blogs: [] };
+let data = {
+    stories: [],
+    blogs: []
+};
 
-// Load JSON
-async function loadData() {
-    const res = await fetch('data.json');
-    data = await res.json();
+// --- RENDER FUNCTIONS ---
+function renderStories() {
+    const container = document.getElementById('storiesList');
+    container.innerHTML = '';
+    data.stories.forEach((story, idx) => {
+        const div = document.createElement('div');
+        div.className = 'list-item';
+        div.innerHTML = `
+            <span>${story.title}</span>
+            <div>
+                <button onclick="deleteStory(${idx})">Delete</button>
+                <button onclick="addChapter(${idx})">+Chapter</button>
+            </div>
+        `;
+
+        // Chapters
+        if(story.chapters && story.chapters.length > 0){
+            const chaptersDiv = document.createElement('div');
+            chaptersDiv.className = 'chapter-container';
+            story.chapters.forEach((chap, cidx)=>{
+                const chapDiv = document.createElement('div');
+                chapDiv.className = 'list-item';
+                chapDiv.innerHTML = `<span>${chap.title}</span> <button onclick="deleteChapter(${idx},${cidx})">Delete</button>`;
+                chaptersDiv.appendChild(chapDiv);
+            });
+            div.appendChild(chaptersDiv);
+        }
+
+        container.appendChild(div);
+    });
+}
+
+function renderBlogs() {
+    const container = document.getElementById('blogsList');
+    container.innerHTML = '';
+    data.blogs.forEach((blog, idx)=>{
+        const div = document.createElement('div');
+        div.className = 'list-item';
+        div.innerHTML = `<span>${blog.title}</span> <button onclick="deleteBlog(${idx})">Delete</button>`;
+        container.appendChild(div);
+    });
+}
+
+// --- CRUD FUNCTIONS ---
+function addStory(){
+    const title = document.getElementById('storyTitle').value.trim();
+    const desc = document.getElementById('storyDesc').value.trim();
+    const cover = document.getElementById('storyCover').value.trim();
+    if(!title) return alert("Story title required!");
+    data.stories.push({id:'story'+Date.now(), title, description: desc, cover, chapters: []});
+    document.getElementById('storyTitle').value = '';
+    document.getElementById('storyDesc').value = '';
+    document.getElementById('storyCover').value = '';
     renderStories();
+}
+
+function deleteStory(idx){
+    if(confirm("Delete this story?")) data.stories.splice(idx,1);
+    renderStories();
+}
+
+function addChapter(storyIdx){
+    const title = prompt("Chapter Title:");
+    const content = prompt("Chapter Content (HTML allowed):");
+    if(!title || !content) return;
+    data.stories[storyIdx].chapters.push({id:'chap'+Date.now(), title, content});
+    renderStories();
+}
+
+function deleteChapter(storyIdx, chapIdx){
+    if(confirm("Delete this chapter?")) data.stories[storyIdx].chapters.splice(chapIdx,1);
+    renderStories();
+}
+
+function addBlog(){
+    const title = document.getElementById('blogTitle').value.trim();
+    const excerpt = document.getElementById('blogExcerpt').value.trim();
+    const cover = document.getElementById('blogCover').value.trim();
+    const content = document.getElementById('blogContent').value.trim();
+    if(!title || !excerpt || !content) return alert("All fields required!");
+    data.blogs.push({id:'blog'+Date.now(), title, excerpt, cover, content});
+    document.getElementById('blogTitle').value = '';
+    document.getElementById('blogExcerpt').value = '';
+    document.getElementById('blogCover').value = '';
+    document.getElementById('blogContent').value = '';
     renderBlogs();
 }
 
-// Render Stories
-function renderStories() {
-    const container = document.getElementById('storiesContainer');
-    container.innerHTML = '';
-
-    data.stories.forEach((story, sIndex) => {
-        const div = document.createElement('div');
-        div.className = 'card';
-        div.innerHTML = `
-            <strong>Story:</strong> <input value="${story.title}" onchange="updateStoryTitle(${sIndex}, this.value)" />
-            <textarea onchange="updateStoryDesc(${sIndex}, this.value)">${story.description}</textarea>
-            <input value="${story.heroImage}" placeholder="Hero Image URL" onchange="updateStoryImage(${sIndex}, this.value)" />
-            <h4>Chapters:</h4>
-            <div class="chapter-list" id="chapters-${sIndex}"></div>
-            <button onclick="addChapter(${sIndex})">Add Chapter</button>
-            <button onclick="deleteStory(${sIndex})" style="background:#c0392b;">Delete Story</button>
-        `;
-        container.appendChild(div);
-        renderChapters(sIndex);
-    });
+function deleteBlog(idx){
+    if(confirm("Delete this blog?")) data.blogs.splice(idx,1);
+    renderBlogs();
 }
 
-// Render Chapters
-function renderChapters(sIndex) {
-    const chaptersDiv = document.getElementById(`chapters-${sIndex}`);
-    chaptersDiv.innerHTML = '';
-    data.stories[sIndex].chapters.forEach((ch, cIndex) => {
-        const div = document.createElement('div');
-        div.className = 'chapter-card';
-        div.innerHTML = `
-            <input value="${ch.title}" onchange="updateChapterTitle(${sIndex}, ${cIndex}, this.value)" />
-            <textarea onchange="updateChapterExcerpt(${sIndex}, ${cIndex}, this.value)">${ch.excerpt}</textarea>
-            <button onclick="deleteChapter(${sIndex}, ${cIndex})" style="background:#c0392b;">Delete Chapter</button>
-        `;
-        chaptersDiv.appendChild(div);
-    });
-}
-
-// Story Functions
-function updateStoryTitle(i, val) { data.stories[i].title = val; }
-function updateStoryDesc(i, val) { data.stories[i].description = val; }
-function updateStoryImage(i, val) { data.stories[i].heroImage = val; }
-function addChapter(i) { 
-    const newCh = { id: 'chapter-' + Date.now(), title: 'New Chapter', excerpt: 'Chapter excerpt...' };
-    data.stories[i].chapters.push(newCh);
-    renderChapters(i);
-}
-function updateChapterTitle(sIndex, cIndex, val) { data.stories[sIndex].chapters[cIndex].title = val; }
-function updateChapterExcerpt(sIndex, cIndex, val) { data.stories[sIndex].chapters[cIndex].excerpt = val; }
-function deleteChapter(sIndex, cIndex) { data.stories[sIndex].chapters.splice(cIndex,1); renderChapters(sIndex); }
-function deleteStory(i) { data.stories.splice(i,1); renderStories(); }
-function addStory() { data.stories.push({id:'story-'+Date.now(), title:'New Story', description:'Description...', heroImage:'', chapters:[]}); renderStories(); }
-
-// Render Blogs
-function renderBlogs() {
-    const container = document.getElementById('blogsContainer');
-    container.innerHTML = '';
-    data.blogs.forEach((blog, bIndex) => {
-        const div = document.createElement('div');
-        div.className = 'card';
-        div.innerHTML = `
-            <input value="${blog.title}" onchange="updateBlogTitle(${bIndex}, this.value)" />
-            <textarea onchange="updateBlogExcerpt(${bIndex}, this.value)">${blog.excerpt}</textarea>
-            <input value="${blog.heroImage}" placeholder="Hero Image URL" onchange="updateBlogImage(${bIndex}, this.value)" />
-            <button onclick="deleteBlog(${bIndex})" style="background:#c0392b;">Delete Blog</button>
-        `;
-        container.appendChild(div);
-    });
-}
-
-// Blog Functions
-function updateBlogTitle(i,val){ data.blogs[i].title = val; }
-function updateBlogExcerpt(i,val){ data.blogs[i].excerpt = val; }
-function updateBlogImage(i,val){ data.blogs[i].heroImage = val; }
-function addBlog(){ data.blogs.push({id:'blog-'+Date.now(), title:'New Blog', excerpt:'Excerpt...', heroImage:''}); renderBlogs(); }
-function deleteBlog(i){ data.blogs.splice(i,1); renderBlogs(); }
-
-// Export JSON
-function exportJSON() {
-    const blob = new Blob([JSON.stringify(data, null, 2)], {type: "application/json"});
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = "data.json";
-    a.click();
-    URL.revokeObjectURL(url);
-}
-
-loadData();
+// Initial render
+renderStories();
+renderBlogs();
 </script>
-
-<button onclick="addStory()">Add New Story</button>
-<button onclick="addBlog()">Add New Blog</button>
 
 </body>
 </html>
