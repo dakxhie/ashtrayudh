@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stories — Astrayudh</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Stories Hero */
+    .stories-hero {
+      background: linear-gradient(rgba(124,16,41,0.55), rgba(124,16,41,0.55)),
+                  url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+      color: #fff;
+      text-align: center;
+      padding: 100px 20px 60px;
+    }
+    .stories-hero h2 {
+      font-family:'Playfair Display', serif;
+      font-size: 2.2rem;
+      margin-bottom: 10px;
+    }
+    .stories-hero p {
+      max-width: 700px;
+      margin: 0 auto;
+      font-size: 1rem;
+      opacity: 0.95;
+    }
+
+    /* Stories Grid */
+    .stories-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      max-width: 1100px;
+      margin: 50px auto;
+      padding: 0 20px;
+    }
+
+    .story-card {
+      background: var(--card-bg);
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px var(--shadow);
+      transition: transform 0.2s, box-shadow 0.3s;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .story-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+    }
+
+    .story-thumb {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+    }
+
+    .story-content {
+      padding: 20px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .story-content h3 {
+      font-family:'Playfair Display', serif;
+      color: var(--accent);
+      margin-bottom: 8px;
+      font-size: 1.3rem;
+    }
+
+    .story-content p {
+      color: var(--muted-text);
+      flex: 1;
+      line-height: 1.6;
+      margin-bottom: 12px;
+    }
+
+    .story-content a.cta {
+      align-self: flex-start;
+      text-decoration: none;
+      background: var(--accent);
+      color: #fff;
+      padding: 8px 18px;
+      border-radius: 20px;
+      font-weight: 500;
+      transition: background 0.3s;
+    }
+
+    .story-content a.cta:hover { background: var(--accent-hover); }
+
+    @media (max-width: 768px) {
+      .stories-hero { padding: 80px 15px 50px; }
+      .stories-hero h2 { font-size: 1.9rem; }
+      .story-thumb { height: 140px; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <h1><a href="index.html">Astrayudh</a></h1>
+  <nav class="nav">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="apps.html">Apps</a>
+    <a href="blogs.html">Blogs</a>
+    <a href="stories.html" class="active">Stories</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+</header>
+
+<section class="stories-hero">
+  <h2>Our Stories</h2>
+  <p>Explore all our creative stories. Each story is divided into chapters for an immersive reading experience.</p>
+</section>
+
+<main class="stories-grid">
+
+  <!-- Example Story Card -->
+  <div class="story-card">
+    <img src="https://images.unsplash.com/photo-1524985069026-dd778a71c7b4?auto=format&fit=crop&w=1400&q=80" alt="Story Thumbnail" class="story-thumb">
+    <div class="story-content">
+      <h3>The Red Chronicles</h3>
+      <p>A thrilling tale of mystery, courage, and discovery spanning multiple chapters.</p>
+      <a href="story-red-chronicles.html" class="cta">View Chapters</a>
+    </div>
+  </div>
+
+  <div class="story-card">
+    <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1400&q=80" alt="Story Thumbnail" class="story-thumb">
+    <div class="story-content">
+      <h3>Whispers of the Wind</h3>
+      <p>An enchanting fantasy story with captivating characters and epic journeys.</p>
+      <a href="story-whispers-wind.html" class="cta">View Chapters</a>
+    </div>
+  </div>
+
+  <!-- Add more story cards here -->
+
+</main>
+
+<footer class="site-footer">
+  © 2025 Astrayudh — Crafted with creativity and calm.
+</footer>
+
+</body>
+</html>
