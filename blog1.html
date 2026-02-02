@@ -1,176 +1,176 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>The Spark Behind Vortix — Astrayudh</title>
-    <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Spark Behind Vortix — Astrayudh</title>
+  <link rel="stylesheet" href="style.css">
 
-    <style>
-        /* Scoped styling for article pages */
-        .article-hero {
-            background: linear-gradient(
-                rgba(124,16,41,0.55),
-                rgba(124,16,41,0.55)
-                ),
-                url('https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
-            padding: 100px 20px;
-            color: #fff;
-            text-align: center;
-        }
+  <style>
+    /* Hero Section */
+    .article-hero {
+      background: linear-gradient(rgba(124,16,41,0.55), rgba(124,16,41,0.55)),
+                  url('https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+      padding: 120px 20px 80px;
+      color: #fff;
+      text-align: center;
+    }
 
-        /* Styling the h2 inside the hero without inline CSS */
-        .article-hero h2 {
-            font-family:'Playfair Display',serif; 
-            font-size:2.1rem;
-        }
+    .article-hero h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      margin-bottom: 15px;
+      animation: fadeIn 0.9s ease forwards;
+      opacity: 0;
+    }
 
-        .article-wrapper {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 50px 20px 80px;
-        }
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: translateY(20px);}
+      100% { opacity: 1; transform: translateY(0);}
+    }
 
-        .article-wrapper h1 {
-            font-family: 'Playfair Display', serif;
-            color: var(--accent);
-            margin-bottom: 25px;
-            font-size: 2.4rem;
-        }
+    /* Article content */
+    .article-wrapper {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 50px 20px 80px;
+      line-height: 1.8;
+    }
 
-        /* Styling h2 inside the content without inline CSS */
-        .article-wrapper h2 {
-            font-family:'Playfair Display',serif; 
-            color:var(--accent); 
-            margin-top:40px;
-        }
+    .article-wrapper h1, .article-wrapper h2 {
+      font-family: 'Playfair Display', serif;
+      color: var(--accent);
+      margin-top: 40px;
+      margin-bottom: 20px;
+    }
 
-        .article-wrapper p {
-            font-size: 1.08rem;
-            color: var(--text);
-            line-height: 1.85;
-            margin-bottom: 22px;
-        }
+    .article-wrapper h1 { font-size: 2.4rem; }
+    .article-wrapper h2 { font-size: 1.8rem; }
 
-        .article-wrapper strong {
-            color: var(--accent);
-        }
+    .article-wrapper p {
+      font-size: 1.05rem;
+      color: var(--text);
+      margin-bottom: 20px;
+    }
 
-        .article-wrapper ul {
-            margin-left: 20px; 
-            line-height: 1.7; 
-            color: var(--text);
-            list-style: disc; /* Ensure list items have a clear marker */
-            padding-left: 20px;
-        }
-    </style>
+    .article-wrapper ul {
+      margin-left: 20px;
+      line-height: 1.7;
+      color: var(--text);
+      list-style: disc;
+      padding-left: 20px;
+      margin-bottom: 20px;
+    }
+
+    .article-wrapper strong {
+      color: var(--accent);
+    }
+
+    /* CTA back button */
+    .cta-back {
+      display: inline-block;
+      background: var(--accent);
+      color: #fff;
+      padding: 10px 22px;
+      border-radius: 25px;
+      text-decoration: none;
+      font-weight: 500;
+      margin-top: 30px;
+      transition: background 0.3s ease;
+    }
+
+    .cta-back:hover {
+      background: var(--accent-hover);
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .article-hero { padding: 80px 15px 60px; }
+      .article-hero h2 { font-size: 1.9rem; }
+      .article-wrapper { padding: 40px 15px 60px; }
+      .article-wrapper h1 { font-size: 2rem; }
+      .article-wrapper h2 { font-size: 1.6rem; }
+    }
+  </style>
 </head>
-
 <body>
-    <header class="site-header">
-        <h1>Astrayudh</h1>
-        <nav class="nav">
-            <a href="index.html">Home</a>
-            <a href="about.html">About</a>
-            <a href="apps.html">Apps</a>
-            <a href="blogs.html">Blogs</a>
-            <a href="contact.html">Contact</a>
-        </nav>
-    </header>
 
-    <section class="article-hero">
-        <h2>The Spark Behind Vortix</h2>
-    </section>
+  <!-- Header -->
+  <header class="site-header">
+    <h1><a href="index.html">Astrayudh</a></h1>
+    <nav class="nav">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="apps.html">Apps</a>
+      <a href="blogs.html" class="active">Blogs</a>
+      <a href="stories.html">Stories</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
 
-    <main class="article-wrapper">
-        <p>
-            Every app begins with a moment — a conversation, an inconvenience, a tiny flicker of curiosity.
-            <strong>Vortix</strong> began with something even smaller: a question.
-            A question that kept echoing every time we opened an app, scrolled through content, or tried to share something meaningful online:
-        </p>
+  <!-- Hero -->
+  <section class="article-hero">
+    <h2>The Spark Behind Vortix</h2>
+  </section>
 
-        <p>
-            <em>“Why can’t digital spaces feel more intentional?”</em>
-        </p>
+  <!-- Article Content -->
+  <main class="article-wrapper">
+    <p>
+      Every app begins with a moment — a conversation, an inconvenience, a tiny flicker of curiosity.
+      <strong>Vortix</strong> began with something even smaller: a question.
+      A question that kept echoing every time we opened an app, scrolled through content, or tried to share something meaningful online:
+    </p>
 
-        <p>
-            Most platforms today chase attention. They fight for your eyes, your time, your taps. But rarely do they stop to ask what you actually value or why you’re interacting in the first place.
-            And somewhere in that noise, real creativity gets buried.
-        </p>
+    <p><em>“Why can’t digital spaces feel more intentional?”</em></p>
 
-        <p>
-            Vortix was our answer to that.
-            Not a competitor — but a quiet rebellion.
-            Not a place to overwhelm — but a space to breathe.
-        </p>
+    <p>
+      Most platforms today chase attention. They fight for your eyes, your time, your taps. But rarely do they stop to ask what you actually value or why you’re interacting in the first place.
+    </p>
 
-        <h2>The Idea: Meaning Before Metrics</h2>
-        <p>
-            When we started shaping Vortix, the goal wasn’t to build another content-sharing platform.
-            It was to build a **value-driven ecosystem**.
-        </p>
+    <h2>The Idea: Meaning Before Metrics</h2>
+    <p>
+      When we started shaping Vortix, the goal wasn’t to build another content-sharing platform. 
+      It was to build a <strong>value-driven ecosystem</strong>.
+    </p>
 
-        <p>
-            Your content is not buried beneath algorithms.
-            Your effort is not ignored behind hard-to-reach dashboards.
-            Your creativity is not lost in the noise.
-        </p>
+    <ul>
+      <li>Your content is not buried beneath algorithms.</li>
+      <li>Your effort is not ignored behind hard-to-reach dashboards.</li>
+      <li>Your creativity is not lost in the noise.</li>
+    </ul>
 
-        <p>
-            Instead, Vortix creates a simple, rewarding loop:
-            <br><br>
-            **Create → Share → Get rewarded → Share more**
-        </p>
+    <h2>The Experience We Want to Build</h2>
+    <p>
+      Apps often forget that the people behind screens are human. That’s why Vortix is designed around a single principle:
+      <strong>Digital spaces should feel good.</strong>
+    </p>
 
-        <p>
-            Nothing feels wasted, because everything flows back into something meaningful — your visibility, your opportunities, your growth.
-        </p>
+    <ul>
+      <li>Clean design that doesn’t exhaust you</li>
+      <li>Meaningful interactions rather than endless scrolling</li>
+      <li>Rewards that feel fair, transparent, and motivating</li>
+      <li>A community that grows naturally, without pressure</li>
+    </ul>
 
-        <h2>The Experience We Want to Build</h2>
+    <h2>What’s Next?</h2>
+    <p>
+      Vortix is still evolving — reshaping itself with every test build, every design tweak, every line of thought scribbled in our notes.
+      And honestly, that’s the exciting part.
+    </p>
 
-        <p>
-            Apps often forget that the people behind screens are human. That’s why Vortix is designed around a single principle:
-            **Digital spaces should feel good.**
-        </p>
+    <p>
+      Because Vortix isn’t just an app.
+      It’s a direction.
+      A quiet nudge toward digital spaces that respect your time, reward your creativity, and feel like they were made for you.
+    </p>
 
-        <p>
-            That means:
-            <ul>
-                <li>Clean design that doesn’t exhaust you</li>
-                <li>Meaningful interactions rather than endless scrolling</li>
-                <li>Rewards that feel fair, transparent, and motivating</li>
-                <li>A community that grows naturally, without pressure</li>
-            </ul>
-        </p>
+    <a href="blogs.html" class="cta-back">← Back to Blogs</a>
+  </main>
 
-        <p>
-            We want Vortix to feel like a room you can walk into at any time — calm, creative, and full of possibility.
-        </p>
+  <!-- Footer -->
+  <footer class="site-footer">
+    © 2025 Astrayudh — Crafted with creativity and calm.
+  </footer>
 
-        <h2>What’s Next?</h2>
-
-        <p>
-            Vortix is still evolving — reshaping itself with every test build, every design tweak, every line of thought scribbled in our notes.
-            And honestly, that’s the exciting part.
-        </p>
-
-        <p>
-            Because Vortix isn’t just an app.
-            It’s a direction.
-            A quiet nudge toward digital spaces that respect your time, reward your creativity, and feel like they were made for you.
-        </p>
-
-        <p>
-            This is only the beginning.
-            And if you’re reading this — you’re already part of the story.
-        </p>
-
-        <br><br>
-        <a href="blogs.html" class="cta">← Back to Blogs</a>
-    </main>
-
-    <footer class="site-footer">
-        © 2025 Astrayudh — Crafted with creativity and calm.
-    </footer>
 </body>
 </html>
