@@ -1,71 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Astrayudh — Building Apps & Stories</title>
-  <link rel="stylesheet" href="style.css" />
-
-  <!-- ANDROID APP LINK FALLBACK -->
-  <script>
-    (function () {
-      const isAndroid = /Android/i.test(navigator.userAgent);
-      const path = window.location.pathname;
-
-      // Only redirect for deep links like /task/123
-      if (isAndroid && path.startsWith("/task/")) {
-        window.location.href =
-          "https://play.google.com/store/apps/details?id=com.vortix";
-      }
-    })();
-  </script>
+  <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
+
   <!-- Header -->
   <header class="site-header">
-    <h1>Astrayudh</h1>
+    <h1><a href="index.html">Astrayudh</a></h1>
     <nav class="nav">
-      <a href="index.html">Home</a>
+      <a href="index.html" class="active">Home</a>
       <a href="about.html">About</a>
       <a href="apps.html">Apps</a>
       <a href="blogs.html">Blogs</a>
+      <a href="stories.html">Stories</a>
       <a href="contact.html">Contact</a>
     </nav>
   </header>
 
-  <!-- Hero -->
+  <!-- Hero Section -->
   <section id="hero">
-    <h2>We design digital stories that feel human.</h2>
+    <h2>We design digital stories and apps that feel human.</h2>
     <p>
-      At <strong>Astrayudh</strong>, creativity meets calm — we craft elegant apps,
-      write meaningful blogs, and create experiences that connect.
+      At <strong>Astrayudh</strong>, creativity meets calm. We craft elegant apps, write meaningful blogs,
+      and create experiences that connect people in a natural, thoughtful way.
     </p>
-    <a href="about.html" class="cta">Explore More</a>
+    <a href="stories.html" class="cta">Explore Stories</a>
+    <a href="apps.html" class="cta" style="margin-left:15px;">Our Apps</a>
   </section>
 
-  <!-- Content Preview -->
+  <!-- Featured Sections -->
   <div class="container">
+
+    <!-- Vision Card -->
     <div class="card">
       <h3>Our Vision</h3>
       <p>
-        We believe technology and storytelling should coexist beautifully —
-        thoughtful, modern, and built to inspire connection rather than distraction.
+        Technology and storytelling should coexist beautifully — thoughtful, modern, and built
+        to inspire connection rather than distraction.
       </p>
     </div>
 
+    <!-- What We Do Card -->
     <div class="card">
       <h3>What We Do</h3>
       <p>
-        We build apps like <strong>Vortix</strong> — a platform born from curiosity
-        and creativity. Every project carries a soul, crafted with care and simplicity.
+        We build apps like <strong>Vortix</strong> and craft stories that carry soul and simplicity.
+        Every project is thoughtfully designed to engage and delight.
       </p>
     </div>
+
+    <!-- Featured Story -->
+    <div class="card">
+      <h3>Featured Story: The Lost Pages</h3>
+      <p>
+        Dive into our most recent story release — chapters filled with mystery, emotion, and creativity.
+      </p>
+      <a href="stories.html#lost-pages" class="cta">Read Now</a>
+    </div>
+
+    <!-- Featured App -->
+    <div class="card">
+      <h3>Featured App: Vortix</h3>
+      <p>
+        Explore <strong>Vortix</strong>, our upcoming platform designed to help creators engage meaningfully
+        with their audience.
+      </p>
+      <a href="apps.html" class="cta">Discover App</a>
+    </div>
+
   </div>
 
   <!-- Footer -->
   <footer class="site-footer">
     © 2025 Astrayudh — Crafted with creativity and calm.
   </footer>
+
 </body>
 </html>
