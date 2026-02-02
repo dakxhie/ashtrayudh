@@ -1,9 +1,10 @@
 /* ===========================
-   ASTRAYUDH THEME — ELEGANT + PROFESSIONAL
+   ASTRAYUDH THEME — PROFESSIONAL & RESPONSIVE
    =========================== */
 
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Poppins:wght@300;400;500&display=swap');
 
+/* --- Variables --- */
 :root {
   --background: #f9f7f6;
   --card-bg: #ffffff;
@@ -11,10 +12,10 @@
   --accent-hover: #5e0d1f;
   --text: #1f1f1f;
   --muted-text: #6b6b6b;
-  --shadow: rgba(0, 0, 0, 0.08);
+  --shadow: rgba(0,0,0,0.08);
 }
 
-/* Reset */
+/* --- Reset --- */
 * {
   margin: 0;
   padding: 0;
@@ -23,14 +24,20 @@
 
 body {
   font-family: 'Poppins', sans-serif;
-  background-color: var(--background);
+  background: var(--background);
   color: var(--text);
   line-height: 1.7;
+  scroll-behavior: smooth;
 }
 
-/* Header */
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* --- Header --- */
 .site-header {
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(255,255,255,0.9);
   padding: 18px 40px;
   display: flex;
   align-items: center;
@@ -49,6 +56,11 @@ body {
   letter-spacing: 1px;
 }
 
+.site-header h1 a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
 .nav a {
   color: var(--text);
   margin-left: 20px;
@@ -57,33 +69,38 @@ body {
   transition: color 0.3s ease;
 }
 
+.nav a.active,
 .nav a:hover {
   color: var(--accent);
 }
 
-/* Hero */
-#hero {
-  background: linear-gradient(
-      rgba(124, 16, 41, 0.45),
-      rgba(124, 16, 41, 0.45)
-    ),
-    url('https://images.unsplash.com/photo-1581090700227-1e37b190418e?auto=format&fit=crop&w=1400&q=80') center/cover no-repeat;
+/* --- Hero Sections --- */
+#hero,
+#sub-hero,
+.article-hero {
   color: #fff;
   text-align: center;
-  padding: 120px 20px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  padding: 120px 20px 80px;
 }
 
-#hero h2 {
+#hero h2,
+#sub-hero h2,
+.article-hero h2 {
   font-family: 'Playfair Display', serif;
   font-size: 2.4rem;
   margin-bottom: 15px;
 }
 
-#hero p {
-  max-width: 650px;
+#hero p,
+#sub-hero p,
+.article-hero p {
+  max-width: 700px;
   margin: 0 auto;
   font-size: 1.05rem;
+  line-height: 1.6;
   opacity: 0.95;
 }
 
@@ -103,39 +120,162 @@ body {
   background: var(--accent-hover);
 }
 
-/* Container */
+/* --- Container & Cards --- */
 .container {
-  max-width: 1000px;
+  max-width: 1100px;
   margin: 0 auto;
   padding: 60px 20px;
+  display: grid;
+  gap: 30px;
 }
 
-/* Card */
-.card {
+.card, .blog-card {
   background: var(--card-bg);
   padding: 30px;
   border-radius: 16px;
   box-shadow: 0 4px 12px var(--shadow);
-  margin-bottom: 30px;
   transition: transform 0.2s ease, box-shadow 0.3s ease;
 }
 
-.card:hover {
+.card:hover,
+.blog-card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.1);
 }
 
-.card h3 {
+.card h3,
+.blog-card h3 {
   font-family: 'Playfair Display', serif;
   color: var(--accent);
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 }
 
-.card p {
+.card p,
+.blog-card p {
   color: var(--muted-text);
+  line-height: 1.7;
 }
 
-/* Footer */
+/* --- Blog Card Specifics --- */
+.blog-card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.blog-thumb {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.blog-content {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.blog-content a.cta {
+  align-self: flex-start;
+}
+
+/* --- Article Content --- */
+.article-wrapper {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 50px 20px 80px;
+  line-height: 1.8;
+}
+
+.article-wrapper h1, .article-wrapper h2 {
+  font-family: 'Playfair Display', serif;
+  color: var(--accent);
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+
+.article-wrapper h1 { font-size: 2.4rem; }
+.article-wrapper h2 { font-size: 1.8rem; }
+
+.article-wrapper p {
+  font-size: 1.05rem;
+  color: var(--text);
+  margin-bottom: 20px;
+}
+
+.article-wrapper ul {
+  margin-left: 20px;
+  line-height: 1.7;
+  list-style: disc;
+  padding-left: 20px;
+  margin-bottom: 20px;
+}
+
+.article-wrapper strong {
+  color: var(--accent);
+}
+
+/* CTA Back Button for Article */
+.cta-back {
+  display: inline-block;
+  background: var(--accent);
+  color: #fff;
+  padding: 10px 22px;
+  border-radius: 25px;
+  text-decoration: none;
+  font-weight: 500;
+  margin-top: 30px;
+  transition: background 0.3s ease;
+}
+
+.cta-back:hover {
+  background: var(--accent-hover);
+}
+
+/* --- Forms --- */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 30px;
+  background: var(--card-bg);
+  border-radius: 14px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+input[type="text"], input[type="email"], textarea {
+  padding: 15px;
+  border: 1px solid var(--shadow);
+  border-radius: 8px;
+  font-size: 1rem;
+  color: var(--text);
+  background: var(--background);
+  transition: border-color 0.2s;
+}
+
+input:focus, textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+textarea { resize: vertical; }
+
+button[type="submit"] {
+  background: var(--accent);
+  color: #fff;
+  padding: 14px 20px;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.3s;
+}
+
+button[type="submit"]:hover { background: var(--accent-hover); }
+
+/* --- Footer --- */
 .site-footer {
   background: #fff;
   text-align: center;
@@ -146,18 +286,12 @@ body {
   margin-top: 60px;
 }
 
-/* Responsive */
+/* --- Responsive --- */
 @media (max-width: 768px) {
-  .site-header {
-    flex-direction: column;
-  }
-  .nav a {
-    margin: 10px;
-  }
-  #hero {
-    padding: 90px 15px;
-  }
-  #hero h2 {
-    font-size: 1.9rem;
-  }
+  .site-header { flex-direction: column; padding: 15px 20px; }
+  .nav a { margin: 10px; }
+  #hero, #sub-hero, .article-hero { padding: 90px 15px 60px; }
+  #hero h2, #sub-hero h2, .article-hero h2 { font-size: 1.9rem; }
+  .article-wrapper { padding: 40px 15px 60px; }
+  .blog-thumb { height: 150px; }
 }
