@@ -1,82 +1,181 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>About Astrayudh — Creative Studio</title>
-    <link rel="stylesheet" href="style.css" /> 
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Astrayudh — Creative Studio</title>
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    /* Hero for internal pages */
+    #sub-hero {
+      padding: 100px 20px 60px;
+      text-align: center;
+      background: linear-gradient(rgba(124,16,41,0.5), rgba(124,16,41,0.5)),
+                  url('https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+      color: #fff;
+      position: relative;
+    }
+    #sub-hero h2, #sub-hero p {
+      animation: floatIn 0.9s ease forwards;
+      opacity: 0;
+    }
+    #sub-hero h2 { animation-delay: 0.3s; }
+    #sub-hero p { animation-delay: 0.6s; }
+    
+    @keyframes floatIn {
+      0% { opacity: 0; transform: translateY(20px);}
+      100% { opacity: 1; transform: translateY(0);}
+    }
+
+    #sub-hero h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      margin-bottom: 10px;
+    }
+    #sub-hero p {
+      max-width: 700px;
+      margin: 0 auto;
+      line-height: 1.6;
+      font-size: 1rem;
+    }
+
+    /* Container for cards */
+    .container {
+      padding: 50px 20px 80px;
+      max-width: 1000px;
+      margin: 0 auto;
+      display: grid;
+      gap: 30px;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: 16px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 10px 26px rgba(0,0,0,0.12);
+    }
+
+    .card h2 {
+      font-family: 'Playfair Display', serif;
+      color: var(--accent);
+      margin-top: 0;
+      margin-bottom: 15px;
+    }
+
+    .card p, .card ul {
+      line-height: 1.7;
+      color: var(--muted-text);
+      margin-bottom: 15px;
+    }
+
+    .card ul {
+      list-style: disc;
+      padding-left: 20px;
+    }
+
+    .card a.cta {
+      display: inline-block;
+      background: var(--accent);
+      color: #fff;
+      padding: 10px 22px;
+      border-radius: 25px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: background 0.3s ease;
+      margin-top: 10px;
+    }
+
+    .card a.cta:hover {
+      background: var(--accent-hover);
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      #sub-hero { padding: 80px 15px 50px; }
+      #sub-hero h2 { font-size: 1.9rem; }
+      .card { padding: 25px; }
+    }
+  </style>
 </head>
 <body>
-    <header class="site-header">
-        <h1>Astrayudh</h1>
-        <nav class="nav">
-            <a href="index.html">Home</a>
-            <a href="about.html">About</a>
-            <a href="apps.html">Apps</a>
-            <a href="blogs.html">Blogs</a>
-            <a href="contact.html">Contact</a>
-        </nav>
-    </header>
 
-    <div class="container">
-        
-        <div class="card">
-            <h2>Who We Are</h2>
-            <p>
-                Astrayudh is a small, focused creative studio dedicated to building digital experiences
-                that feel personal, meaningful, and beautifully simple. We design apps, write thoughtful content, 
-                and craft ideas that connect with people in a genuine way.
-            </p>
+  <!-- Header -->
+  <header class="site-header">
+    <h1><a href="index.html">Astrayudh</a></h1>
+    <nav class="nav">
+      <a href="index.html">Home</a>
+      <a href="about.html" class="active">About</a>
+      <a href="apps.html">Apps</a>
+      <a href="blogs.html">Blogs</a>
+      <a href="stories.html">Stories</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
 
-            <p>
-                Our philosophy is rooted in **calm design** — interfaces that breathe, writing that flows,
-                and products that respect both attention and time.
-                Everything we create is shaped with intention: clarity, elegance, and purpose.
-            </p>
-        </div>
-        
-        <div class="card">
-            <h2>Our Work</h2>
-            <p>
-                We work across three main verticals:
-            </p>
-            <ul>
-                <li><strong>Mobile Apps</strong> — beautiful, minimal products built for real human use.</li>
-                <li><strong>Creative Writing</strong> — stories, essays, and blogs that inspire thought and imagination.</li>
-                <li><strong>Digital Identity</strong> — crafting modern, aesthetic web experiences.</li>
-            </ul>
-        </div>
+  <!-- Hero -->
+  <section id="sub-hero">
+    <h2>About Astrayudh</h2>
+    <p>We are a creative studio dedicated to crafting apps, stories, and digital experiences with elegance and intention.</p>
+  </section>
 
-        <div class="card">
-            <h2>Vortix — Our Upcoming App</h2>
-            <p>
-                We’re currently working on **Vortix**, a new digital engagement platform built to help
-                creators grow, connect, and showcase their work in an organic, meaningful way.
-                It’s still in development and not released yet — but it represents everything we believe in:
-                simplicity, expressive design, and empowering users.
-            </p>
-            <p>
-                Vortix is not just a tool — it’s a space for creativity to breathe.
-            </p>
-        </div>
+  <!-- Cards Section -->
+  <div class="container">
 
-        <div class="card">
-            <h2>Our Vision</h2>
-            <p>
-                We believe technology should feel warm, approachable, and human.
-                Every design choice, from color tone to typography to animation, should make the user feel at ease.
-            </p>
-            <p>
-                Whether it’s an app or an article, our goal is the same:
-                **create small, meaningful moments of clarity.**
-            </p>
-            <a href="contact.html">Get in Touch</a> 
-        </div>
-
+    <div class="card">
+      <h2>Who We Are</h2>
+      <p>
+        Astrayudh is a small, focused creative studio building digital experiences that feel personal, meaningful, and beautifully simple. 
+        We design apps, write thoughtful content, and craft ideas that connect with people in a genuine way.
+      </p>
+      <p>
+        Our philosophy is rooted in <strong>calm design</strong> — interfaces that breathe, writing that flows,
+        and products that respect attention and time.
+      </p>
     </div>
 
-    <footer class="site-footer">
-        © 2025 Astrayudh — Crafted with creativity and calm.
-    </footer>
+    <div class="card">
+      <h2>Our Work</h2>
+      <p>We work across three main verticals:</p>
+      <ul>
+        <li><strong>Mobile Apps</strong> — elegant, minimal products built for real human use.</li>
+        <li><strong>Creative Writing</strong> — stories, essays, and blogs that inspire thought and imagination.</li>
+        <li><strong>Digital Identity</strong> — crafting modern, aesthetic web experiences.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>Vortix — Our Upcoming App</h2>
+      <p>
+        We’re currently working on <strong>Vortix</strong>, a digital engagement platform built to help
+        creators grow, connect, and showcase their work organically. It represents simplicity, expressive design, and empowering users.
+      </p>
+    </div>
+
+    <div class="card">
+      <h2>Our Vision</h2>
+      <p>
+        We believe technology should feel warm, approachable, and human.
+        Every design choice — from color tone to typography to animation — aims to make the user feel at ease.
+      </p>
+      <a href="contact.html" class="cta">Get in Touch</a>
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    © 2025 Astrayudh — Crafted with creativity and calm.
+  </footer>
+
 </body>
 </html>
