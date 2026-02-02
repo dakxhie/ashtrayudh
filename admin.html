@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Panel — Astrayudh Stories</title>
+<link rel="stylesheet" href="style.css">
+<style>
+body { font-family: 'Poppins', sans-serif; padding: 20px; background: var(--background); }
+h1 { font-family: 'Playfair Display', serif; color: var(--accent); margin-bottom: 20px; }
+.story-card, .chapter-card { background: var(--card-bg); padding: 20px; border-radius: 14px; box-shadow: 0 4px 12px var(--shadow); margin-bottom: 20px; }
+input, textarea { width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 8px; border: 1px solid #ccc; }
+button { background: var(--accent); color: #fff; border: none; padding: 10px 18px; border-radius: 20px; cursor: pointer; margin-top: 5px; }
+button:hover { background: var(--accent-hover); }
+.chapter-list { margin-left: 20px; }
+</style>
+</head>
+<body>
+
+<h1>Stories Admin Panel</h1>
+<div id="storiesContainer"></div>
+
+<script>
+let storiesData = {};
+
+async function loadStories() {
+    const res = await fetch('stories.json');
+    storiesData = await res.json();
+    renderStories();
+}
+
+function renderStories() {
+    const container = document.getElementById('storiesContainer');
+    container.innerHTML = '';
+
+    storiesData.stories.forEach(story => {
+        const storyDiv = document.createElement('div');
+        storyDiv.className = 'story-card';
+        storyDiv.innerHTML = `
+            <h2>${story.title}</h2>
+            <p>${story.description}</p>
+            <div class="chapter-list">
+                ${story.chapters.map(ch => `<div class="chapter-card"><strong>${ch.title}</strong><p>${ch.excerpt}</p></div>`).join('')}
+            </div>
+        `;
+        container.appendChild(storyDiv);
+    });
+}
+
+// Initial load
+loadStories();
+</script>
+
+</body>
+</html>
