@@ -687,3 +687,182 @@ body {
   background: rgba(255, 61, 110, 0.2);
   border-color: rgba(255, 61, 110, 0.6);
 }
+/* =======================================
+   PREMIUM ANIMATIONS + MOBILE NAVBAR
+======================================= */
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Page fade animation */
+body {
+  opacity: 0;
+  animation: pageFade 0.8s ease forwards;
+}
+
+@keyframes pageFade {
+  to {
+    opacity: 1;
+  }
+}
+
+/* Reveal animation */
+.reveal {
+  opacity: 0;
+  transform: translateY(35px);
+  transition: all 0.9s ease;
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Navbar Improvements */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  backdrop-filter: blur(14px);
+  background: rgba(0, 0, 0, 0.65);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* Navbar links hover glow */
+.nav-links a {
+  position: relative;
+  transition: 0.3s;
+}
+
+.nav-links a:hover {
+  color: #ff3d6e;
+}
+
+.nav-links a.active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, #ff3d6e, rgba(255, 61, 110, 0.1));
+  border-radius: 99px;
+}
+
+/* Premium Buttons */
+.btn {
+  transition: all 0.35s ease;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 20px rgba(255, 61, 110, 0.3);
+}
+
+.btn.primary {
+  background: linear-gradient(90deg, #ff3d6e, #7a1f33);
+  border: none;
+}
+
+.btn.primary:hover {
+  filter: brightness(1.1);
+}
+
+/* Hamburger Menu */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+}
+
+.hamburger span {
+  width: 26px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 10px;
+  transition: 0.3s;
+}
+
+/* Mobile menu dropdown */
+.mobile-menu {
+  display: none;
+  flex-direction: column;
+  gap: 18px;
+  position: absolute;
+  top: 70px;
+  right: 20px;
+  width: 220px;
+  padding: 20px;
+  background: rgba(20, 20, 25, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(12px);
+  animation: dropIn 0.35s ease;
+  z-index: 999;
+}
+
+@keyframes dropIn {
+  from {
+    opacity: 0;
+    transform: translateY(-15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.mobile-menu a {
+  color: rgba(255, 255, 255, 0.85);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  transition: 0.25s;
+}
+
+.mobile-menu a:hover {
+  color: #ff3d6e;
+  transform: translateX(4px);
+}
+
+/* Responsive Navbar */
+@media (max-width: 850px) {
+  .nav-links {
+    display: none;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+}
+
+/* Glow animation background for hero */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at top left, rgba(255, 61, 110, 0.15), transparent 60%),
+              radial-gradient(circle at bottom right, rgba(130, 70, 255, 0.12), transparent 60%);
+  z-index: 0;
+  animation: glowMove 8s infinite alternate ease-in-out;
+}
+
+@keyframes glowMove {
+  from {
+    transform: translateY(0px);
+  }
+  to {
+    transform: translateY(25px);
+  }
+}
+
+/* Ensure hero text stays above glow */
+.hero-content {
+  position: relative;
+  z-index: 2;
+}
+
