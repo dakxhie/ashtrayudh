@@ -3,88 +3,181 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Admin Panel | Astrayudh</title>
+  <title>Astrayudh Admin Panel</title>
 
   <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      background: #05050a;
+      color: #fff;
+      font-family: "Poppins", sans-serif;
+      padding: 30px;
+    }
+
+    .admin-wrap {
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    .admin-title {
+      font-size: 34px;
+      font-family: "Playfair Display", serif;
+      margin-bottom: 10px;
+    }
+
+    .admin-subtitle {
+      color: rgba(255,255,255,0.6);
+      margin-bottom: 30px;
+    }
+
+    .admin-box {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      padding: 25px;
+      border-radius: 16px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0px 0px 30px rgba(0,0,0,0.6);
+    }
+
+    input {
+      width: 100%;
+      padding: 14px;
+      margin-top: 10px;
+      margin-bottom: 15px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.03);
+      color: white;
+      font-size: 15px;
+      outline: none;
+    }
+
+    input:focus {
+      border-color: rgba(255,61,110,0.6);
+    }
+
+    .admin-nav {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 25px;
+    }
+
+    .admin-nav button {
+      padding: 10px 18px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.05);
+      color: white;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .admin-nav button:hover {
+      border-color: rgba(255,61,110,0.7);
+      transform: translateY(-2px);
+    }
+
+    .logout-btn {
+      background: rgba(255,61,110,0.15) !important;
+      border: 1px solid rgba(255,61,110,0.5) !important;
+    }
+
+    .logout-btn:hover {
+      background: rgba(255,61,110,0.25) !important;
+    }
+
+    .admin-section {
+      margin-top: 25px;
+    }
+
+    .admin-section h2 {
+      font-size: 22px;
+      margin-bottom: 15px;
+      font-family: "Playfair Display", serif;
+    }
+
+    .action-btn {
+      margin-bottom: 18px;
+    }
+
+    .action-btn button {
+      padding: 12px 20px;
+      border-radius: 14px;
+      border: none;
+      cursor: pointer;
+      background: linear-gradient(135deg, #ff3d6e, #8b1dff);
+      color: white;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+
+    .action-btn button:hover {
+      transform: translateY(-2px);
+      opacity: 0.9;
+    }
+  </style>
 </head>
 
 <body>
 
-  <!-- NAVBAR -->
-  <nav class="navbar">
-    <div class="logo">Astrayudh</div>
+  <div class="admin-wrap">
 
-    <div class="nav-links">
-      <a href="index.html">Home</a>
-      <a href="blogs.html">Blogs</a>
-      <a href="stories.html">Stories</a>
-    </div>
+    <h1 class="admin-title">Astrayudh Admin</h1>
+    <p class="admin-subtitle">Manage blogs, stories and chapters globally (Firebase powered).</p>
 
-    <a href="index.html" class="nav-btn">Exit</a>
-  </nav>
+    <!-- LOGIN BOX -->
+    <div id="loginBox" class="admin-box">
+      <h2 style="margin-bottom:15px;">🔐 Admin Login</h2>
 
-  <!-- ADMIN LOGIN -->
-  <section class="section blog-view">
-    <div class="contact-box" id="loginBox">
-      <h2>Admin Login</h2>
-      <p>Enter password to access admin panel.</p>
+      <form onsubmit="loginAdmin(event)">
+        <input type="email" id="adminEmail" placeholder="Admin Email" required />
+        <input type="password" id="adminPass" placeholder="Admin Password" required />
 
-      <form class="contact-form" onsubmit="return loginAdmin(event)">
-        <label>Password</label>
-        <input type="password" id="adminPass" placeholder="Enter admin password" required />
-
-        <button type="submit" class="btn primary" style="width:100%; margin-top:20px;">
-          Login
-        </button>
+        <div class="action-btn">
+          <button type="submit">Login</button>
+        </div>
       </form>
     </div>
 
     <!-- ADMIN PANEL -->
-    <div class="privacy-box" id="adminPanel" style="display:none; max-width:1100px;">
-      <h2 style="font-family:Playfair Display, serif; font-size:42px; margin-bottom:15px;">
-        Admin Panel
-      </h2>
-      <p style="color:#b9b9c6; margin-bottom:30px;">
-        Manage your Blogs & Stories content easily.
-      </p>
+    <div id="adminPanel" class="admin-box" style="display:none;">
 
-      <!-- BUTTONS -->
-      <div style="display:flex; gap:15px; flex-wrap:wrap; margin-bottom:35px;">
-        <button class="btn primary" onclick="showSection('blogsAdmin')">Manage Blogs</button>
-        <button class="btn secondary" onclick="showSection('storiesAdmin')">Manage Stories</button>
-        <button class="btn secondary" onclick="logoutAdmin()">Logout</button>
+      <div class="admin-nav">
+        <button onclick="showSection('blogsAdmin')">📝 Manage Blogs</button>
+        <button onclick="showSection('storiesAdmin')">📖 Manage Stories</button>
+        <button class="logout-btn" onclick="logoutAdmin()">🚪 Logout</button>
       </div>
 
-      <!-- BLOGS ADMIN -->
-      <div id="blogsAdmin">
-        <h3 style="font-family:Playfair Display, serif; font-size:28px; margin-bottom:15px;">
-          Blogs Management
-        </h3>
+      <!-- BLOGS -->
+      <div id="blogsAdmin" class="admin-section">
+        <h2>Blogs</h2>
 
-        <button class="btn primary" onclick="addBlog()">➕ Add New Blog</button>
+        <div class="action-btn">
+          <button onclick="addBlog()">➕ Add Blog</button>
+        </div>
 
-        <div id="blogsList" style="margin-top:25px;"></div>
+        <div id="blogsList"></div>
       </div>
 
-      <!-- STORIES ADMIN -->
-      <div id="storiesAdmin" style="display:none;">
-        <h3 style="font-family:Playfair Display, serif; font-size:28px; margin-bottom:15px;">
-          Stories Management
-        </h3>
+      <!-- STORIES -->
+      <div id="storiesAdmin" class="admin-section" style="display:none;">
+        <h2>Stories</h2>
 
-        <button class="btn primary" onclick="addStory()">➕ Add New Story</button>
+        <div class="action-btn">
+          <button onclick="addStory()">➕ Add Story</button>
+        </div>
 
-        <div id="storiesList" style="margin-top:25px;"></div>
+        <div id="storiesList"></div>
       </div>
 
     </div>
-  </section>
 
-  <footer class="footer">
-    <p>© 2026 Astrayudh. Admin Panel.</p>
-  </footer>
+  </div>
 
-  <script src="admin.js"></script>
+  <!-- IMPORTANT: MODULE SCRIPT -->
+  <script type="module" src="admin.js"></script>
+
 </body>
 </html>
