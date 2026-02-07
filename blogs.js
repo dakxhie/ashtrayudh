@@ -1,68 +1,56 @@
-const blogsContainer = document.getElementById("blogsContainer");
-const searchInput = document.getElementById("searchInput");
+import { db } from "./firebase.js";
 
-let blogsData = [];
+import {
+  collection,
+  getDocs,
+  query,
+  orderBy
+} from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
 
-// Load blogs from JSON
 async function loadBlogs() {
+  const blogsContainer = document.getElementById("blogsContainer");
+
+  blogsContainer.innerHTML = `<p style="color:rgba(255,255,255,0.6);">Loading blogs...</p>`;
+
   try {
-    const response = await fetch("blogs.json");
-    const data = await response.json();
+    const blogsQuery = query(collection(db, "blogs"), orderBy("date", "desc"));
+    const snapshot = await getDocs(blogsQuery);
 
-    blogsData = data.blogs;
-    renderBlogs(blogsData);
+    if (snapshot.empty) {
+      blogsContainer.innerHTML = `<p style="color:rgba(255,255,255,0.6);">No blogs yet. Coming soon...</p>`;
+      return;
+    }
+
+    let html = "";
+
+    snapshot.forEach((docSnap) => {
+      const blog = docSnap.data();
+
+      html += `
+        <article class="blog-card">
+          <div class="blog-image">
+            <img src="assets/${blog.image}" alt="${blog.title}">
+          </div>
+
+          <div class="blog-content">
+            <h2>${blog.title}</h2>
+            <p class="blog-excerpt">${blog.excerpt}</p>
+            <p class="blog-date">${blog.date}</p>
+
+            <a class="btn primary" href="blog-view.html?id=${docSnap.id}">
+              Read More →
+            </a>
+          </div>
+        </article>
+      `;
+    });
+
+    blogsContainer.innerHTML = html;
+
   } catch (error) {
-    blogsContainer.innerHTML = `
-      <div class="card">
-        <h3>Error Loading Blogs</h3>
-        <p>blogs.json file not found or invalid. Please check your file setup.</p>
-      </div>
-    `;
+    blogsContainer.innerHTML = `<p style="color:#ff3d6e;">❌ Failed to load blogs.</p>`;
+    console.error(error);
   }
 }
 
-// Render blog cards
-function renderBlogs(blogs) {
-  blogsContainer.innerHTML = "";
-
-  if (blogs.length === 0) {
-    blogsContainer.innerHTML = `
-      <div class="card">
-        <h3>No Blogs Found</h3>
-        <p>Try searching something else.</p>
-      </div>
-    `;
-    return;
-  }
-
-  blogs.forEach((blog) => {
-    const blogCard = document.createElement("div");
-    blogCard.classList.add("card");
-
-    blogCard.innerHTML = `
-      <img src="${blog.image}" alt="${blog.title}" class="blog-img">
-      <h3>${blog.title}</h3>
-      <p>${blog.excerpt}</p>
-      <a href="blog-view.html?id=${blog.id}" class="btn primary" style="margin-top: 18px; display:inline-block;">
-        Read More
-      </a>
-    `;
-
-    blogsContainer.appendChild(blogCard);
-  });
-}
-
-// Search feature
-searchInput.addEventListener("input", () => {
-  const query = searchInput.value.toLowerCase();
-
-  const filteredBlogs = blogsData.filter((blog) =>
-    blog.title.toLowerCase().includes(query) ||
-    blog.excerpt.toLowerCase().includes(query)
-  );
-
-  renderBlogs(filteredBlogs);
-});
-
-// Init
 loadBlogs();
