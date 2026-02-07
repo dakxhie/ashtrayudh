@@ -3,123 +3,53 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Blog | Astrayudh</title>
+  <title>Astrayudh Blogs</title>
 
   <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
   <!-- NAVBAR -->
-  <nav class="navbar">
-    <div class="logo">Astrayudh</div>
+  <header class="navbar">
+    <div class="logo">
+      <a href="index.html">Astrayudh</a>
+    </div>
 
-    <div class="nav-links">
+    <nav class="nav-links">
       <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="apps.html">Apps</a>
       <a href="blogs.html" class="active">Blogs</a>
       <a href="stories.html">Stories</a>
       <a href="contact.html">Contact</a>
-    </div>
+    </nav>
+  </header>
 
-    <a href="contact.html" class="nav-btn">Let's Talk</a>
-  </nav>
-
-  <!-- BLOG VIEW -->
-  <section class="section blog-view">
-    <div class="blog-header">
-      <h1 id="blogTitle">Loading...</h1>
-      <p class="blog-date" id="blogDate"></p>
-    </div>
-
-    <div class="blog-image-box">
-      <img id="blogImage" src="" alt="Blog Image" />
-    </div>
-
-    <div class="blog-content" id="blogContent"></div>
-
-    <div style="margin-top:50px;">
-      <a href="blogs.html" class="btn secondary">← Back to Blogs</a>
+  <!-- HERO -->
+  <section class="page-hero">
+    <div class="page-hero-overlay"></div>
+    <div class="page-hero-content">
+      <h1>Blogs</h1>
+      <p>Thoughtful writing, calm technology, and meaningful stories.</p>
     </div>
   </section>
 
+  <!-- BLOG LIST -->
+  <section class="container">
+    <div id="blogsContainer" class="blogs-grid">
+      <!-- Blogs load here from Firebase -->
+    </div>
+  </section>
+
+  <!-- FOOTER -->
   <footer class="footer">
     <p>© 2026 Astrayudh. Crafted with calm design.</p>
-    <div class="footer-links">
-      <a href="privacy.html">Privacy Policy</a>
-    </div>
   </footer>
 
-  <script>
-    async function loadBlog() {
-      const params = new URLSearchParams(window.location.search);
-      const blogId = params.get("id");
-
-      if (!blogId) {
-        document.getElementById("blogTitle").innerText = "Blog Not Found";
-        return;
-      }
-
-      let blogs = [];
-
-      // 1️⃣ Check LocalStorage first
-      const localBlogs = localStorage.getItem("astrayudh_blogs");
-
-      if (localBlogs) {
-        blogs = JSON.parse(localBlogs);
-      } else {
-        // 2️⃣ fallback to blogs.json
-        const response = await fetch("blogs.json");
-        const data = await response.json();
-        blogs = data.blogs;
-      }
-
-      const blog = blogs.find(b => b.id === blogId);
-
-      if (!blog) {
-        document.getElementById("blogTitle").innerText = "Blog Not Found";
-        document.getElementById("blogContent").innerHTML =
-          "<p style='color:#b9b9c6;'>The blog you are looking for does not exist.</p>";
-        return;
-      }
-
-      document.title = blog.title + " | Astrayudh";
-
-      document.getElementById("blogTitle").innerText = blog.title;
-      document.getElementById("blogDate").innerText = "Published on " + blog.date;
-      document.getElementById("blogImage").src = blog.image;
-
-      const contentBox = document.getElementById("blogContent");
-
-      blog.content.forEach(block => {
-        if (block.type === "heading") {
-          const h2 = document.createElement("h2");
-          h2.innerText = block.text;
-          contentBox.appendChild(h2);
-        }
-
-        if (block.type === "paragraph") {
-          const p = document.createElement("p");
-          p.innerText = block.text;
-          contentBox.appendChild(p);
-        }
-
-        if (block.type === "list") {
-          const ul = document.createElement("ul");
-
-          block.items.forEach(item => {
-            const li = document.createElement("li");
-            li.innerText = item;
-            ul.appendChild(li);
-          });
-
-          contentBox.appendChild(ul);
-        }
-      });
-    }
-
-    loadBlog();
-  </script>
+  <!-- MODULE SCRIPT -->
+  <script type="module" src="blogs.js"></script>
 
 </body>
 </html>
