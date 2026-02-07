@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Astrayudh Blogs</title>
+  <title>Blogs | Astrayudh</title>
 
   <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -11,7 +11,6 @@
 
 <body>
 
-  <!-- NAVBAR -->
   <header class="navbar">
     <div class="logo">
       <a href="index.html">Astrayudh</a>
@@ -27,29 +26,21 @@
     </nav>
   </header>
 
-  <!-- HERO -->
-  <section class="page-hero">
-    <div class="page-hero-overlay"></div>
-    <div class="page-hero-content">
-      <h1>Blogs</h1>
-      <p>Thoughtful writing, calm technology, and meaningful stories.</p>
-    </div>
+  <section class="container page-header">
+    <h1>Blogs</h1>
+    <p>
+      Thoughts, reflections, and calm digital storytelling — written with intention.
+    </p>
   </section>
 
-  <!-- BLOG LIST -->
   <section class="container">
-    <div id="blogsContainer" class="blogs-grid">
-      <!-- Blogs load here from Firebase -->
-    </div>
+    <div id="blogsGrid" class="grid-layout"></div>
   </section>
 
-  <!-- FOOTER -->
   <footer class="footer">
     <p>© 2026 Astrayudh. Crafted with calm design.</p>
   </footer>
 
-  <!-- MODULE SCRIPT -->
   <script type="module" src="blogs.js"></script>
-
 </body>
 </html>
