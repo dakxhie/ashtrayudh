@@ -1,0 +1,88 @@
+{
+  "blogs": [
+    {
+      "id": "calm-design",
+      "title": "Why Calm Design is the Future",
+      "excerpt": "Modern users are tired of noise. Calm design is about clarity, minimalism, and emotional comfort.",
+      "image": "blog1.jpg",
+      "date": "2026-02-01",
+      "content": [
+        {
+          "type": "heading",
+          "text": "The Problem With Modern Apps"
+        },
+        {
+          "type": "paragraph",
+          "text": "Most apps today are designed to capture attention, not respect it. Notifications, ads, popups, and cluttered UI create stress instead of simplicity."
+        },
+        {
+          "type": "heading",
+          "text": "What is Calm Design?"
+        },
+        {
+          "type": "paragraph",
+          "text": "Calm design focuses on reducing unnecessary UI noise. It gives the user breathing space, smooth interactions, and clarity."
+        },
+        {
+          "type": "list",
+          "items": [
+            "Minimal UI components",
+            "Soft animations instead of aggressive effects",
+            "Comfortable typography",
+            "Clean spacing and layouts"
+          ]
+        },
+        {
+          "type": "heading",
+          "text": "Astrayudh Philosophy"
+        },
+        {
+          "type": "paragraph",
+          "text": "Astrayudh builds products that feel elegant and human. Calm design is not just style — it’s respect for the user’s mind."
+        }
+      ]
+    },
+    {
+      "id": "digital-storytelling",
+      "title": "Digital Storytelling: The New Art Form",
+      "excerpt": "Storytelling has evolved. Now digital platforms can create immersive worlds through design and interaction.",
+      "image": "blog2.jpg",
+      "date": "2026-02-03",
+      "content": [
+        {
+          "type": "heading",
+          "text": "Stories Are Changing"
+        },
+        {
+          "type": "paragraph",
+          "text": "Storytelling is no longer limited to books or movies. Digital storytelling is interactive, emotional, and often deeply personal."
+        },
+        {
+          "type": "heading",
+          "text": "Why It Matters"
+        },
+        {
+          "type": "paragraph",
+          "text": "People connect to stories because stories carry meaning. Digital storytelling allows creators to blend visuals, sound, and interaction into a single experience."
+        },
+        {
+          "type": "list",
+          "items": [
+            "Interactive chapters",
+            "Cinematic UI layouts",
+            "User-driven narrative choices",
+            "Immersive reading experiences"
+          ]
+        },
+        {
+          "type": "heading",
+          "text": "Astrayudh Vision"
+        },
+        {
+          "type": "paragraph",
+          "text": "Astrayudh aims to create stories that feel cinematic and alive — built for the digital generation."
+        }
+      ]
+    }
+  ]
+}
