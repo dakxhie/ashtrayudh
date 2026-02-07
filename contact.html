@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact | Astrayudh</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- AOS -->
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <div class="logo">Astrayudh</div>
+
+    <nav class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="apps.html">Apps</a>
+      <a href="blogs.html">Blogs</a>
+      <a href="stories.html">Stories</a>
+      <a class="active" href="contact.html">Contact</a>
+    </nav>
+
+    <a class="nav-btn" href="contact.html">Let's Talk</a>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero" style="height: 65vh; background: url('contact.jpg') center/cover no-repeat;">
+    <div class="hero-overlay"></div>
+
+    <div class="hero-content" data-aos="fade-up">
+      <h1>Contact Astrayudh</h1>
+      <p>
+        Want to collaborate, suggest ideas, or connect?  
+        Send a message — we’ll reply soon.
+      </p>
+    </div>
+  </section>
+
+  <!-- CONTACT FORM -->
+  <section class="section">
+    <div class="section-heading" data-aos="fade-right">
+      <h2>Send a Message</h2>
+      <p>
+        Fill the form below and Astrayudh will respond via email.
+      </p>
+    </div>
+
+    <div class="contact-box" data-aos="fade-up">
+
+      <!-- FORM (Formspree Integration) -->
+      <form action="https://formspree.io/f/yourFormID" method="POST" class="contact-form">
+
+        <label>Your Name</label>
+        <input type="text" name="name" placeholder="Enter your name" required />
+
+        <label>Your Email</label>
+        <input type="email" name="email" placeholder="Enter your email" required />
+
+        <label>Your Message</label>
+        <textarea name="message" rows="6" placeholder="Write your message..." required></textarea>
+
+        <button type="submit" class="btn primary" style="width: 100%; margin-top: 15px;">
+          Send Message
+        </button>
+
+      </form>
+
+      <p style="margin-top: 20px; font-size: 14px; color: #b9b9c6;">
+        Your message is secure and will only be used to reply back.
+      </p>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p>© 2026 Astrayudh. Crafted with calm design.</p>
+    <div class="footer-links">
+      <a href="privacy.html">Privacy Policy</a>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 1000,
+      once: true
+    });
+  </script>
+
+</body>
+</html>
