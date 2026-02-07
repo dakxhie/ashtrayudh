@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blogs | Astrayudh</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- AOS Animations -->
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <div class="logo">Astrayudh</div>
+
+    <nav class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="apps.html">Apps</a>
+      <a class="active" href="blogs.html">Blogs</a>
+      <a href="stories.html">Stories</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+
+    <a class="nav-btn" href="contact.html">Let's Talk</a>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero" style="height: 70vh; background: url('blogs.jpg') center/cover no-repeat;">
+    <div class="hero-overlay"></div>
+
+    <div class="hero-content" data-aos="fade-up">
+      <h1>Astrayudh Blogs</h1>
+      <p>
+        Thoughts on creativity, technology, calm design, storytelling, and building meaningful digital experiences.
+      </p>
+    </div>
+  </section>
+
+  <!-- BLOGS SECTION -->
+  <section class="section">
+    <div class="section-heading" data-aos="fade-right">
+      <h2>Latest Articles</h2>
+      <p>
+        Carefully written content designed to feel clean, minimal, and valuable.
+      </p>
+    </div>
+
+    <!-- Search bar -->
+    <div class="search-box" data-aos="fade-up">
+      <input type="text" id="searchInput" placeholder="Search blogs..." />
+    </div>
+
+    <!-- Blogs Grid -->
+    <div class="cards" id="blogsContainer" data-aos="fade-up">
+      <!-- Blogs will load here from JS -->
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p>© 2026 Astrayudh. Crafted with calm design.</p>
+    <div class="footer-links">
+      <a href="privacy.html">Privacy Policy</a>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 1000,
+      once: true
+    });
+  </script>
+
+  <script src="blogs.js"></script>
+
+</body>
+</html>
