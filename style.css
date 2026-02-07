@@ -565,3 +565,125 @@ body {
   color: rgba(255,255,255,0.5);
   margin-bottom: 18px;
 }
+/* ================================
+   BLOGS + STORIES PREMIUM UI
+================================ */
+
+.page-header {
+  padding: 70px 0 30px;
+  text-align: center;
+}
+
+.page-header h1 {
+  font-family: "Playfair Display", serif;
+  font-size: 48px;
+  margin-bottom: 10px;
+  color: #ffffff;
+}
+
+.page-header p {
+  max-width: 750px;
+  margin: 0 auto;
+  font-size: 15px;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.grid-layout {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+  padding: 40px 0 70px;
+}
+
+@media (max-width: 1100px) {
+  .grid-layout {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 750px) {
+  .grid-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .page-header h1 {
+    font-size: 36px;
+  }
+}
+
+/* Card */
+.content-card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.35);
+  transition: 0.35s ease;
+  cursor: pointer;
+  position: relative;
+}
+
+.content-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(255, 61, 110, 0.55);
+  box-shadow: 0 25px 55px rgba(0, 0, 0, 0.55);
+}
+
+.card-image {
+  height: 170px;
+  width: 100%;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.card-image::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.85));
+}
+
+.card-body {
+  padding: 20px;
+}
+
+.card-title {
+  font-family: "Playfair Display", serif;
+  font-size: 20px;
+  margin-bottom: 8px;
+  color: #ffffff;
+}
+
+.card-desc {
+  font-size: 14px;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.65);
+  margin-bottom: 15px;
+}
+
+.card-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.card-btn {
+  display: inline-block;
+  padding: 9px 14px;
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 999px;
+  background: rgba(255, 61, 110, 0.12);
+  border: 1px solid rgba(255, 61, 110, 0.35);
+  color: #ff3d6e;
+  transition: 0.3s;
+}
+
+.content-card:hover .card-btn {
+  background: rgba(255, 61, 110, 0.2);
+  border-color: rgba(255, 61, 110, 0.6);
+}
