@@ -525,3 +525,43 @@ body {
   margin-bottom: 8px;
 }
 
+.stories-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 25px;
+  padding: 40px 0;
+}
+
+.story-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0px 0px 20px rgba(0,0,0,0.5);
+  transition: 0.3s;
+  padding: 22px;
+}
+
+.story-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(255,61,110,0.5);
+}
+
+.story-content h2 {
+  font-family: "Playfair Display", serif;
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.story-desc {
+  font-size: 14px;
+  color: rgba(255,255,255,0.75);
+  margin-bottom: 14px;
+  line-height: 1.6;
+}
+
+.story-meta {
+  font-size: 13px;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 18px;
+}
