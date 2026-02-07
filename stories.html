@@ -5,63 +5,42 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Stories | Astrayudh</title>
 
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-
-  <!-- CSS -->
-  <link rel="stylesheet" href="style.css">
-
-  <!-- AOS -->
-  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
   <!-- NAVBAR -->
-  <header class="navbar">
+  <nav class="navbar">
     <div class="logo">Astrayudh</div>
 
-    <nav class="nav-links">
+    <div class="nav-links">
       <a href="index.html">Home</a>
       <a href="about.html">About</a>
       <a href="apps.html">Apps</a>
       <a href="blogs.html">Blogs</a>
-      <a class="active" href="stories.html">Stories</a>
+      <a href="stories.html" class="active">Stories</a>
       <a href="contact.html">Contact</a>
-    </nav>
-
-    <a class="nav-btn" href="contact.html">Let's Talk</a>
-  </header>
-
-  <!-- HERO -->
-  <section class="hero" style="height: 70vh; background: url('stories.jpg') center/cover no-repeat;">
-    <div class="hero-overlay"></div>
-
-    <div class="hero-content" data-aos="fade-up">
-      <h1>Astrayudh Stories</h1>
-      <p>
-        Cinematic storytelling — structured into chapters, designed for immersive reading.
-      </p>
     </div>
-  </section>
+
+    <a href="contact.html" class="nav-btn">Let's Talk</a>
+  </nav>
 
   <!-- STORIES SECTION -->
-  <section class="section">
-    <div class="section-heading" data-aos="fade-right">
-      <h2>Featured Stories</h2>
-      <p>
-        Each story is organized into chapters. Click to explore.
-      </p>
+  <section class="section story-view">
+    <div class="section-heading">
+      <h2>Stories</h2>
+      <p>Serialized stories crafted with imagination, depth, and cinematic writing.</p>
     </div>
 
-    <div class="cards" id="storiesContainer" data-aos="fade-up">
-      <!-- Stories load here -->
+    <div class="search-box">
+      <input type="text" id="searchInput" placeholder="Search stories..." onkeyup="searchStories()" />
     </div>
+
+    <div class="cards" id="storiesContainer"></div>
   </section>
 
-  <!-- FOOTER -->
   <footer class="footer">
     <p>© 2026 Astrayudh. Crafted with calm design.</p>
     <div class="footer-links">
@@ -69,16 +48,64 @@
     </div>
   </footer>
 
-  <!-- Scripts -->
-  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
   <script>
-    AOS.init({
-      duration: 1000,
-      once: true
-    });
-  </script>
+    let allStories = [];
 
-  <script src="stories.js"></script>
+    async function loadStories() {
+      const container = document.getElementById("storiesContainer");
+
+      // 1️⃣ Check LocalStorage first
+      const localStories = localStorage.getItem("astrayudh_stories");
+
+      if (localStories) {
+        allStories = JSON.parse(localStories);
+      } else {
+        // 2️⃣ fallback to stories.json
+        const response = await fetch("stories.json");
+        const data = await response.json();
+        allStories = data.stories;
+      }
+
+      renderStories(allStories);
+    }
+
+    function renderStories(stories) {
+      const container = document.getElementById("storiesContainer");
+
+      if (stories.length === 0) {
+        container.innerHTML = `<p style="color:#b9b9c6;">No stories found.</p>`;
+        return;
+      }
+
+      container.innerHTML = stories.map(story => `
+        <div class="card">
+          <h3>${story.title}</h3>
+          <p>${story.description}</p>
+
+          <p style="margin-top:12px; font-size:13px; color:#ff3d6e;">
+            Chapters: ${story.chapters.length}
+          </p>
+
+          <a href="story-view.html?id=${story.id}" class="btn secondary" style="margin-top:15px; display:inline-block;">
+            Read Story →
+          </a>
+        </div>
+      `).join("");
+    }
+
+    function searchStories() {
+      const searchValue = document.getElementById("searchInput").value.toLowerCase();
+
+      const filtered = allStories.filter(story =>
+        story.title.toLowerCase().includes(searchValue) ||
+        story.description.toLowerCase().includes(searchValue)
+      );
+
+      renderStories(filtered);
+    }
+
+    loadStories();
+  </script>
 
 </body>
 </html>
