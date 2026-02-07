@@ -1,5 +1,5 @@
 /* ==============================
-   ASTRAYUDH ADMIN PANEL (LOCAL STORAGE)
+   ASTRAYUDH ADMIN PANEL (ADVANCED)
    ============================== */
 
 const ADMIN_PASSWORD = "astrayudh@2026"; // CHANGE THIS PASSWORD
@@ -95,6 +95,9 @@ function addBlog() {
 
   const id = title.toLowerCase().replace(/\s+/g, "-");
 
+  const contentText = prompt("Enter blog content (paragraph). You can edit later:");
+  if (!contentText) return;
+
   const newBlog = {
     id: id,
     title: title,
@@ -102,8 +105,8 @@ function addBlog() {
     image: "blog1.jpg",
     date: new Date().toISOString().split("T")[0],
     content: [
-      { type: "heading", text: "New Blog Heading" },
-      { type: "paragraph", text: "Write your blog content here..." }
+      { type: "heading", text: title },
+      { type: "paragraph", text: contentText }
     ]
   };
 
@@ -147,7 +150,7 @@ function deleteBlog(index) {
 }
 
 // ------------------------------
-// STORIES CRUD
+// STORIES CRUD + CHAPTERS
 // ------------------------------
 function getStories() {
   let stories = localStorage.getItem("astrayudh_stories");
@@ -171,11 +174,15 @@ function loadStories() {
     <div class="card" style="margin-bottom:18px;">
       <h3>${story.title}</h3>
       <p>${story.description}</p>
-      <p style="margin-top:10px; font-size:13px; color:#ff3d6e;">ID: ${story.id}</p>
+
+      <p style="margin-top:12px; font-size:13px; color:#ff3d6e;">
+        Chapters: ${story.chapters.length}
+      </p>
 
       <div style="margin-top:15px; display:flex; gap:10px; flex-wrap:wrap;">
-        <button class="btn secondary" onclick="editStory(${index})">✏️ Edit</button>
-        <button class="btn primary" onclick="deleteStory(${index})">🗑 Delete</button>
+        <button class="btn secondary" onclick="editStory(${index})">✏️ Edit Story</button>
+        <button class="btn secondary" onclick="manageChapters(${index})">📖 Manage Chapters</button>
+        <button class="btn primary" onclick="deleteStory(${index})">🗑 Delete Story</button>
       </div>
     </div>
   `).join("");
@@ -240,6 +247,127 @@ function deleteStory(index) {
     stories.splice(index, 1);
     saveStories(stories);
     alert("🗑 Story Deleted!");
+    loadStories();
+  }
+}
+
+// ------------------------------
+// CHAPTER MANAGEMENT
+// ------------------------------
+function manageChapters(storyIndex) {
+  let stories = getStories();
+  let story = stories[storyIndex];
+
+  let chapterMenu = `Managing Chapters for: ${story.title}\n\n`;
+
+  story.chapters.forEach((ch, i) => {
+    chapterMenu += `${i + 1}. ${ch.title}\n`;
+  });
+
+  chapterMenu += `\nOptions:
+1 = Add Chapter
+2 = Edit Chapter
+3 = Delete Chapter
+0 = Exit`;
+
+  const choice = prompt(chapterMenu);
+
+  if (!choice) return;
+
+  if (choice === "1") {
+    addChapter(storyIndex);
+  }
+
+  if (choice === "2") {
+    editChapter(storyIndex);
+  }
+
+  if (choice === "3") {
+    deleteChapter(storyIndex);
+  }
+}
+
+function addChapter(storyIndex) {
+  let stories = getStories();
+  let story = stories[storyIndex];
+
+  const title = prompt("Enter Chapter Title:");
+  if (!title) return;
+
+  const contentRaw = prompt("Enter Chapter Content (separate lines using || ):\nExample:\nLine1||Line2||Line3");
+  if (!contentRaw) return;
+
+  const contentLines = contentRaw.split("||").map(line => line.trim());
+
+  story.chapters.push({
+    title: title,
+    content: contentLines
+  });
+
+  stories[storyIndex] = story;
+  saveStories(stories);
+
+  alert("✅ Chapter Added!");
+  loadStories();
+}
+
+function editChapter(storyIndex) {
+  let stories = getStories();
+  let story = stories[storyIndex];
+
+  const chapterNumber = prompt(`Enter chapter number to edit (1 - ${story.chapters.length}):`);
+  if (!chapterNumber) return;
+
+  const chapterIndex = parseInt(chapterNumber) - 1;
+
+  if (chapterIndex < 0 || chapterIndex >= story.chapters.length) {
+    alert("❌ Invalid chapter number!");
+    return;
+  }
+
+  const chapter = story.chapters[chapterIndex];
+
+  const newTitle = prompt("Edit Chapter Title:", chapter.title);
+  if (!newTitle) return;
+
+  const oldContent = chapter.content.join("||");
+
+  const newContentRaw = prompt("Edit Chapter Content (use || for new lines):", oldContent);
+  if (!newContentRaw) return;
+
+  chapter.title = newTitle;
+  chapter.content = newContentRaw.split("||").map(line => line.trim());
+
+  story.chapters[chapterIndex] = chapter;
+  stories[storyIndex] = story;
+
+  saveStories(stories);
+
+  alert("✅ Chapter Updated!");
+  loadStories();
+}
+
+function deleteChapter(storyIndex) {
+  let stories = getStories();
+  let story = stories[storyIndex];
+
+  const chapterNumber = prompt(`Enter chapter number to delete (1 - ${story.chapters.length}):`);
+  if (!chapterNumber) return;
+
+  const chapterIndex = parseInt(chapterNumber) - 1;
+
+  if (chapterIndex < 0 || chapterIndex >= story.chapters.length) {
+    alert("❌ Invalid chapter number!");
+    return;
+  }
+
+  if (confirm("Are you sure you want to delete this chapter?")) {
+    story.chapters.splice(chapterIndex, 1);
+
+    stories[storyIndex] = story;
+    saveStories(stories);
+
+    alert("🗑 Chapter Deleted!");
     loadStories();
   }
 }
