@@ -3,144 +3,70 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Story | Astrayudh</title>
+  <title>Astrayudh Story</title>
 
   <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
   <!-- NAVBAR -->
-  <nav class="navbar">
-    <div class="logo">Astrayudh</div>
+  <header class="navbar">
+    <div class="logo">
+      <a href="index.html">Astrayudh</a>
+    </div>
 
-    <div class="nav-links">
+    <nav class="nav-links">
       <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="apps.html">Apps</a>
       <a href="blogs.html">Blogs</a>
       <a href="stories.html" class="active">Stories</a>
       <a href="contact.html">Contact</a>
-    </div>
-
-    <a href="contact.html" class="nav-btn">Let's Talk</a>
-  </nav>
+    </nav>
+  </header>
 
   <!-- STORY VIEW -->
-  <section class="section story-view">
-    
-    <div class="story-header">
-      <h1 id="storyTitle">Loading...</h1>
-      <p class="story-desc" id="storyDesc"></p>
+  <section class="container story-view">
+
+    <h1 id="storyTitle" class="story-title">Loading...</h1>
+    <p id="storyDesc" class="story-desc"></p>
+
+    <div class="story-layout">
+
+      <!-- CHAPTER LIST -->
+      <aside class="chapters-panel">
+        <h3>Chapters</h3>
+        <div id="chapterList"></div>
+      </aside>
+
+      <!-- READER -->
+      <main class="story-reader">
+        <h2 id="chapterTitle">Loading...</h2>
+        <div id="chapterContent" class="chapter-text"></div>
+
+        <div class="chapter-controls">
+          <button class="btn secondary" onclick="prevChapter()">← Previous</button>
+          <button class="btn primary" onclick="nextChapter()">Next →</button>
+        </div>
+      </main>
+
     </div>
 
-    <!-- CHAPTERS -->
-    <div class="story-chapters-box">
-      <h2 style="font-family:Playfair Display, serif; font-size:30px; margin-bottom:15px;">
-        Chapters
-      </h2>
-
-      <div class="chapter-list" id="chaptersList"></div>
-    </div>
-
-    <!-- CHAPTER CONTENT -->
-    <div class="story-content-box">
-      <h2 id="chapterTitle" style="font-family:Playfair Display, serif; font-size:36px; margin-bottom:20px;">
-        Select a Chapter
-      </h2>
-
-      <div class="chapter-content" id="chapterContent"></div>
-    </div>
-
-    <div style="margin-top:50px;">
-      <a href="stories.html" class="btn secondary">← Back to Stories</a>
-    </div>
+    <a href="stories.html" class="btn secondary" style="margin-top:35px; display:inline-block;">
+      ← Back to Stories
+    </a>
 
   </section>
 
+  <!-- FOOTER -->
   <footer class="footer">
     <p>© 2026 Astrayudh. Crafted with calm design.</p>
-    <div class="footer-links">
-      <a href="privacy.html">Privacy Policy</a>
-    </div>
   </footer>
 
-  <script>
-    let storyData = null;
-
-    async function loadStory() {
-      const params = new URLSearchParams(window.location.search);
-      const storyId = params.get("id");
-
-      if (!storyId) {
-        document.getElementById("storyTitle").innerText = "Story Not Found";
-        return;
-      }
-
-      let stories = [];
-
-      // 1️⃣ LocalStorage first
-      const localStories = localStorage.getItem("astrayudh_stories");
-
-      if (localStories) {
-        stories = JSON.parse(localStories);
-      } else {
-        // 2️⃣ fallback to stories.json
-        const response = await fetch("stories.json");
-        const data = await response.json();
-        stories = data.stories;
-      }
-
-      storyData = stories.find(s => s.id === storyId);
-
-      if (!storyData) {
-        document.getElementById("storyTitle").innerText = "Story Not Found";
-        document.getElementById("storyDesc").innerText = "This story does not exist.";
-        return;
-      }
-
-      document.title = storyData.title + " | Astrayudh";
-
-      document.getElementById("storyTitle").innerText = storyData.title;
-      document.getElementById("storyDesc").innerText = storyData.description;
-
-      renderChapters();
-      loadChapter(0);
-    }
-
-    function renderChapters() {
-      const chaptersList = document.getElementById("chaptersList");
-
-      chaptersList.innerHTML = storyData.chapters.map((chapter, index) => `
-        <button class="chapter-btn" id="chapterBtn${index}" onclick="loadChapter(${index})">
-          ${chapter.title}
-        </button>
-      `).join("");
-    }
-
-    function loadChapter(index) {
-      const chapter = storyData.chapters[index];
-
-      document.getElementById("chapterTitle").innerText = chapter.title;
-
-      const contentBox = document.getElementById("chapterContent");
-      contentBox.innerHTML = "";
-
-      chapter.content.forEach(line => {
-        const p = document.createElement("p");
-        p.innerText = line;
-        contentBox.appendChild(p);
-      });
-
-      // highlight active button
-      storyData.chapters.forEach((_, i) => {
-        document.getElementById("chapterBtn" + i).classList.remove("active");
-      });
-
-      document.getElementById("chapterBtn" + index).classList.add("active");
-    }
-
-    loadStory();
-  </script>
+  <!-- MODULE SCRIPT -->
+  <script type="module" src="story-view.js"></script>
 
 </body>
 </html>
