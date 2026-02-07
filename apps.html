@@ -1,78 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Apps - Astrayudh</title>
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@400;500&display=swap" rel="stylesheet">
-  <!-- Stylesheet -->
-  <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Apps | Astrayudh</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 <body>
-  <!-- Header / Navbar -->
-  <header>
-    <nav class="navbar">
-      <a href="index.html" class="logo">Astrayudh</a>
-      <ul class="nav-links">
-        <li><a href="about.html">About</a></li>
-        <li><a href="apps.html" class="active">Apps</a></li>
-        <li><a href="blogs.html">Blogs</a></li>
-        <li><a href="stories.html">Stories</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
+
+  <header class="navbar">
+    <div class="logo">Astrayudh</div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="apps.html" class="active">Apps</a>
+      <a href="blogs.html">Blogs</a>
+      <a href="stories.html">Stories</a>
+      <a href="contact.html">Contact</a>
     </nav>
   </header>
 
-  <!-- Hero Section -->
-  <section class="hero" style="background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1581092580493-f3b7e5b1c6d5?auto=format&fit=crop&w=1470&q=80') center/cover no-repeat;">
-    <div class="hero-content">
-      <h1>Our Apps</h1>
-      <p>Innovative digital experiences crafted with intention and care.</p>
-    </div>
-  </section>
+  <section class="section">
+    <h2>Apps</h2>
+    <p class="subtitle">
+      Astrayudh apps are built with calm design, clean performance, and human-centered experience.
+    </p>
 
-  <!-- Apps Section -->
-  <section class="apps-section">
-    <div class="container">
-      <h2>Featured Apps</h2>
-      <div class="cards">
-        <!-- App Card 1 -->
-        <div class="card">
-          <h3>Vortix</h3>
-          <p><strong>Design Philosophy:</strong> Minimalist, human-centered, and immersive. Every interaction is crafted to feel natural.</p>
-          <p><strong>Description:</strong> Vortix is our upcoming app that merges creativity and technology, providing users with seamless digital experiences.</p>
-          <a href="blogs.html" class="btn-cta">Learn More</a>
-        </div>
-        <!-- App Card 2 -->
-        <div class="card">
-          <h3>StoryWeaver</h3>
-          <p><strong>Design Philosophy:</strong> Narrative-driven design, emphasizing clarity and engagement for readers.</p>
-          <p><strong>Description:</strong> StoryWeaver allows users to read serialized stories and explore narratives that inspire and connect.</p>
-          <a href="stories.html" class="btn-cta">Read Stories</a>
-        </div>
-        <!-- App Card 3 -->
-        <div class="card">
-          <h3>Insight Blog</h3>
-          <p><strong>Design Philosophy:</strong> Clean, readable, and structured for thoughtful reflection.</p>
-          <p><strong>Description:</strong> A platform to share insights, tips, and stories from our creative studio and beyond.</p>
-          <a href="blogs.html" class="btn-cta">Visit Blog</a>
-        </div>
+    <div class="grid">
+      <div class="card">
+        <h3>Vortix</h3>
+        <p>
+          A premium upcoming app designed to feel minimal, fast, and emotionally clean.
+        </p>
+        <a class="btn primary" href="blogs.html" style="margin-top: 15px;">Read Related Blogs</a>
+      </div>
+
+      <div class="card">
+        <h3>Future Projects</h3>
+        <p>
+          Astrayudh is expanding into tools for creators, readers, and digital storytellers.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>Studio Experiments</h3>
+        <p>
+          Small creative builds, UI explorations, and storytelling experiences.
+        </p>
       </div>
     </div>
   </section>
 
-  <!-- Footer -->
-  <footer>
-    <div class="container">
-      <p>&copy; 2026 Astrayudh. All rights reserved.</p>
-      <ul class="footer-links">
-        <li><a href="privacy.html">Privacy Policy</a></li>
-      </ul>
-    </div>
+  <footer class="footer">
+    <p>© 2026 Astrayudh. Built with calm design.</p>
+    <a href="privacy.html">Privacy Policy</a>
   </footer>
 
-  <!-- Main JS -->
-  <script src="js/main.js"></script>
 </body>
 </html>
