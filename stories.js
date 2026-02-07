@@ -1,38 +1,51 @@
-const storiesContainer = document.getElementById("storiesContainer");
+import { db } from "./firebase.js";
+
+import {
+  collection,
+  getDocs
+} from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
 
 async function loadStories() {
+  const storiesContainer = document.getElementById("storiesContainer");
+
+  storiesContainer.innerHTML = `<p style="color:rgba(255,255,255,0.6);">Loading stories...</p>`;
+
   try {
-    const response = await fetch("stories.json");
-    const data = await response.json();
+    const snapshot = await getDocs(collection(db, "stories"));
 
-    storiesContainer.innerHTML = "";
+    if (snapshot.empty) {
+      storiesContainer.innerHTML = `<p style="color:rgba(255,255,255,0.6);">No stories yet. Coming soon...</p>`;
+      return;
+    }
 
-    data.stories.forEach((story) => {
-      const storyCard = document.createElement("div");
-      storyCard.classList.add("card");
+    let html = "";
 
-      storyCard.innerHTML = `
-        <img src="${story.image}" alt="${story.title}" class="blog-img">
-        <h3>${story.title}</h3>
-        <p>${story.description}</p>
-        <p style="margin-top: 12px; color: #b9b9c6; font-size: 14px;">
-          Chapters: <b style="color:white;">${story.chapters.length}</b>
-        </p>
-        <a href="story-view.html?id=${story.id}" class="btn primary" style="margin-top: 18px; display:inline-block;">
-          Read Story
-        </a>
+    snapshot.forEach((docSnap) => {
+      const story = docSnap.data();
+
+      html += `
+        <article class="story-card">
+          <div class="story-content">
+            <h2>${story.title}</h2>
+            <p class="story-desc">${story.description}</p>
+
+            <p class="story-meta">
+              Chapters: ${story.chapters ? story.chapters.length : 0}
+            </p>
+
+            <a class="btn primary" href="story-view.html?id=${docSnap.id}">
+              Read Story →
+            </a>
+          </div>
+        </article>
       `;
-
-      storiesContainer.appendChild(storyCard);
     });
 
+    storiesContainer.innerHTML = html;
+
   } catch (error) {
-    storiesContainer.innerHTML = `
-      <div class="card">
-        <h3>Error Loading Stories</h3>
-        <p>stories.json not found or invalid. Please check setup.</p>
-      </div>
-    `;
+    storiesContainer.innerHTML = `<p style="color:#ff3d6e;">❌ Failed to load stories.</p>`;
+    console.error(error);
   }
 }
 
