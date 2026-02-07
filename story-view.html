@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Story | Astrayudh</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- AOS -->
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <div class="logo">Astrayudh</div>
+
+    <nav class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="apps.html">Apps</a>
+      <a href="blogs.html">Blogs</a>
+      <a class="active" href="stories.html">Stories</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+
+    <a class="nav-btn" href="contact.html">Let's Talk</a>
+  </header>
+
+  <!-- STORY VIEW -->
+  <section class="section story-view">
+    
+    <div class="story-header" data-aos="fade-up">
+      <h1 id="storyTitle">Loading Story...</h1>
+      <p id="storyDesc" class="story-desc"></p>
+    </div>
+
+    <div class="story-chapters-box" data-aos="fade-up">
+      <h2>Chapters</h2>
+      <div id="chaptersList" class="chapter-list">
+        <!-- Chapters will load here -->
+      </div>
+    </div>
+
+    <div class="story-content-box" data-aos="fade-up">
+      <h2 id="chapterTitle">Select a Chapter</h2>
+      <div id="chapterContent" class="chapter-content">
+        <p>Please select a chapter from above.</p>
+      </div>
+    </div>
+
+    <div class="blog-back" style="margin-top: 50px;" data-aos="fade-up">
+      <a href="stories.html" class="btn secondary">← Back to Stories</a>
+    </div>
+
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p>© 2026 Astrayudh. Crafted with calm design.</p>
+    <div class="footer-links">
+      <a href="privacy.html">Privacy Policy</a>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 1000,
+      once: true
+    });
+  </script>
+
+  <script src="story-view.js"></script>
+
+</body>
+</html>
