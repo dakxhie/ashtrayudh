@@ -49,40 +49,32 @@
   </section>
 
   <!-- CONTACT FORM -->
-  <section class="section">
-    <div class="section-heading" data-aos="fade-right">
-      <h2>Send a Message</h2>
-      <p>
-        Fill the form below and Astrayudh will respond via email.
-      </p>
-    </div>
+<div class="contact-box">
+  <h2>Send a Message</h2>
+  <p>Fill the form below and Astrayudh will respond via email.</p>
 
-    <div class="contact-box" data-aos="fade-up">
+  <form class="contact-form" action="https://formspree.io/f/YOUR_ID" method="POST">
 
-      <!-- FORM (Formspree Integration) -->
-      <form action="https://formspree.io/f/yourFormID" method="POST" class="contact-form">
+    <label>Your Name</label>
+    <input type="text" name="name" placeholder="Enter your name" required>
 
-        <label>Your Name</label>
-        <input type="text" name="name" placeholder="Enter your name" required />
+    <label>Your Email</label>
+    <input type="email" name="email" placeholder="Enter your email" required>
 
-        <label>Your Email</label>
-        <input type="email" name="email" placeholder="Enter your email" required />
+    <label>Your Message</label>
+    <textarea name="message" rows="6" placeholder="Write your message..." required></textarea>
 
-        <label>Your Message</label>
-        <textarea name="message" rows="6" placeholder="Write your message..." required></textarea>
+    <button type="submit" class="btn primary" style="width:100%; margin-top:20px;">
+      Send Message
+    </button>
 
-        <button type="submit" class="btn primary" style="width: 100%; margin-top: 15px;">
-          Send Message
-        </button>
+    <p style="margin-top:15px; font-size:13px; color:#b9b9c6; text-align:center;">
+      Your message is secure and will only be used to reply back.
+    </p>
 
-      </form>
+  </form>
+</div>
 
-      <p style="margin-top: 20px; font-size: 14px; color: #b9b9c6;">
-        Your message is secure and will only be used to reply back.
-      </p>
-
-    </div>
-  </section>
 
   <!-- FOOTER -->
   <footer class="footer">
