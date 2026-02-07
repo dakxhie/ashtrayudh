@@ -2,50 +2,54 @@ import { db } from "./firebase.js";
 
 import {
   collection,
-  getDocs
+  getDocs,
+  query,
+  orderBy
 } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
 
 async function loadStories() {
-  const storiesContainer = document.getElementById("storiesContainer");
-
-  storiesContainer.innerHTML = `<p style="color:rgba(255,255,255,0.6);">Loading stories...</p>`;
+  const storiesGrid = document.getElementById("storiesGrid");
+  storiesGrid.innerHTML = "";
 
   try {
-    const snapshot = await getDocs(collection(db, "stories"));
-
-    if (snapshot.empty) {
-      storiesContainer.innerHTML = `<p style="color:rgba(255,255,255,0.6);">No stories yet. Coming soon...</p>`;
-      return;
-    }
-
-    let html = "";
+    const q = query(collection(db, "stories"), orderBy("createdAt", "desc"));
+    const snapshot = await getDocs(q);
 
     snapshot.forEach((docSnap) => {
       const story = docSnap.data();
+      const id = docSnap.id;
 
-      html += `
-        <article class="story-card">
-          <div class="story-content">
-            <h2>${story.title}</h2>
-            <p class="story-desc">${story.description}</p>
+      const title = story.title || "Untitled Story";
+      const description = story.description || "No description available.";
+      const date = story.createdAt || "Unknown date";
+      const cover = story.cover || "assets/default-story.jpg";
 
-            <p class="story-meta">
-              Chapters: ${story.chapters ? story.chapters.length : 0}
-            </p>
+      const card = document.createElement("div");
+      card.className = "content-card";
 
-            <a class="btn primary" href="story-view.html?id=${docSnap.id}">
-              Read Story →
-            </a>
+      card.innerHTML = `
+        <div class="card-image" style="background-image:url('${cover}')"></div>
+        <div class="card-body">
+          <h2 class="card-title">${title}</h2>
+          <p class="card-desc">${description}</p>
+
+          <div class="card-meta">
+            <span>${date}</span>
+            <span class="card-btn">Open →</span>
           </div>
-        </article>
+        </div>
       `;
+
+      card.addEventListener("click", () => {
+        window.location.href = `story-view.html?id=${id}`;
+      });
+
+      storiesGrid.appendChild(card);
     });
 
-    storiesContainer.innerHTML = html;
-
   } catch (error) {
-    storiesContainer.innerHTML = `<p style="color:#ff3d6e;">❌ Failed to load stories.</p>`;
-    console.error(error);
+    console.error("Error loading stories:", error);
+    storiesGrid.innerHTML = `<p style="color:rgba(255,255,255,0.6);">Failed to load stories.</p>`;
   }
 }
 
