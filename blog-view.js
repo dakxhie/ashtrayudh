@@ -1,61 +1,63 @@
-const blogTitle = document.getElementById("blogTitle");
-const blogDate = document.getElementById("blogDate");
-const blogImage = document.getElementById("blogImage");
-const blogContent = document.getElementById("blogContent");
+import { db } from "./firebase.js";
 
-// Get blog id from URL
-const params = new URLSearchParams(window.location.search);
-const blogId = params.get("id");
+import {
+  doc,
+  getDoc
+} from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+
+function getBlogId() {
+  const params = new URLSearchParams(window.location.search);
+  return params.get("id");
+}
 
 async function loadBlog() {
+  const blogId = getBlogId();
+
+  const blogTitle = document.getElementById("blogTitle");
+  const blogMeta = document.getElementById("blogMeta");
+  const blogImage = document.getElementById("blogImage");
+  const blogContent = document.getElementById("blogContent");
+
+  if (!blogId) {
+    blogTitle.innerText = "Blog not found";
+    blogContent.innerHTML = "<p>Invalid blog ID.</p>";
+    return;
+  }
+
   try {
-    const response = await fetch("blogs.json");
-    const data = await response.json();
+    const blogRef = doc(db, "blogs", blogId);
+    const blogSnap = await getDoc(blogRef);
 
-    const blog = data.blogs.find((b) => b.id === blogId);
-
-    if (!blog) {
-      blogTitle.innerText = "Blog Not Found";
+    if (!blogSnap.exists()) {
+      blogTitle.innerText = "Blog not found";
       blogContent.innerHTML = "<p>This blog does not exist.</p>";
       return;
     }
 
-    // Fill content
-    blogTitle.innerText = blog.title;
-    blogDate.innerText = `Published: ${blog.date}`;
-    blogImage.src = blog.image;
+    const blog = blogSnap.data();
 
-    blogContent.innerHTML = "";
+    blogTitle.innerText = blog.title;
+    blogMeta.innerText = `Published on ${blog.date}`;
+    blogImage.src = `assets/${blog.image}`;
+
+    let html = "";
 
     blog.content.forEach((block) => {
       if (block.type === "heading") {
-        const h2 = document.createElement("h2");
-        h2.innerText = block.text;
-        blogContent.appendChild(h2);
-      }
-
-      if (block.type === "paragraph") {
-        const p = document.createElement("p");
-        p.innerText = block.text;
-        blogContent.appendChild(p);
-      }
-
-      if (block.type === "list") {
-        const ul = document.createElement("ul");
-
-        block.items.forEach((item) => {
-          const li = document.createElement("li");
-          li.innerText = item;
-          ul.appendChild(li);
-        });
-
-        blogContent.appendChild(ul);
+        html += `<h2>${block.text}</h2>`;
+      } else if (block.type === "paragraph") {
+        html += `<p>${block.text}</p>`;
+      } else if (block.type === "list") {
+        html += `<ul>${block.items.map(item => `<li>${item}</li>`).join("")}</ul>`;
       }
     });
 
+    blogContent.innerHTML = html;
+
   } catch (error) {
-    blogTitle.innerText = "Error Loading Blog";
-    blogContent.innerHTML = "<p>Could not load blog data.</p>";
+    blogTitle.innerText = "Error loading blog";
+    blogContent.innerHTML = "<p>Something went wrong.</p>";
+    console.error(error);
   }
 }
 
