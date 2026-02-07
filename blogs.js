@@ -8,48 +8,48 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
 
 async function loadBlogs() {
-  const blogsContainer = document.getElementById("blogsContainer");
-
-  blogsContainer.innerHTML = `<p style="color:rgba(255,255,255,0.6);">Loading blogs...</p>`;
+  const blogsGrid = document.getElementById("blogsGrid");
+  blogsGrid.innerHTML = "";
 
   try {
-    const blogsQuery = query(collection(db, "blogs"), orderBy("date", "desc"));
-    const snapshot = await getDocs(blogsQuery);
-
-    if (snapshot.empty) {
-      blogsContainer.innerHTML = `<p style="color:rgba(255,255,255,0.6);">No blogs yet. Coming soon...</p>`;
-      return;
-    }
-
-    let html = "";
+    const q = query(collection(db, "blogs"), orderBy("date", "desc"));
+    const snapshot = await getDocs(q);
 
     snapshot.forEach((docSnap) => {
       const blog = docSnap.data();
+      const id = docSnap.id;
 
-      html += `
-        <article class="blog-card">
-          <div class="blog-image">
-            <img src="assets/${blog.image}" alt="${blog.title}">
+      const image = blog.image || "assets/default-blog.jpg";
+      const title = blog.title || "Untitled Blog";
+      const excerpt = blog.excerpt || "No excerpt available.";
+      const date = blog.date || "Unknown date";
+
+      const card = document.createElement("div");
+      card.className = "content-card";
+
+      card.innerHTML = `
+        <div class="card-image" style="background-image:url('${image}')"></div>
+        <div class="card-body">
+          <h2 class="card-title">${title}</h2>
+          <p class="card-desc">${excerpt}</p>
+
+          <div class="card-meta">
+            <span>${date}</span>
+            <span class="card-btn">Read →</span>
           </div>
-
-          <div class="blog-content">
-            <h2>${blog.title}</h2>
-            <p class="blog-excerpt">${blog.excerpt}</p>
-            <p class="blog-date">${blog.date}</p>
-
-            <a class="btn primary" href="blog-view.html?id=${docSnap.id}">
-              Read More →
-            </a>
-          </div>
-        </article>
+        </div>
       `;
+
+      card.addEventListener("click", () => {
+        window.location.href = `blog-view.html?id=${id}`;
+      });
+
+      blogsGrid.appendChild(card);
     });
 
-    blogsContainer.innerHTML = html;
-
   } catch (error) {
-    blogsContainer.innerHTML = `<p style="color:#ff3d6e;">❌ Failed to load blogs.</p>`;
-    console.error(error);
+    console.error("Error loading blogs:", error);
+    blogsGrid.innerHTML = `<p style="color:rgba(255,255,255,0.6);">Failed to load blogs.</p>`;
   }
 }
 
