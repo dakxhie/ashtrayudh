@@ -3,76 +3,55 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Blog | Astrayudh</title>
+  <title>Astrayudh Blog</title>
 
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-
-  <!-- CSS -->
-  <link rel="stylesheet" href="style.css">
-
-  <!-- AOS Animations -->
-  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
   <!-- NAVBAR -->
   <header class="navbar">
-    <div class="logo">Astrayudh</div>
+    <div class="logo">
+      <a href="index.html">Astrayudh</a>
+    </div>
 
     <nav class="nav-links">
       <a href="index.html">Home</a>
       <a href="about.html">About</a>
       <a href="apps.html">Apps</a>
-      <a class="active" href="blogs.html">Blogs</a>
+      <a href="blogs.html" class="active">Blogs</a>
       <a href="stories.html">Stories</a>
       <a href="contact.html">Contact</a>
     </nav>
-
-    <a class="nav-btn" href="contact.html">Let's Talk</a>
   </header>
 
   <!-- BLOG VIEW -->
-  <section class="section blog-view">
-    <div class="blog-header" data-aos="fade-up">
-      <h1 id="blogTitle">Loading...</h1>
-      <p id="blogDate" class="blog-date"></p>
+  <section class="container blog-view">
+    <h1 id="blogTitle" class="blog-title">Loading...</h1>
+    <p id="blogMeta" class="blog-meta"></p>
+
+    <div class="blog-cover">
+      <img id="blogImage" src="assets/blog1.jpg" alt="Blog Image">
     </div>
 
-    <div class="blog-image-box" data-aos="zoom-in">
-      <img id="blogImage" src="" alt="Blog Image" />
+    <div id="blogContent" class="blog-text">
+      <!-- Content loads here -->
     </div>
 
-    <div class="blog-content" id="blogContent" data-aos="fade-up">
-      <!-- Blog content loads here -->
-    </div>
-
-    <div class="blog-back" data-aos="fade-up">
-      <a href="blogs.html" class="btn secondary">← Back to Blogs</a>
-    </div>
+    <a href="blogs.html" class="btn secondary" style="margin-top:30px; display:inline-block;">
+      ← Back to Blogs
+    </a>
   </section>
 
   <!-- FOOTER -->
   <footer class="footer">
     <p>© 2026 Astrayudh. Crafted with calm design.</p>
-    <div class="footer-links">
-      <a href="privacy.html">Privacy Policy</a>
-    </div>
   </footer>
 
-  <!-- Scripts -->
-  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
-  <script>
-    AOS.init({
-      duration: 1000,
-      once: true
-    });
-  </script>
-
-  <script src="blog-view.js"></script>
+  <!-- MODULE SCRIPT -->
+  <script type="module" src="blog-view.js"></script>
 
 </body>
 </html>
