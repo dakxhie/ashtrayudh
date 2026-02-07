@@ -5,69 +5,42 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Blogs | Astrayudh</title>
 
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-
-  <!-- CSS -->
-  <link rel="stylesheet" href="style.css">
-
-  <!-- AOS Animations -->
-  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wghtwght@300;400;500&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
   <!-- NAVBAR -->
-  <header class="navbar">
+  <nav class="navbar">
     <div class="logo">Astrayudh</div>
 
-    <nav class="nav-links">
+    <div class="nav-links">
       <a href="index.html">Home</a>
       <a href="about.html">About</a>
       <a href="apps.html">Apps</a>
-      <a class="active" href="blogs.html">Blogs</a>
+      <a href="blogs.html" class="active">Blogs</a>
       <a href="stories.html">Stories</a>
       <a href="contact.html">Contact</a>
-    </nav>
-
-    <a class="nav-btn" href="contact.html">Let's Talk</a>
-  </header>
-
-  <!-- HERO -->
-  <section class="hero" style="height: 70vh; background: url('blogs.jpg') center/cover no-repeat;">
-    <div class="hero-overlay"></div>
-
-    <div class="hero-content" data-aos="fade-up">
-      <h1>Astrayudh Blogs</h1>
-      <p>
-        Thoughts on creativity, technology, calm design, storytelling, and building meaningful digital experiences.
-      </p>
     </div>
-  </section>
+
+    <a href="contact.html" class="nav-btn">Let's Talk</a>
+  </nav>
 
   <!-- BLOGS SECTION -->
-  <section class="section">
-    <div class="section-heading" data-aos="fade-right">
-      <h2>Latest Articles</h2>
-      <p>
-        Carefully written content designed to feel clean, minimal, and valuable.
-      </p>
+  <section class="section blog-view">
+    <div class="section-heading">
+      <h2>Blogs</h2>
+      <p>Thoughtful writing about calm design, storytelling, creativity, and meaningful technology.</p>
     </div>
 
-    <!-- Search bar -->
-    <div class="search-box" data-aos="fade-up">
-      <input type="text" id="searchInput" placeholder="Search blogs..." />
+    <div class="search-box">
+      <input type="text" id="searchInput" placeholder="Search blogs..." onkeyup="searchBlogs()" />
     </div>
 
-    <!-- Blogs Grid -->
-    <div class="cards" id="blogsContainer" data-aos="fade-up">
-      <!-- Blogs will load here from JS -->
-    </div>
+    <div class="cards" id="blogsContainer"></div>
   </section>
 
-  <!-- FOOTER -->
   <footer class="footer">
     <p>© 2026 Astrayudh. Crafted with calm design.</p>
     <div class="footer-links">
@@ -75,16 +48,60 @@
     </div>
   </footer>
 
-  <!-- Scripts -->
-  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
   <script>
-    AOS.init({
-      duration: 1000,
-      once: true
-    });
-  </script>
+    let allBlogs = [];
 
-  <script src="blogs.js"></script>
+    async function loadBlogs() {
+      const container = document.getElementById("blogsContainer");
+
+      // 1️⃣ Check LocalStorage first (Admin Panel)
+      const localBlogs = localStorage.getItem("astrayudh_blogs");
+
+      if (localBlogs) {
+        allBlogs = JSON.parse(localBlogs);
+      } else {
+        // 2️⃣ If LocalStorage empty, load default blogs.json
+        const response = await fetch("blogs.json");
+        const data = await response.json();
+        allBlogs = data.blogs;
+      }
+
+      renderBlogs(allBlogs);
+    }
+
+    function renderBlogs(blogs) {
+      const container = document.getElementById("blogsContainer");
+
+      if (blogs.length === 0) {
+        container.innerHTML = `<p style="color:#b9b9c6;">No blogs found.</p>`;
+        return;
+      }
+
+      container.innerHTML = blogs.map(blog => `
+        <div class="card">
+          <img src="${blog.image}" class="blog-img" alt="${blog.title}" />
+          <h3>${blog.title}</h3>
+          <p>${blog.excerpt}</p>
+          <a href="blog-view.html?id=${blog.id}" class="btn secondary" style="margin-top:15px; display:inline-block;">
+            Read More →
+          </a>
+        </div>
+      `).join("");
+    }
+
+    function searchBlogs() {
+      const searchValue = document.getElementById("searchInput").value.toLowerCase();
+
+      const filtered = allBlogs.filter(blog =>
+        blog.title.toLowerCase().includes(searchValue) ||
+        blog.excerpt.toLowerCase().includes(searchValue)
+      );
+
+      renderBlogs(filtered);
+    }
+
+    loadBlogs();
+  </script>
 
 </body>
 </html>
