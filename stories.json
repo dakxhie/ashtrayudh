@@ -1,0 +1,47 @@
+{
+  "stories": [
+    {
+      "id": "shadow-realm",
+      "title": "Shadow Realm",
+      "description": "A mysterious world where silence speaks louder than words. A story about fear, destiny, and hidden truth.",
+      "image": "story1.jpg",
+      "chapters": [
+        {
+          "chapter": 1,
+          "title": "The First Door",
+          "content": [
+            "The air was cold, even though the sun was still alive in the sky.",
+            "A strange door stood in the middle of the forest, untouched by time.",
+            "And he knew… opening it would change everything."
+          ]
+        },
+        {
+          "chapter": 2,
+          "title": "Whispers in the Dark",
+          "content": [
+            "The moment the door opened, silence collapsed into whispers.",
+            "Not human voices. Not animal sounds.",
+            "Something older. Something waiting."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "vortix-chronicles",
+      "title": "Vortix Chronicles",
+      "description": "A futuristic story where technology becomes emotion and reality bends through digital consciousness.",
+      "image": "story2.jpg",
+      "chapters": [
+        {
+          "chapter": 1,
+          "title": "The Signal",
+          "content": [
+            "The screen blinked with a signal that should not exist.",
+            "A message arrived from nowhere.",
+            "And the world started to rewrite itself."
+          ]
+        }
+      ]
+    }
+  ]
+}
