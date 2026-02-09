@@ -1,3 +1,5 @@
+import { getBlogById } from "./firestoreService.js";
+
 function getBlogId() {
   const params = new URLSearchParams(window.location.search);
   return params.get("id");
@@ -23,34 +25,8 @@ async function loadBlog() {
   }
 
   try {
-    // Load from local JSON first
-    let blog = null;
-    
-    try {
-      const response = await fetch("blogs.json");
-      if (response.ok) {
-        const data = await response.json();
-        const blogs = data.blogs || [];
-        blog = blogs.find(b => b.id === blogId);
-      }
-    } catch (e) {
-      console.warn("Could not load from JSON, trying Firestore...", e);
-    }
-
-    // Fallback to Firestore if JSON unavailable
-    if (!blog) {
-      try {
-        const { db } = await import("./firebase.js");
-        const { doc, getDoc } = await import("https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js");
-        const blogRef = doc(db, "blogs", blogId);
-        const blogSnap = await getDoc(blogRef);
-        if (blogSnap.exists()) {
-          blog = blogSnap.data();
-        }
-      } catch (e) {
-        console.warn("Firestore fetch failed", e);
-      }
-    }
+    // Fetch blog from Firestore
+    const blog = await getBlogById(blogId);
 
     if (!blog) {
       blogTitle.innerText = "Blog not found";
@@ -58,20 +34,45 @@ async function loadBlog() {
       return;
     }
 
+    // Check if blog is published
+    if (!blog.published) {
+      blogTitle.innerText = "Blog not published";
+      blogContent.innerHTML = "<p style='color:rgba(255,255,255,0.6);'>This blog is still in draft status.</p>";
+      return;
+    }
+
     blogTitle.innerText = blog.title || "Untitled Blog";
-    blogMeta.innerText = `Published on ${blog.date || "Unknown date"}`;
     
-    // Update breadcrumb early
+    // Format date
+    let dateStr = "Unknown date";
+    if (blog.createdAt) {
+      if (blog.createdAt.toDate) {
+        // Firestore timestamp
+        dateStr = new Date(blog.createdAt.toDate()).toLocaleDateString('en-US', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric'
+        });
+      } else {
+        // String date
+        dateStr = new Date(blog.createdAt).toLocaleDateString('en-US', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric'
+        });
+      }
+    }
+    
+    blogMeta.innerText = `Published on ${dateStr}`;
+    
+    // Update breadcrumb
     const bc = document.getElementById("blogBreadcrumbTitle");
     if (bc) bc.innerText = blog.title || "Blog";
     
     // Handle image loading
     const blogCoverDiv = document.querySelector(".blog-cover");
-    if (blog.image) {
-      const imagePath = blog.image.startsWith("http") || blog.image.startsWith("/") 
-        ? blog.image 
-        : `assets/${blog.image}`;
-      blogImage.src = imagePath;
+    if (blog.imageUrl) {
+      blogImage.src = blog.imageUrl;
       blogImage.alt = blog.title || "Blog cover image";
       blogImage.onerror = function() {
         if (blogCoverDiv) blogCoverDiv.style.display = "none";
@@ -84,20 +85,30 @@ async function loadBlog() {
       if (blogCoverDiv) blogCoverDiv.style.display = "none";
     }
 
+    // Render content
     let html = "";
-
-    if (blog.content && Array.isArray(blog.content)) {
-      blog.content.forEach((block) => {
-        if (block.type === "heading") {
-          html += `<h2>${block.text || ""}</h2>`;
-        } else if (block.type === "paragraph") {
-          html += `<p>${block.text || ""}</p>`;
-        } else if (block.type === "list" && block.items) {
-          html += `<ul>${block.items.map(item => `<li>${item}</li>`).join("")}</ul>`;
-        }
-      });
-    } else {
-      html = "<p>No content available.</p>";
+    
+    if (blog.content) {
+      // If content is a string, render as paragraphs
+      if (typeof blog.content === "string") {
+        const paragraphs = blog.content.split("\n\n").filter(p => p.trim());
+        paragraphs.forEach((para) => {
+          if (para.trim()) {
+            html += `<p>${para.trim()}</p>`;
+          }
+        });
+      } else if (Array.isArray(blog.content)) {
+        // If content is array of objects
+        blog.content.forEach((block) => {
+          if (block.type === "heading") {
+            html += `<h2>${block.text || ""}</h2>`;
+          } else if (block.type === "paragraph") {
+            html += `<p>${block.text || ""}</p>`;
+          } else if (block.type === "list" && block.items) {
+            html += `<ul>${block.items.map(item => `<li>${item}</li>`).join("")}</ul>`;
+          }
+        });
+      }
     }
 
     blogContent.innerHTML = html || "<p>No content available.</p>";
@@ -107,7 +118,7 @@ async function loadBlog() {
       const text = (blogContent.innerText || "").trim();
       const words = text.split(/\s+/).filter(Boolean).length;
       const minutes = Math.max(1, Math.round(words / 200));
-      blogMeta.innerText = `Published on ${blog.date || "Unknown date"} • ${minutes} min read`;
+      blogMeta.innerText = `Published on ${dateStr} • ${minutes} min read`;
     } catch (e) {
       // ignore
     }

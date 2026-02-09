@@ -1,9 +1,4 @@
-import { db } from "./firebase.js";
-
-import {
-  doc,
-  getDoc
-} from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+import { getStoryWithChapters } from "./firestoreService.js";
 
 function getStoryId() {
   const params = new URLSearchParams(window.location.search);
@@ -35,25 +30,45 @@ function renderChapter(index) {
 
   const chapter = storyData.chapters[index];
 
-  chapterTitle.innerText = chapter.title || "Untitled Chapter";
+  chapterTitle.innerText = `Chapter ${chapter.chapterNumber}: ${chapter.title || "Untitled Chapter"}`;
 
   let html = "";
-  if (chapter.content && Array.isArray(chapter.content)) {
-    chapter.content.forEach((para) => {
-      html += `<p>${para || ""}</p>`;
-    });
-  } else {
+  
+  // Handle content - can be string or array
+  if (chapter.content) {
+    if (typeof chapter.content === "string") {
+      // If content is a string, render as paragraphs
+      const paragraphs = chapter.content.split("\n\n").filter(p => p.trim());
+      paragraphs.forEach((para) => {
+        if (para.trim()) {
+          html += `<p>${para.trim()}</p>`;
+        }
+      });
+    } else if (Array.isArray(chapter.content)) {
+      // If content is array of objects or strings
+      chapter.content.forEach((block) => {
+        if (typeof block === "string") {
+          html += `<p>${block || ""}</p>`;
+        } else if (block.type === "paragraph") {
+          html += `<p>${block.text || ""}</p>`;
+        }
+      });
+    }
+  }
+
+  if (!html) {
     html = "<p>No content available.</p>";
   }
 
-  chapterContent.innerHTML = html || "<p>No content available.</p>";
+  chapterContent.innerHTML = html;
 
-  // highlight active chapter
+  // Highlight active chapter
   document.querySelectorAll(".chapter-link").forEach((btn, i) => {
     if (i === index) btn.classList.add("active");
     else btn.classList.remove("active");
   });
-  // update progress when chapter changed
+  
+  // Update progress when chapter changed
   if (typeof updateProgress === 'function') updateProgress();
 }
 
@@ -86,7 +101,7 @@ function renderChaptersList() {
 
   chapterList.innerHTML = storyData.chapters.map((ch, index) => `
     <button class="chapter-link" onclick="window.openChapter(${index})">
-      ${index + 1}. ${ch.title || "Untitled"}
+      ${ch.chapterNumber || index + 1}. ${ch.title || "Untitled"}
     </button>
   `).join("");
 }
@@ -132,35 +147,18 @@ async function loadStory() {
   }
 
   try {
-    // Load from local JSON first
-    let story = null;
-    
-    try {
-      const response = await fetch("stories.json");
-      if (response.ok) {
-        const data = await response.json();
-        const stories = data.stories || [];
-        story = stories.find(s => s.id === storyId);
-      }
-    } catch (e) {
-      console.warn("Could not load from JSON, trying Firestore...", e);
-    }
-
-    // Fallback to Firestore if JSON unavailable
-    if (!story) {
-      try {
-        const storyRef = doc(db, "stories", storyId);
-        const storySnap = await getDoc(storyRef);
-        if (storySnap.exists()) {
-          story = storySnap.data();
-        }
-      } catch (e) {
-        console.warn("Firestore fetch failed", e);
-      }
-    }
+    // Fetch story with chapters from Firestore
+    const story = await getStoryWithChapters(storyId);
 
     if (!story) {
       storyTitle.innerText = "Story not found";
+      return;
+    }
+
+    // Check if story is published
+    if (!story.published) {
+      storyTitle.innerText = "Story not published";
+      storyDesc.innerHTML = "<p style='color:rgba(255,255,255,0.6);'>This story is still in draft status.</p>";
       return;
     }
 
@@ -173,14 +171,17 @@ async function loadStory() {
     const bc = document.getElementById('storyBreadcrumbTitle');
     if (bc) bc.innerText = storyData.title || 'Story';
 
-    // reading meta (chapters + est time)
+    // Reading meta (chapters + estimated time)
     try {
       let totalText = '';
       if (storyData.chapters && Array.isArray(storyData.chapters)) {
         storyData.chapters.forEach(ch => {
           if (ch.content) {
-            if (Array.isArray(ch.content)) totalText += ' ' + ch.content.join(' ');
-            else totalText += ' ' + String(ch.content);
+            if (typeof ch.content === "string") {
+              totalText += ' ' + ch.content;
+            } else if (Array.isArray(ch.content)) {
+              totalText += ' ' + ch.content.join(' ');
+            }
           }
         });
       }
@@ -196,7 +197,7 @@ async function loadStory() {
     renderChaptersList();
     renderChapter(0);
 
-    // attach scroll listeners for reading progress
+    // Attach scroll listeners for reading progress
     window.addEventListener('scroll', updateProgress);
     window.addEventListener('resize', updateProgress);
     setTimeout(updateProgress, 300);
@@ -204,6 +205,7 @@ async function loadStory() {
   } catch (error) {
     console.error("Error loading story:", error);
     storyTitle.innerText = "Error loading story";
+    storyDesc.innerHTML = "<p style='color:rgba(255,255,255,0.6);'>Something went wrong. Please refresh the page.</p>";
   }
 }
 

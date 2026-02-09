@@ -1,14 +1,7 @@
-import { db } from "./firebase.js";
+import { getPublishedStories } from "./firestoreService.js";
 
-import {
-  collection,
-  getDocs,
-  query,
-  orderBy
-} from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
-
-let allStories = []; // Store all stories for filtering
-let filteredStories = []; // Filtered and sorted stories
+let allStories = [];
+let filteredStories = [];
 let currentPage = 0;
 const itemsPerPage = 6;
 
@@ -47,8 +40,28 @@ function renderStories(startIndex = 0) {
 
     const title = story.title || "Untitled Story";
     const description = story.description || "No description available.";
-    const date = story.createdAt || "Unknown date";
-    const cover = story.cover || "assets/default-story.jpg";
+    
+    // Format date
+    let dateStr = "Unknown date";
+    if (story.createdAt) {
+      if (story.createdAt.toDate) {
+        // Firestore timestamp
+        dateStr = new Date(story.createdAt.toDate()).toLocaleDateString('en-US', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric'
+        });
+      } else {
+        // String date
+        dateStr = new Date(story.createdAt).toLocaleDateString('en-US', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric'
+        });
+      }
+    }
+    
+    const cover = story.coverImageUrl || "assets/default-story.jpg";
 
     card.innerHTML = `
       <div class="card-image" style="background-image:url('${cover}')"></div>
@@ -57,7 +70,7 @@ function renderStories(startIndex = 0) {
         <h2 class="card-title">${title}</h2>
         <p class="card-desc">${description}</p>
         <div class="card-meta">
-          <span class="card-date">${date}</span>
+          <span class="card-date">${dateStr}</span>
           <span class="card-btn">Open →</span>
         </div>
       </div>
@@ -93,9 +106,17 @@ function filterAndSortStories() {
 
   // Sort
   if (sortValue === "newest") {
-    filteredStories.sort((a, b) => new Date(b.createdAt || 0) - new Date(a.createdAt || 0));
+    filteredStories.sort((a, b) => {
+      const dateA = a.createdAt?.toDate ? a.createdAt.toDate().getTime() : new Date(a.createdAt || 0).getTime();
+      const dateB = b.createdAt?.toDate ? b.createdAt.toDate().getTime() : new Date(b.createdAt || 0).getTime();
+      return dateB - dateA;
+    });
   } else if (sortValue === "oldest") {
-    filteredStories.sort((a, b) => new Date(a.createdAt || 0) - new Date(b.createdAt || 0));
+    filteredStories.sort((a, b) => {
+      const dateA = a.createdAt?.toDate ? a.createdAt.toDate().getTime() : new Date(a.createdAt || 0).getTime();
+      const dateB = b.createdAt?.toDate ? b.createdAt.toDate().getTime() : new Date(b.createdAt || 0).getTime();
+      return dateA - dateB;
+    });
   } else if (sortValue === "a-z") {
     filteredStories.sort((a, b) => (a.title || "").localeCompare(b.title || ""));
   }
@@ -114,27 +135,28 @@ async function loadStories() {
   storiesGrid.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 60px 20px;"><p style="color:rgba(255,255,255,0.6); font-size: 16px;">Loading stories...</p></div>`;
 
   try {
-    const q = query(collection(db, "stories"), orderBy("createdAt", "desc"));
-    const snapshot = await getDocs(q);
-
-    allStories = [];
-    snapshot.forEach((docSnap) => {
-      const story = docSnap.data();
-      allStories.push({
-        id: docSnap.id,
-        ...story
-      });
-    });
+    // Fetch published stories from Firestore
+    allStories = await getPublishedStories();
 
     // Initialize filtered list
     filteredStories = [...allStories];
 
     // Attach event listeners
-    document.getElementById("searchInput").addEventListener("input", filterAndSortStories);
-    document.getElementById("sortSelect").addEventListener("change", filterAndSortStories);
-    document.getElementById("loadMoreBtn").addEventListener("click", () => {
-      renderStories(currentPage);
-    });
+    const searchInput = document.getElementById("searchInput");
+    const sortSelect = document.getElementById("sortSelect");
+    const loadMoreBtn = document.getElementById("loadMoreBtn");
+
+    if (searchInput) {
+      searchInput.addEventListener("input", filterAndSortStories);
+    }
+    if (sortSelect) {
+      sortSelect.addEventListener("change", filterAndSortStories);
+    }
+    if (loadMoreBtn) {
+      loadMoreBtn.addEventListener("click", () => {
+        renderStories(currentPage);
+      });
+    }
 
     // Initial render
     renderStories(0);
@@ -144,7 +166,5 @@ async function loadStories() {
     storiesGrid.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 40px;"><p style="color:rgba(255,255,255,0.6);">Failed to load stories. Please refresh the page.</p></div>`;
   }
 }
-
-loadStories();
 
 loadStories();

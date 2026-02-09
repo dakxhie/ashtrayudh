@@ -1,14 +1,7 @@
-import { db } from "./firebase.js";
+import { getPublishedBlogs } from "./firestoreService.js";
 
-import {
-  collection,
-  getDocs,
-  query,
-  orderBy
-} from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
-
-let allBlogs = []; // Store all blogs for filtering
-let filteredBlogs = []; // Filtered and sorted blogs
+let allBlogs = [];
+let filteredBlogs = [];
 let currentPage = 0;
 const itemsPerPage = 6;
 
@@ -45,19 +38,38 @@ function renderBlogs(startIndex = 0) {
     card.style.animation = `fadeIn 0.6s ease forwards`;
     card.style.animationDelay = `${(index % itemsPerPage) * 0.1}s`;
 
-    const image = blog.image || "assets/default-blog.jpg";
+    const image = blog.imageUrl || "assets/default-blog.jpg";
     const title = blog.title || "Untitled Blog";
-    const excerpt = blog.excerpt || "No excerpt available.";
-    const date = blog.date || "Unknown date";
+    const subtitle = blog.subtitle || "No subtitle";
+    
+    // Format date if it's a timestamp
+    let dateStr = "Unknown date";
+    if (blog.createdAt) {
+      if (blog.createdAt.toDate) {
+        // Firestore timestamp
+        dateStr = new Date(blog.createdAt.toDate()).toLocaleDateString('en-US', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric'
+        });
+      } else {
+        // String date
+        dateStr = new Date(blog.createdAt).toLocaleDateString('en-US', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric'
+        });
+      }
+    }
 
     card.innerHTML = `
       <div class="card-image" style="background-image:url('${image}')"></div>
       <div class="card-body">
         <span class="card-category">Blog</span>
         <h2 class="card-title">${title}</h2>
-        <p class="card-desc">${excerpt}</p>
+        <p class="card-desc">${subtitle}</p>
         <div class="card-meta">
-          <span class="card-date">${date}</span>
+          <span class="card-date">${dateStr}</span>
           <span class="card-btn">Read →</span>
         </div>
       </div>
@@ -87,15 +99,24 @@ function filterAndSortBlogs() {
   // Filter
   filteredBlogs = allBlogs.filter(blog => {
     const title = (blog.title || "").toLowerCase();
-    const excerpt = (blog.excerpt || "").toLowerCase();
-    return title.includes(searchTerm) || excerpt.includes(searchTerm);
+    const subtitle = (blog.subtitle || "").toLowerCase();
+    const description = (blog.description || "").toLowerCase();
+    return title.includes(searchTerm) || subtitle.includes(searchTerm) || description.includes(searchTerm);
   });
 
   // Sort
   if (sortValue === "newest") {
-    filteredBlogs.sort((a, b) => new Date(b.date || 0) - new Date(a.date || 0));
+    filteredBlogs.sort((a, b) => {
+      const dateA = a.createdAt?.toDate ? a.createdAt.toDate().getTime() : new Date(a.createdAt || 0).getTime();
+      const dateB = b.createdAt?.toDate ? b.createdAt.toDate().getTime() : new Date(b.createdAt || 0).getTime();
+      return dateB - dateA;
+    });
   } else if (sortValue === "oldest") {
-    filteredBlogs.sort((a, b) => new Date(a.date || 0) - new Date(b.date || 0));
+    filteredBlogs.sort((a, b) => {
+      const dateA = a.createdAt?.toDate ? a.createdAt.toDate().getTime() : new Date(a.createdAt || 0).getTime();
+      const dateB = b.createdAt?.toDate ? b.createdAt.toDate().getTime() : new Date(b.createdAt || 0).getTime();
+      return dateA - dateB;
+    });
   } else if (sortValue === "a-z") {
     filteredBlogs.sort((a, b) => (a.title || "").localeCompare(b.title || ""));
   }
@@ -114,27 +135,28 @@ async function loadBlogs() {
   blogsGrid.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 60px 20px;"><p style="color:rgba(255,255,255,0.6); font-size: 16px;">Loading blogs...</p></div>`;
 
   try {
-    const q = query(collection(db, "blogs"), orderBy("date", "desc"));
-    const snapshot = await getDocs(q);
-
-    allBlogs = [];
-    snapshot.forEach((docSnap) => {
-      const blog = docSnap.data();
-      allBlogs.push({
-        id: docSnap.id,
-        ...blog
-      });
-    });
+    // Fetch published blogs from Firestore
+    allBlogs = await getPublishedBlogs();
 
     // Initialize filtered list
     filteredBlogs = [...allBlogs];
 
     // Attach event listeners
-    document.getElementById("searchInput").addEventListener("input", filterAndSortBlogs);
-    document.getElementById("sortSelect").addEventListener("change", filterAndSortBlogs);
-    document.getElementById("loadMoreBtn").addEventListener("click", () => {
-      renderBlogs(currentPage);
-    });
+    const searchInput = document.getElementById("searchInput");
+    const sortSelect = document.getElementById("sortSelect");
+    const loadMoreBtn = document.getElementById("loadMoreBtn");
+
+    if (searchInput) {
+      searchInput.addEventListener("input", filterAndSortBlogs);
+    }
+    if (sortSelect) {
+      sortSelect.addEventListener("change", filterAndSortBlogs);
+    }
+    if (loadMoreBtn) {
+      loadMoreBtn.addEventListener("click", () => {
+        renderBlogs(currentPage);
+      });
+    }
 
     // Initial render
     renderBlogs(0);
@@ -144,7 +166,5 @@ async function loadBlogs() {
     blogsGrid.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 40px;"><p style="color:rgba(255,255,255,0.6);">Failed to load blogs. Please refresh the page.</p></div>`;
   }
 }
-
-loadBlogs();
 
 loadBlogs();
