@@ -27,7 +27,7 @@ async function loadBlog() {
     let blog = null;
     
     try {
-      const response = await fetch("data/blogs.json");
+      const response = await fetch("blogs.json");
       if (response.ok) {
         const data = await response.json();
         const blogs = data.blogs || [];

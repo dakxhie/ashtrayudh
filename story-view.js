@@ -53,6 +53,22 @@ function renderChapter(index) {
     if (i === index) btn.classList.add("active");
     else btn.classList.remove("active");
   });
+  // update progress when chapter changed
+  if (typeof updateProgress === 'function') updateProgress();
+}
+
+// Reading progress handler for story reader
+function updateProgress() {
+  const chapterContent = document.getElementById('chapterContent');
+  const progressBar = document.getElementById('progressBar');
+  if (!chapterContent || !progressBar) return;
+
+  const articleTop = chapterContent.getBoundingClientRect().top + window.scrollY;
+  const articleHeight = chapterContent.offsetHeight;
+  const winCentre = window.scrollY + window.innerHeight / 2;
+  let progress = (winCentre - articleTop) / Math.max(1, articleHeight);
+  progress = Math.max(0, Math.min(1, progress));
+  progressBar.style.width = (progress * 100) + "%";
 }
 
 function renderChaptersList() {
@@ -116,26 +132,74 @@ async function loadStory() {
   }
 
   try {
-    const storyRef = doc(db, "stories", storyId);
-    const storySnap = await getDoc(storyRef);
+    // Load from local JSON first
+    let story = null;
+    
+    try {
+      const response = await fetch("stories.json");
+      if (response.ok) {
+        const data = await response.json();
+        const stories = data.stories || [];
+        story = stories.find(s => s.id === storyId);
+      }
+    } catch (e) {
+      console.warn("Could not load from JSON, trying Firestore...", e);
+    }
 
-    if (!storySnap.exists()) {
+    // Fallback to Firestore if JSON unavailable
+    if (!story) {
+      try {
+        const storyRef = doc(db, "stories", storyId);
+        const storySnap = await getDoc(storyRef);
+        if (storySnap.exists()) {
+          story = storySnap.data();
+        }
+      } catch (e) {
+        console.warn("Firestore fetch failed", e);
+      }
+    }
+
+    if (!story) {
       storyTitle.innerText = "Story not found";
       return;
     }
 
-    storyData = storySnap.data();
-
-    if (!storyData) {
-      storyTitle.innerText = "Story not found";
-      return;
-    }
+    storyData = story;
 
     storyTitle.innerText = storyData.title || "Untitled Story";
     storyDesc.innerText = storyData.description || "No description available.";
 
+    // Breadcrumb
+    const bc = document.getElementById('storyBreadcrumbTitle');
+    if (bc) bc.innerText = storyData.title || 'Story';
+
+    // reading meta (chapters + est time)
+    try {
+      let totalText = '';
+      if (storyData.chapters && Array.isArray(storyData.chapters)) {
+        storyData.chapters.forEach(ch => {
+          if (ch.content) {
+            if (Array.isArray(ch.content)) totalText += ' ' + ch.content.join(' ');
+            else totalText += ' ' + String(ch.content);
+          }
+        });
+      }
+      const plain = totalText.replace(/<[^>]+>/g, ' ');
+      const words = plain.split(/\s+/).filter(Boolean).length;
+      const minutes = Math.max(1, Math.round(words / 200));
+      const metaEl = document.getElementById('readingMeta');
+      if (metaEl) metaEl.innerText = `${storyData.chapters ? storyData.chapters.length : 0} chapters • ${minutes} min read`;
+    } catch (e) {
+      // ignore
+    }
+
     renderChaptersList();
     renderChapter(0);
+
+    // attach scroll listeners for reading progress
+    window.addEventListener('scroll', updateProgress);
+    window.addEventListener('resize', updateProgress);
+    setTimeout(updateProgress, 300);
 
   } catch (error) {
     console.error("Error loading story:", error);
