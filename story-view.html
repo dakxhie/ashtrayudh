@@ -32,8 +32,25 @@
   <!-- STORY VIEW -->
   <section class="container story-view">
 
-    <h1 id="storyTitle" class="story-title">Loading...</h1>
-    <p id="storyDesc" class="story-desc"></p>
+    <!-- Breadcrumbs -->
+    <nav class="breadcrumbs" aria-label="Breadcrumb">
+      <a href="index.html">Home</a>
+      <span class="crumb-sep">›</span>
+      <a href="stories.html">Stories</a>
+      <span class="crumb-sep">›</span>
+      <span id="storyBreadcrumbTitle">Loading...</span>
+    </nav>
+
+    <!-- Reading Progress -->
+    <div class="reading-progress" aria-hidden="true"><div id="progressBar"></div></div>
+
+    <!-- Hero (Title + Meta) -->
+    <header class="page-hero">
+      <h1 id="storyTitle" class="story-title">Loading...</h1>
+      <p id="storyDesc" class="story-desc">&nbsp;</p>
+      <div class="header-divider small"></div>
+      <div id="readingMeta" class="reading-meta" aria-hidden="true"></div>
+    </header>
 
     <div class="story-layout">
 
@@ -44,9 +61,9 @@
       </aside>
 
       <!-- READER -->
-      <main class="story-reader">
+      <main class="story-reader reader-card">
         <h2 id="chapterTitle">Loading...</h2>
-        <div id="chapterContent" class="chapter-text"></div>
+        <div id="chapterContent" class="chapter-text reader-content" tabindex="0"></div>
 
         <div class="chapter-controls">
           <button class="btn secondary" onclick="prevChapter()">← Previous</button>
@@ -56,9 +73,11 @@
 
     </div>
 
-    <a href="stories.html" class="btn secondary" style="margin-top:35px; display:inline-block;">
-      ← Back to Stories
-    </a>
+    <div style="margin-top:35px;">
+      <a href="stories.html" class="btn secondary">
+        ← Back to Stories
+      </a>
+    </div>
 
   </section>
 
