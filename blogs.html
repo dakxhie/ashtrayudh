@@ -29,15 +29,57 @@
     <a class="nav-btn" href="contact.html">Let's Talk</a>
   </header>
 
-  <section class="container page-header" data-aos="fade-up">
-    <h1>Blogs</h1>
-    <p>
-      Thoughts, reflections, and calm digital storytelling — written with intention.
-    </p>
+  <!-- PREMIUM HEADER -->
+  <section class="container premium-page-header" data-aos="fade-up">
+    <div class="header-content">
+      <h1 class="page-title">Blogs</h1>
+      <p class="page-subtitle">
+        Thoughts, reflections, and calm digital storytelling — written with intention.
+      </p>
+      <div class="header-divider"></div>
+    </div>
   </section>
 
-  <section class="container">
-    <div id="blogsGrid" class="grid-layout"></div>
+  <!-- CONTROLS SECTION -->
+  <section class="container blogs-controls">
+    <div class="controls-wrapper">
+      <div class="search-box-wrapper">
+        <input 
+          type="text" 
+          id="searchInput" 
+          class="search-box" 
+          placeholder="Search blogs..."
+          aria-label="Search blogs"
+        >
+        <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"></circle>
+          <path d="m21 21-4.35-4.35"></path>
+        </svg>
+      </div>
+      
+      <div class="sort-wrapper">
+        <label for="sortSelect" class="sort-label">Sort by:</label>
+        <select id="sortSelect" class="sort-select" aria-label="Sort blogs">
+          <option value="newest">Newest First</option>
+          <option value="oldest">Oldest First</option>
+          <option value="a-z">A - Z</option>
+        </select>
+      </div>
+    </div>
+    <div id="resultsCount" class="results-count">Showing <span id="resultNum">0</span> blogs</div>
+  </section>
+
+  <!-- BLOGS GRID -->
+  <section class="container blogs-section">
+    <div id="blogsGrid" class="premium-grid-layout"></div>
+    <div id="emptyState" class="empty-state" style="display:none;">
+      <p>No blogs found matching your search.</p>
+    </div>
+  </section>
+
+  <!-- PAGINATION -->
+  <section class="container pagination-section" id="paginationSection" style="display:none;">
+    <button id="loadMoreBtn" class="btn primary load-more-btn">Load More Blogs</button>
   </section>
 
   <footer class="footer">
