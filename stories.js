@@ -9,11 +9,20 @@ import {
 
 async function loadStories() {
   const storiesGrid = document.getElementById("storiesGrid");
+  if (!storiesGrid) {
+    console.error("storiesGrid element not found");
+    return;
+  }
   storiesGrid.innerHTML = "";
 
   try {
     const q = query(collection(db, "stories"), orderBy("createdAt", "desc"));
     const snapshot = await getDocs(q);
+
+    if (snapshot.empty) {
+      storiesGrid.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 60px 20px;"><p style="color:rgba(255,255,255,0.6); font-size: 16px;">No stories available yet.</p></div>`;
+      return;
+    }
 
     snapshot.forEach((docSnap) => {
       const story = docSnap.data();
@@ -49,7 +58,7 @@ async function loadStories() {
 
   } catch (error) {
     console.error("Error loading stories:", error);
-    storiesGrid.innerHTML = `<p style="color:rgba(255,255,255,0.6);">Failed to load stories.</p>`;
+    storiesGrid.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 40px;"><p style="color:rgba(255,255,255,0.6);">Failed to load stories. Please refresh the page.</p></div>`;
   }
 }
 

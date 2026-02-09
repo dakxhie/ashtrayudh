@@ -9,11 +9,20 @@ import {
 
 async function loadBlogs() {
   const blogsGrid = document.getElementById("blogsGrid");
+  if (!blogsGrid) {
+    console.error("blogsGrid element not found");
+    return;
+  }
   blogsGrid.innerHTML = "";
 
   try {
     const q = query(collection(db, "blogs"), orderBy("date", "desc"));
     const snapshot = await getDocs(q);
+
+    if (snapshot.empty) {
+      blogsGrid.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 60px 20px;"><p style="color:rgba(255,255,255,0.6); font-size: 16px;">No blogs available yet.</p></div>`;
+      return;
+    }
 
     snapshot.forEach((docSnap) => {
       const blog = docSnap.data();
@@ -49,7 +58,7 @@ async function loadBlogs() {
 
   } catch (error) {
     console.error("Error loading blogs:", error);
-    blogsGrid.innerHTML = `<p style="color:rgba(255,255,255,0.6);">Failed to load blogs.</p>`;
+    blogsGrid.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 40px;"><p style="color:rgba(255,255,255,0.6);">Failed to load blogs. Please refresh the page.</p></div>`;
   }
 }
 

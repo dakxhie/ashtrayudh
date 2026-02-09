@@ -7,6 +7,7 @@
 
   <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
 </head>
 
 <body>
@@ -24,9 +25,11 @@
       <a href="stories.html" class="active">Stories</a>
       <a href="contact.html">Contact</a>
     </nav>
+
+    <a class="nav-btn" href="contact.html">Let's Talk</a>
   </header>
 
-  <section class="container page-header">
+  <section class="container page-header" data-aos="fade-up">
     <h1>Stories</h1>
     <p>
       Fiction, worlds, and chapters crafted with emotion — Astrayudh stories are meant to be felt.
@@ -41,6 +44,10 @@
     <p>© 2026 Astrayudh. Crafted with calm design.</p>
   </footer>
 
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    AOS.init();
+  </script>
   <script type="module" src="stories.js"></script>
 </body>
 </html>

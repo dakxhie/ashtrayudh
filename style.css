@@ -65,6 +65,16 @@ body {
   color: var(--text);
 }
 
+.logo a {
+  text-decoration: none;
+  color: var(--text);
+  transition: 0.3s ease;
+}
+
+.logo a:hover {
+  color: var(--accent2);
+}
+
 .nav-links {
   display: flex;
   gap: 22px;
@@ -217,6 +227,12 @@ body {
   padding: 90px 70px;
   max-width: 1250px;
   margin: auto;
+}
+
+.container {
+  max-width: 1250px;
+  margin: 0 auto;
+  padding: 0 70px;
 }
 
 .section-heading h2 {
@@ -415,6 +431,10 @@ body {
     padding: 70px 20px;
   }
 
+  .container {
+    padding: 0 20px;
+  }
+
   .cards {
     grid-template-columns: 1fr;
   }
@@ -444,6 +464,19 @@ body {
   color: #b9b9c6;
   margin-bottom: 30px;
   line-height: 1.8;
+}
+
+.contact-form label {
+  display: block;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 8px;
+  margin-top: 12px;
+}
+
+.contact-form label:first-of-type {
+  margin-top: 0;
 }
 
 .contact-form {
@@ -864,5 +897,274 @@ body {
 .hero-content {
   position: relative;
   z-index: 2;
+}
+
+/* ================================
+   STORY VIEW LAYOUT (PREMIUM)
+================================ */
+
+.story-view {
+  padding: 60px 0;
+  max-width: 1100px;
+}
+
+.story-title {
+  font-family: "Playfair Display", serif;
+  font-size: 42px;
+  margin-bottom: 10px;
+  color: #ffffff;
+}
+
+.story-desc {
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.65);
+  margin-bottom: 30px;
+  line-height: 1.8;
+}
+
+.story-layout {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 40px;
+  margin: 40px 0;
+}
+
+.chapters-panel {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 18px;
+  padding: 25px;
+  height: fit-content;
+  position: sticky;
+  top: 100px;
+}
+
+.chapters-panel h3 {
+  font-family: "Playfair Display", serif;
+  font-size: 18px;
+  margin-bottom: 18px;
+  color: #ffffff;
+}
+
+.chapter-link {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 12px 14px;
+  margin-bottom: 8px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.02);
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 13px;
+  cursor: pointer;
+  transition: 0.3s ease;
+  font-weight: 500;
+}
+
+.chapter-link:hover {
+  border-color: rgba(255, 61, 110, 0.4);
+  background: rgba(255, 61, 110, 0.08);
+  color: #ff3d6e;
+  transform: translateX(4px);
+}
+
+.chapter-link.active {
+  background: rgba(255, 61, 110, 0.2);
+  border-color: rgba(255, 61, 110, 0.6);
+  color: #ff3d6e;
+}
+
+.story-reader {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 18px;
+  padding: 40px;
+  min-height: 500px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.35);
+}
+
+.story-reader h2 {
+  font-family: "Playfair Display", serif;
+  font-size: 32px;
+  margin-bottom: 25px;
+  color: #ffffff;
+}
+
+.chapter-text {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.chapter-text p {
+  font-size: 15px;
+  line-height: 1.9;
+  color: rgba(255, 255, 255, 0.8);
+  text-align: justify;
+}
+
+.chapter-controls {
+  display: flex;
+  gap: 12px;
+  margin-top: 35px;
+  padding-top: 25px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.chapter-controls button {
+  flex: 1;
+}
+
+/* Responsive Story Layout */
+@media (max-width: 1000px) {
+  .story-layout {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+
+  .chapters-panel {
+    position: relative;
+    top: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 8px;
+    padding: 20px;
+    height: auto;
+  }
+
+  .chapter-link {
+    margin-bottom: 0;
+    font-size: 12px;
+    padding: 10px 12px;
+  }
+
+  .story-reader {
+    padding: 30px;
+  }
+
+  .story-reader h2 {
+    font-size: 26px;
+  }
+}
+
+@media (max-width: 700px) {
+  .chapters-panel {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 15px;
+  }
+
+  .chapters-panel h3 {
+    width: 100%;
+    margin-bottom: 12px;
+    font-size: 16px;
+  }
+
+  .chapter-link {
+    font-size: 11px;
+    padding: 8px 10px;
+  }
+
+  .story-reader {
+    padding: 20px;
+    min-height: auto;
+  }
+
+  .story-reader h2 {
+    font-size: 22px;
+    margin-bottom: 18px;
+  }
+
+  .chapter-text p {
+    font-size: 14px;
+    line-height: 1.8;
+    text-align: left;
+  }
+
+  .chapter-controls {
+    flex-direction: column;
+    margin-top: 25px;
+  }
+
+  .chapter-controls button {
+    width: 100%;
+  }
+}
+
+/* ================================
+   ADMIN PANEL PREMIUM STYLING
+================================ */
+
+.admin-box {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 25px;
+  border-radius: 18px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+  margin-bottom: 25px;
+}
+
+.admin-nav {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 25px;
+}
+
+.admin-nav button {
+  padding: 10px 18px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.05);
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+  font-weight: 500;
+  font-size: 13px;
+}
+
+.admin-nav button:hover {
+  border-color: rgba(255, 61, 110, 0.7);
+  transform: translateY(-2px);
+  background: rgba(255, 61, 110, 0.1);
+}
+
+.admin-nav button.logout-btn {
+  background: rgba(255, 61, 110, 0.15);
+  border: 1px solid rgba(255, 61, 110, 0.5);
+}
+
+.admin-nav button.logout-btn:hover {
+  background: rgba(255, 61, 110, 0.25);
+  border-color: rgba(255, 61, 110, 0.8);
+}
+
+.admin-section {
+  margin-top: 25px;
+}
+
+.admin-section h2 {
+  font-size: 20px;
+  margin-bottom: 15px;
+  font-family: "Playfair Display", serif;
+  color: #ffffff;
+}
+
+.admin-action-btn {
+  margin-bottom: 18px;
+}
+
+.admin-action-btn button {
+  padding: 12px 22px;
+  border-radius: 14px;
+  border: none;
+  cursor: pointer;
+  background: linear-gradient(135deg, #ff3d6e, #8b1dff);
+  color: white;
+  font-weight: 600;
+  transition: 0.3s;
+  font-size: 14px;
 }
 
