@@ -135,8 +135,11 @@ async function loadStories() {
   storiesGrid.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 60px 20px;"><p style="color:rgba(255,255,255,0.6); font-size: 16px;">Loading stories...</p></div>`;
 
   try {
+    console.log("[STORIES] 🔄 Starting to load published stories from Firestore...");
     // Fetch published stories from Firestore
     allStories = await getPublishedStories();
+    console.log(`[STORIES] ✅ Successfully fetched ${allStories.length} published stories from Firestore`);
+    console.log("[STORIES] Story samples:", allStories.slice(0, 2));
 
     // Initialize filtered list
     filteredStories = [...allStories];
@@ -162,7 +165,9 @@ async function loadStories() {
     renderStories(0);
 
   } catch (error) {
-    console.error("Error loading stories:", error);
+    console.error("[STORIES] ❌ Error loading stories:", error);
+    console.error("[STORIES] Error message:", error.message);
+    console.error("[STORIES] Error code:", error.code);
     storiesGrid.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 40px;"><p style="color:rgba(255,255,255,0.6);">Failed to load stories. Please refresh the page.</p></div>`;
   }
 }

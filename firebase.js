@@ -18,10 +18,15 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
+console.log("[FIREBASE] 🔧 Initializing Firebase with config...");
 export const app = initializeApp(firebaseConfig);
+console.log("[FIREBASE] ✅ Firebase initialized");
 
 // Export Firestore Database
 export const db = getFirestore(app);
+console.log("[FIREBASE] ✅ Firestore initialized - Project ID:", firebaseConfig.projectId);
 
 // Export Authentication
 export const auth = getAuth(app);
+console.log("[FIREBASE] ✅ Authentication initialized");
+

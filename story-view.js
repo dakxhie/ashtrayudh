@@ -147,11 +147,14 @@ async function loadStory() {
   }
 
   try {
+    console.log("[STORY-VIEW] 🔄 Loading story with ID:", storyId);
     // Fetch story with chapters from Firestore
     const story = await getStoryWithChapters(storyId);
+    console.log("[STORY-VIEW] ✅ Story fetched:", story);
 
     if (!story) {
       storyTitle.innerText = "Story not found";
+      console.warn("[STORY-VIEW] Story document not found in Firestore");
       return;
     }
 
@@ -159,8 +162,11 @@ async function loadStory() {
     if (!story.published) {
       storyTitle.innerText = "Story not published";
       storyDesc.innerHTML = "<p style='color:rgba(255,255,255,0.6);'>This story is still in draft status.</p>";
+      console.warn(`[STORY-VIEW] Story ${storyId} is not published (published=${story.published})`);
       return;
     }
+
+    console.log("[STORY-VIEW] ✅ Story is published, rendering content...");
 
     storyData = story;
 
@@ -203,7 +209,9 @@ async function loadStory() {
     setTimeout(updateProgress, 300);
 
   } catch (error) {
-    console.error("Error loading story:", error);
+    console.error("[STORY-VIEW] ❌ Error loading story:", error);
+    console.error("[STORY-VIEW] Error message:", error.message);
+    console.error("[STORY-VIEW] Error code:", error.code);
     storyTitle.innerText = "Error loading story";
     storyDesc.innerHTML = "<p style='color:rgba(255,255,255,0.6);'>Something went wrong. Please refresh the page.</p>";
   }

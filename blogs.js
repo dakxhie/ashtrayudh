@@ -135,8 +135,11 @@ async function loadBlogs() {
   blogsGrid.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 60px 20px;"><p style="color:rgba(255,255,255,0.6); font-size: 16px;">Loading blogs...</p></div>`;
 
   try {
+    console.log("[BLOGS] 🔄 Starting to load published blogs from Firestore...");
     // Fetch published blogs from Firestore
     allBlogs = await getPublishedBlogs();
+    console.log(`[BLOGS] ✅ Successfully fetched ${allBlogs.length} published blogs from Firestore`);
+    console.log("[BLOGS] Blog samples:", allBlogs.slice(0, 2));
 
     // Initialize filtered list
     filteredBlogs = [...allBlogs];
@@ -162,7 +165,9 @@ async function loadBlogs() {
     renderBlogs(0);
 
   } catch (error) {
-    console.error("Error loading blogs:", error);
+    console.error("[BLOGS] ❌ Error loading blogs:", error);
+    console.error("[BLOGS] Error message:", error.message);
+    console.error("[BLOGS] Error code:", error.code);
     blogsGrid.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 40px;"><p style="color:rgba(255,255,255,0.6);">Failed to load blogs. Please refresh the page.</p></div>`;
   }
 }

@@ -36,6 +36,35 @@ import {
   showTextAreaModal
 } from "./utils.js";
 
+// ===== ERROR HELPER =====
+function getErrorMessage(error) {
+  console.error("[ADMIN ERROR HANDLER] Received error:", error);
+  
+  // Firebase-specific error messages
+  const errorMap = {
+    "permission-denied": "❌ Permission Denied: You don't have access to this content. Check Firestore rules.",
+    "not-found": "❌ Not Found: The document or collection doesn't exist.",
+    "already-exists": "❌ Already Exists: This document already exists.",
+    "failed-precondition": "❌ Failed Precondition: Operation cannot be completed in current state.",
+    "aborted": "❌ Aborted: Operation was interrupted.",
+    "out-of-range": "❌ Out of Range: Query parameter is out of range.",
+    "unauthenticated": "❌ Not Authenticated: Please login first.",
+    "resource-exhausted": "❌ Resource Exhausted: Quota exceeded.",
+    "unimplemented": "❌ Unimplemented: Operation not supported.",
+    "internal": "❌ Internal Server Error: Try again later.",
+    "unavailable": "❌ Service Unavailable: Firestore is currently unavailable.",
+    "data-loss": "❌ Data Loss: Permanent data loss detected.",
+    "unknown": "❌ Unknown Error: Check console for details."
+  };
+
+  const code = error.code || "unknown";
+  const message = error.message || "";
+  const friendlyMessage = errorMap[code] || errorMap["unknown"];
+  
+  // Return both friendly message and technical details
+  return `${friendlyMessage} [${code}] ${message}`;
+}
+
 // ===== STATE =====
 let currentUser = null;
 let allBlogs = [];
@@ -74,9 +103,11 @@ window.handleLogin = async (event) => {
     await signInWithEmailAndPassword(auth, email, password);
     showSuccess("Login successful!");
   } catch (err) {
-    loginError.textContent = err.message;
+    const errorDetail = `${err.message} [${err.code}]`;
+    loginError.textContent = errorDetail;
     loginError.style.display = "inline";
-    showError("Login failed");
+    showError("Login failed: " + err.message);
+    console.error("[AUTH ERROR]", errorDetail);
   } finally {
     loginBtn.classList.remove("login-loading");
   }
@@ -148,7 +179,8 @@ async function loadDashboardData() {
     allStories = stories;
   } catch (err) {
     console.error("Error loading dashboard data:", err);
-    showError("Failed to load dashboard data");
+    const errorMsg = getErrorMessage(err);
+    showError(errorMsg);
   }
 }
 
@@ -173,8 +205,9 @@ async function loadBlogs() {
     renderBlogsList(allBlogs);
   } catch (err) {
     console.error("Error loading blogs:", err);
-    showError("Failed to load blogs");
-    blogsList.innerHTML = `<div class="empty-state"><h3>Error loading blogs</h3></div>`;
+    const errorMsg = getErrorMessage(err);
+    showError(errorMsg);
+    blogsList.innerHTML = `<div class="empty-state"><h3>Error loading blogs</h3><p>${errorMsg}</p></div>`;
   }
 }
 
@@ -266,7 +299,8 @@ window.createNewBlog = () => {
                 await loadBlogs();
               } catch (err) {
                 console.error("Error creating blog:", err);
-                showError("Failed to create blog");
+                const errorMsg = getErrorMessage(err);
+                showError(errorMsg);
               }
             }
           );
@@ -309,7 +343,8 @@ window.editBlog = (blogId) => {
                 await loadBlogs();
               } catch (err) {
                 console.error("Error updating blog:", err);
-                showError("Failed to update blog");
+                const errorMsg = getErrorMessage(err);
+                showError(errorMsg);
               }
             }
           );
@@ -327,7 +362,8 @@ window.toggleBlogPublish = async (blogId, shouldPublish) => {
     await loadDashboardData();
   } catch (err) {
     console.error("Error toggling publish status:", err);
-    showError("Failed to update publish status");
+    const errorMsg = getErrorMessage(err);
+    showError(errorMsg);
   }
 };
 
@@ -346,7 +382,8 @@ window.deleteBlogConfirm = (blogId) => {
         await loadDashboardData();
       } catch (err) {
         console.error("Error deleting blog:", err);
-        showError("Failed to delete blog");
+        const errorMsg = getErrorMessage(err);
+        showError(errorMsg);
       }
     }
   );
@@ -392,8 +429,9 @@ async function loadStories() {
     renderStoriesList(allStories);
   } catch (err) {
     console.error("Error loading stories:", err);
-    showError("Failed to load stories");
-    storiesList.innerHTML = `<div class="empty-state"><h3>Error loading stories</h3></div>`;
+    const errorMsg = getErrorMessage(err);
+    showError(errorMsg);
+    storiesList.innerHTML = `<div class="empty-state"><h3>Error loading stories</h3><p>${errorMsg}</p></div>`;
   }
 }
 
@@ -475,7 +513,8 @@ window.createNewStory = () => {
             await loadDashboardData();
           } catch (err) {
             console.error("Error creating story:", err);
-            showError("Failed to create story");
+            const errorMsg = getErrorMessage(err);
+            showError(errorMsg);
           }
         }
       );
@@ -508,7 +547,8 @@ window.editStory = (storyId) => {
             await loadStories();
           } catch (err) {
             console.error("Error updating story:", err);
-            showError("Failed to update story");
+            const errorMsg = getErrorMessage(err);
+            showError(errorMsg);
           }
         }
       );
@@ -524,7 +564,8 @@ window.toggleStoryPublish = async (storyId, shouldPublish) => {
     await loadDashboardData();
   } catch (err) {
     console.error("Error toggling publish status:", err);
-    showError("Failed to update publish status");
+    const errorMsg = getErrorMessage(err);
+    showError(errorMsg);
   }
 };
 
@@ -543,7 +584,8 @@ window.deleteStoryConfirm = (storyId) => {
         await loadDashboardData();
       } catch (err) {
         console.error("Error deleting story:", err);
-        showError("Failed to delete story");
+        const errorMsg = getErrorMessage(err);
+        showError(errorMsg);
       }
     }
   );
@@ -566,7 +608,8 @@ async function loadChaptersSection() {
     chaptersList.innerHTML = '<div class="empty-state"><p>Select a story to view chapters</p></div>';
   } catch (err) {
     console.error("Error loading chapters section:", err);
-    showError("Failed to load stories");
+    const errorMsg = getErrorMessage(err);
+    showError(errorMsg);
   }
 }
 
@@ -628,8 +671,9 @@ async function loadChaptersForStory(storyId) {
     chaptersList.appendChild(addBtn);
   } catch (err) {
     console.error("Error loading chapters:", err);
-    showError("Failed to load chapters");
-    chaptersList.innerHTML = `<div class="empty-state"><h3>Error loading chapters</h3></div>`;
+    const errorMsg = getErrorMessage(err);
+    showError(errorMsg);
+    chaptersList.innerHTML = `<div class="empty-state"><h3>Error loading chapters</h3><p>${errorMsg}</p></div>`;
   }
 }
 
@@ -660,7 +704,8 @@ window.createNewChapter = (storyId) => {
             await loadChaptersForStory(storyId);
           } catch (err) {
             console.error("Error creating chapter:", err);
-            showError("Failed to create chapter");
+            const errorMsg = getErrorMessage(err);
+            showError(errorMsg);
           }
         }
       );
@@ -694,7 +739,8 @@ window.editChapter = (storyId, chapterId) => {
             await loadChaptersForStory(storyId);
           } catch (err) {
             console.error("Error updating chapter:", err);
-            showError("Failed to update chapter");
+            const errorMsg = getErrorMessage(err);
+            showError(errorMsg);
           }
         }
       );
@@ -713,7 +759,8 @@ window.deleteChapterConfirm = (storyId, chapterId) => {
         await loadChaptersForStory(storyId);
       } catch (err) {
         console.error("Error deleting chapter:", err);
-        showError("Failed to delete chapter");
+        const errorMsg = getErrorMessage(err);
+        showError(errorMsg);
       }
     }
   );

@@ -21,16 +21,20 @@ async function loadBlog() {
   if (!blogId) {
     blogTitle.innerText = "Blog not found";
     blogContent.innerHTML = "<p style='color:rgba(255,255,255,0.6);'>Invalid blog ID.</p>";
+    console.error("[BLOG-VIEW] ❌ No blog ID found in URL");
     return;
   }
 
   try {
+    console.log("[BLOG-VIEW] 🔄 Loading blog with ID:", blogId);
     // Fetch blog from Firestore
     const blog = await getBlogById(blogId);
+    console.log("[BLOG-VIEW] ✅ Blog fetched:", blog);
 
     if (!blog) {
       blogTitle.innerText = "Blog not found";
       blogContent.innerHTML = "<p style='color:rgba(255,255,255,0.6);'>This blog does not exist.</p>";
+      console.warn("[BLOG-VIEW] Blog document not found in Firestore");
       return;
     }
 
@@ -38,8 +42,11 @@ async function loadBlog() {
     if (!blog.published) {
       blogTitle.innerText = "Blog not published";
       blogContent.innerHTML = "<p style='color:rgba(255,255,255,0.6);'>This blog is still in draft status.</p>";
+      console.warn(`[BLOG-VIEW] Blog ${blogId} is not published (published=${blog.published})`);
       return;
     }
+
+    console.log("[BLOG-VIEW] ✅ Blog is published, rendering content...");
 
     blogTitle.innerText = blog.title || "Untitled Blog";
     
@@ -141,7 +148,9 @@ async function loadBlog() {
     setTimeout(updateProgress, 300);
 
   } catch (error) {
-    console.error("Error loading blog:", error);
+    console.error("[BLOG-VIEW] ❌ Error loading blog:", error);
+    console.error("[BLOG-VIEW] Error message:", error.message);
+    console.error("[BLOG-VIEW] Error code:", error.code);
     blogTitle.innerText = "Error loading blog";
     blogContent.innerHTML = "<p style='color:rgba(255,255,255,0.6);'>Something went wrong. Please refresh the page.</p>";
   }

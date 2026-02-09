@@ -27,6 +27,7 @@ import {
  */
 export async function getPublishedBlogs() {
   try {
+    console.log("[FIRESTORE] 🔍 Querying published blogs...");
     const q = query(
       collection(db, "blogs"),
       where("published", "==", true),
@@ -40,9 +41,12 @@ export async function getPublishedBlogs() {
         ...docSnap.data(),
       });
     });
+    console.log(`[FIRESTORE] ✅ Query successful: Found ${blogs.length} published blogs`);
     return blogs;
   } catch (error) {
-    console.error("Error fetching published blogs:", error);
+    console.error("[FIRESTORE] ❌ Error fetching published blogs:", error);
+    console.error("[FIRESTORE] Error code:", error.code);
+    console.error("[FIRESTORE] Error message:", error.message);
     throw error;
   }
 }
@@ -52,6 +56,7 @@ export async function getPublishedBlogs() {
  */
 export async function getAllBlogs() {
   try {
+    console.log("[FIRESTORE] 🔍 Querying ALL blogs (including drafts)...");
     const q = query(
       collection(db, "blogs"),
       orderBy("createdAt", "desc")
@@ -64,9 +69,13 @@ export async function getAllBlogs() {
         ...docSnap.data(),
       });
     });
+    console.log(`[FIRESTORE] ✅ Query successful: Found ${blogs.length} blogs (published + drafts)`);
     return blogs;
   } catch (error) {
-    console.error("Error fetching all blogs:", error);
+    console.error("[FIRESTORE] ❌ Error fetching all blogs:");
+    console.error("[FIRESTORE] Error Code:", error.code);
+    console.error("[FIRESTORE] Error Message:", error.message);
+    console.error("[FIRESTORE] Full Error:", error);
     throw error;
   }
 }
@@ -76,19 +85,23 @@ export async function getAllBlogs() {
  */
 export async function getBlogById(blogId) {
   try {
+    console.log("[FIRESTORE] 🔍 Fetching blog by ID:", blogId);
     const docRef = doc(db, "blogs", blogId);
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
-      return {
+      const blog = {
         id: docSnap.id,
         ...docSnap.data(),
       };
+      console.log("[FIRESTORE] ✅ Blog found:", blog);
+      return blog;
     } else {
-      console.error("Blog not found");
+      console.warn("[FIRESTORE] ⚠️ Blog document does not exist");
       return null;
     }
   } catch (error) {
-    console.error("Error fetching blog:", error);
+    console.error("[FIRESTORE] ❌ Error fetching blog:", error);
+    console.error("[FIRESTORE] Error code:", error.code);
     throw error;
   }
 }
@@ -98,6 +111,7 @@ export async function getBlogById(blogId) {
  */
 export async function createBlog(blogData) {
   try {
+    console.log("[FIRESTORE] 📝 Creating new blog:", blogData);
     const dataWithTimestamps = {
       title: blogData.title,
       subtitle: blogData.subtitle || "",
@@ -111,12 +125,16 @@ export async function createBlog(blogData) {
     };
 
     const docRef = await addDoc(collection(db, "blogs"), dataWithTimestamps);
+    console.log("[FIRESTORE] ✅ Blog created with ID:", docRef.id);
     return {
       id: docRef.id,
       ...dataWithTimestamps,
     };
   } catch (error) {
-    console.error("Error creating blog:", error);
+    console.error("[FIRESTORE] ❌ Error creating blog:");
+    console.error("[FIRESTORE] Error Code:", error.code);
+    console.error("[FIRESTORE] Error Message:", error.message);
+    console.error("[FIRESTORE] Full Error:", error);
     throw error;
   }
 }
@@ -126,14 +144,19 @@ export async function createBlog(blogData) {
  */
 export async function updateBlog(blogId, updates) {
   try {
+    console.log("[FIRESTORE] 📝 Updating blog:", blogId, updates);
     const docRef = doc(db, "blogs", blogId);
     await updateDoc(docRef, {
       ...updates,
       updatedAt: serverTimestamp(),
     });
+    console.log("[FIRESTORE] ✅ Blog updated successfully");
     return { id: blogId, ...updates };
   } catch (error) {
-    console.error("Error updating blog:", error);
+    console.error("[FIRESTORE] ❌ Error updating blog:");
+    console.error("[FIRESTORE] Error Code:", error.code);
+    console.error("[FIRESTORE] Error Message:", error.message);
+    console.error("[FIRESTORE] Full Error:", error);
     throw error;
   }
 }
@@ -143,9 +166,14 @@ export async function updateBlog(blogId, updates) {
  */
 export async function deleteBlog(blogId) {
   try {
+    console.log("[FIRESTORE] 🗑 Deleting blog:", blogId);
     await deleteDoc(doc(db, "blogs", blogId));
+    console.log("[FIRESTORE] ✅ Blog deleted successfully");
   } catch (error) {
-    console.error("Error deleting blog:", error);
+    console.error("[FIRESTORE] ❌ Error deleting blog:");
+    console.error("[FIRESTORE] Error Code:", error.code);
+    console.error("[FIRESTORE] Error Message:", error.message);
+    console.error("[FIRESTORE] Full Error:", error);
     throw error;
   }
 }
@@ -164,6 +192,7 @@ export async function toggleBlogPublished(blogId, published) {
  */
 export async function getPublishedStories() {
   try {
+    console.log("[FIRESTORE] 🔍 Querying published stories...");
     const q = query(
       collection(db, "stories"),
       where("published", "==", true),
@@ -177,9 +206,12 @@ export async function getPublishedStories() {
         ...docSnap.data(),
       });
     });
+    console.log(`[FIRESTORE] ✅ Query successful: Found ${stories.length} published stories`);
     return stories;
   } catch (error) {
-    console.error("Error fetching published stories:", error);
+    console.error("[FIRESTORE] ❌ Error fetching published stories:", error);
+    console.error("[FIRESTORE] Error code:", error.code);
+    console.error("[FIRESTORE] Error message:", error.message);
     throw error;
   }
 }
@@ -189,6 +221,7 @@ export async function getPublishedStories() {
  */
 export async function getAllStories() {
   try {
+    console.log("[FIRESTORE] 🔍 Querying ALL stories (including drafts)...");
     const q = query(
       collection(db, "stories"),
       orderBy("createdAt", "desc")
@@ -201,9 +234,13 @@ export async function getAllStories() {
         ...docSnap.data(),
       });
     });
+    console.log(`[FIRESTORE] ✅ Query successful: Found ${stories.length} stories (published + drafts)`);
     return stories;
   } catch (error) {
-    console.error("Error fetching all stories:", error);
+    console.error("[FIRESTORE] ❌ Error fetching all stories:");
+    console.error("[FIRESTORE] Error Code:", error.code);
+    console.error("[FIRESTORE] Error Message:", error.message);
+    console.error("[FIRESTORE] Full Error:", error);
     throw error;
   }
 }
@@ -213,12 +250,13 @@ export async function getAllStories() {
  */
 export async function getStoryWithChapters(storyId) {
   try {
+    console.log("[FIRESTORE] 🔍 Fetching story with chapters, ID:", storyId);
     // Get story
     const storyRef = doc(db, "stories", storyId);
     const storySnap = await getDoc(storyRef);
     
     if (!storySnap.exists()) {
-      console.error("Story not found");
+      console.warn("[FIRESTORE] ⚠️ Story document does not exist");
       return null;
     }
 
@@ -240,9 +278,11 @@ export async function getStoryWithChapters(storyId) {
       });
     });
 
+    console.log(`[FIRESTORE] ✅ Story found with ${story.chapters.length} chapters:`, story);
     return story;
   } catch (error) {
-    console.error("Error fetching story with chapters:", error);
+    console.error("[FIRESTORE] ❌ Error fetching story with chapters:", error);
+    console.error("[FIRESTORE] Error code:", error.code);
     throw error;
   }
 }
@@ -252,6 +292,7 @@ export async function getStoryWithChapters(storyId) {
  */
 export async function createStory(storyData) {
   try {
+    console.log("[FIRESTORE] 📝 Creating new story:", storyData);
     const dataWithTimestamps = {
       title: storyData.title,
       description: storyData.description || "",
@@ -262,13 +303,17 @@ export async function createStory(storyData) {
     };
 
     const docRef = await addDoc(collection(db, "stories"), dataWithTimestamps);
+    console.log("[FIRESTORE] ✅ Story created with ID:", docRef.id);
     return {
       id: docRef.id,
       ...dataWithTimestamps,
       chapters: [],
     };
   } catch (error) {
-    console.error("Error creating story:", error);
+    console.error("[FIRESTORE] ❌ Error creating story:");
+    console.error("[FIRESTORE] Error Code:", error.code);
+    console.error("[FIRESTORE] Error Message:", error.message);
+    console.error("[FIRESTORE] Full Error:", error);
     throw error;
   }
 }
@@ -278,14 +323,19 @@ export async function createStory(storyData) {
  */
 export async function updateStory(storyId, updates) {
   try {
+    console.log("[FIRESTORE] 📝 Updating story:", storyId, updates);
     const docRef = doc(db, "stories", storyId);
     await updateDoc(docRef, {
       ...updates,
       updatedAt: serverTimestamp(),
     });
+    console.log("[FIRESTORE] ✅ Story updated successfully");
     return { id: storyId, ...updates };
   } catch (error) {
-    console.error("Error updating story:", error);
+    console.error("[FIRESTORE] ❌ Error updating story:");
+    console.error("[FIRESTORE] Error Code:", error.code);
+    console.error("[FIRESTORE] Error Message:", error.message);
+    console.error("[FIRESTORE] Full Error:", error);
     throw error;
   }
 }
@@ -295,6 +345,7 @@ export async function updateStory(storyId, updates) {
  */
 export async function deleteStory(storyId) {
   try {
+    console.log("[FIRESTORE] 🗑 Deleting story and all chapters:", storyId);
     const batch = writeBatch(db);
 
     // Delete all chapters
@@ -308,8 +359,12 @@ export async function deleteStory(storyId) {
     batch.delete(doc(db, "stories", storyId));
 
     await batch.commit();
+    console.log("[FIRESTORE] ✅ Story and all chapters deleted successfully");
   } catch (error) {
-    console.error("Error deleting story:", error);
+    console.error("[FIRESTORE] ❌ Error deleting story:");
+    console.error("[FIRESTORE] Error Code:", error.code);
+    console.error("[FIRESTORE] Error Message:", error.message);
+    console.error("[FIRESTORE] Full Error:", error);
     throw error;
   }
 }
@@ -328,6 +383,7 @@ export async function toggleStoryPublished(storyId, published) {
  */
 export async function getChapters(storyId) {
   try {
+    console.log("[FIRESTORE] 📖 Loading chapters for story:", storyId);
     const q = query(
       collection(db, "stories", storyId, "chapters"),
       orderBy("chapterNumber", "asc")
@@ -340,9 +396,13 @@ export async function getChapters(storyId) {
         ...docSnap.data(),
       });
     });
+    console.log(`[FIRESTORE] ✅ Found ${chapters.length} chapters for story ${storyId}`);
     return chapters;
   } catch (error) {
-    console.error("Error fetching chapters:", error);
+    console.error("[FIRESTORE] ❌ Error fetching chapters:");
+    console.error("[FIRESTORE] Error Code:", error.code);
+    console.error("[FIRESTORE] Error Message:", error.message);
+    console.error("[FIRESTORE] Full Error:", error);
     throw error;
   }
 }
@@ -374,6 +434,7 @@ export async function getChapter(storyId, chapterId) {
  */
 export async function createChapter(storyId, chapterData) {
   try {
+    console.log("[FIRESTORE] 📝 Creating new chapter for story:", storyId, chapterData);
     // Find the next chapter number
     const chapters = await getChapters(storyId);
     const maxChapterNumber = chapters.length > 0 
@@ -392,13 +453,16 @@ export async function createChapter(storyId, chapterData) {
       collection(db, "stories", storyId, "chapters"),
       dataWithTimestamps
     );
-
+    console.log("[FIRESTORE] ✅ Chapter created with ID:", docRef.id);
     return {
       id: docRef.id,
       ...dataWithTimestamps,
     };
   } catch (error) {
-    console.error("Error creating chapter:", error);
+    console.error("[FIRESTORE] ❌ Error creating chapter:");
+    console.error("[FIRESTORE] Error Code:", error.code);
+    console.error("[FIRESTORE] Error Message:", error.message);
+    console.error("[FIRESTORE] Full Error:", error);
     throw error;
   }
 }
@@ -408,14 +472,19 @@ export async function createChapter(storyId, chapterData) {
  */
 export async function updateChapter(storyId, chapterId, updates) {
   try {
+    console.log("[FIRESTORE] 📝 Updating chapter:", storyId, chapterId, updates);
     const docRef = doc(db, "stories", storyId, "chapters", chapterId);
     await updateDoc(docRef, {
       ...updates,
       updatedAt: serverTimestamp(),
     });
+    console.log("[FIRESTORE] ✅ Chapter updated successfully");
     return { id: chapterId, ...updates };
   } catch (error) {
-    console.error("Error updating chapter:", error);
+    console.error("[FIRESTORE] ❌ Error updating chapter:");
+    console.error("[FIRESTORE] Error Code:", error.code);
+    console.error("[FIRESTORE] Error Message:", error.message);
+    console.error("[FIRESTORE] Full Error:", error);
     throw error;
   }
 }
@@ -425,9 +494,14 @@ export async function updateChapter(storyId, chapterId, updates) {
  */
 export async function deleteChapter(storyId, chapterId) {
   try {
+    console.log("[FIRESTORE] 🗑 Deleting chapter:", storyId, chapterId);
     await deleteDoc(doc(db, "stories", storyId, "chapters", chapterId));
+    console.log("[FIRESTORE] ✅ Chapter deleted successfully");
   } catch (error) {
-    console.error("Error deleting chapter:", error);
+    console.error("[FIRESTORE] ❌ Error deleting chapter:");
+    console.error("[FIRESTORE] Error Code:", error.code);
+    console.error("[FIRESTORE] Error Message:", error.message);
+    console.error("[FIRESTORE] Full Error:", error);
     throw error;
   }
 }
