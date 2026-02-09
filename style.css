@@ -1589,3 +1589,101 @@ body {
   font-size: 14px;
 }
 
+/* ================================
+   READER / HERO / BREADCRUMBS
+================================ */
+
+.breadcrumbs {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  color: rgba(255,255,255,0.6);
+  font-size: 13px;
+  margin-bottom: 12px;
+}
+
+.breadcrumbs a {
+  color: rgba(255,255,255,0.85);
+  text-decoration: none;
+}
+
+.breadcrumbs .crumb-sep {
+  color: rgba(255,255,255,0.35);
+}
+
+.page-hero {
+  text-align: left;
+  max-width: 1100px;
+  margin: 0 auto 18px;
+  padding: 6px 0 18px;
+}
+
+.page-hero .header-divider.small {
+  width: 60px;
+  height: 3px;
+  margin-top: 10px;
+}
+
+.reader-card {
+  max-width: 1100px;
+  margin: 18px auto 0;
+  background: rgba(255,255,255,0.02);
+  border-radius: 18px;
+  padding: 18px;
+  border: 1px solid rgba(255,255,255,0.06);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+}
+
+.reader-content {
+  max-width: 900px;
+  margin: 18px auto 0;
+  line-height: 1.9;
+  font-size: 17px;
+  color: rgba(255,255,255,0.9);
+}
+
+.blog-cover {
+  margin-bottom: 24px;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: opacity 0.3s ease, max-height 0.3s ease;
+}
+
+.blog-cover img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+.reading-progress {
+  height: 6px;
+  width: 100%;
+  background: rgba(255,255,255,0.03);
+  border-radius: 999px;
+  overflow: hidden;
+  margin: 8px 0 16px;
+}
+
+#progressBar {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, rgba(255,61,110,0.9), rgba(138,39,140,0.9));
+  transition: width 0.15s linear;
+}
+
+/* Footer refinement for reader pages */
+.footer {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--muted);
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  background: linear-gradient(180deg, rgba(0,0,0,0), rgba(0,0,0,0.02));
+}
+
+@media (max-width: 900px) {
+  .page-hero { text-align: center; }
+  .reader-content { padding: 0 10px; }
+}
+
+

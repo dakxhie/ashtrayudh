@@ -31,20 +31,43 @@
 
   <!-- BLOG VIEW -->
   <section class="container blog-view">
-    <h1 id="blogTitle" class="blog-title">Loading...</h1>
-    <p id="blogMeta" class="blog-meta"></p>
 
-    <div class="blog-cover">
-      <img id="blogImage" src="assets/blog1.jpg" alt="Blog Image">
+    <!-- Breadcrumbs -->
+    <nav class="breadcrumbs" aria-label="Breadcrumb">
+      <a href="index.html">Home</a>
+      <span class="crumb-sep">›</span>
+      <a href="blogs.html">Blogs</a>
+      <span class="crumb-sep">›</span>
+      <span id="blogBreadcrumbTitle">Loading...</span>
+    </nav>
+
+    <!-- Reading Progress -->
+    <div class="reading-progress" aria-hidden="true"><div id="progressBar"></div></div>
+
+    <!-- Hero (Title + Meta) -->
+    <header class="page-hero">
+      <h1 id="blogTitle" class="blog-title">Loading...</h1>
+      <p id="blogMeta" class="blog-meta">&nbsp;</p>
+      <div class="header-divider small"></div>
+    </header>
+
+    <!-- Reader Card -->
+    <div class="reader-card">
+      <div class="blog-cover">
+        <img id="blogImage" src="assets/blog1.jpg" alt="Blog Image">
+      </div>
+
+      <article id="blogContent" class="blog-text reader-content" tabindex="0">
+        <!-- Content loads here -->
+      </article>
     </div>
 
-    <div id="blogContent" class="blog-text">
-      <!-- Content loads here -->
+    <div style="margin-top:22px;">
+      <a href="blogs.html" class="btn secondary">
+        ← Back to Blogs
+      </a>
     </div>
 
-    <a href="blogs.html" class="btn secondary" style="margin-top:30px; display:inline-block;">
-      ← Back to Blogs
-    </a>
   </section>
 
   <!-- FOOTER -->
