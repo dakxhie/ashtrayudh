@@ -76,6 +76,14 @@ async function loadBlog() {
     const bc = document.getElementById("blogBreadcrumbTitle");
     if (bc) bc.innerText = blog.title || "Blog";
     
+    // Set hero image background
+    const heroImage = document.getElementById("blogHeroImage");
+    if (blog.imageUrl && heroImage) {
+      heroImage.style.backgroundImage = `url('${blog.imageUrl}')`;
+    } else if (blog.featuredImage && heroImage) {
+      heroImage.style.backgroundImage = `url('${blog.featuredImage}')`;
+    }
+    
     // Handle image loading
     const blogCoverDiv = document.querySelector(".blog-cover");
     if (blog.imageUrl) {

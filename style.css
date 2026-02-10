@@ -129,13 +129,38 @@ body {
 
 .hero {
   height: 92vh;
+  min-height: 500px;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 50px;
   position: relative;
-
   background: url("hero.jpg") center/cover no-repeat;
+}
+
+/* ===========================
+   Page Hero Image Section (Blog/Story Pages)
+   =========================== */
+
+.page-hero-image {
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  height: 45vh;
+  min-height: 280px;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  position: relative;
+  margin-bottom: 50px;
+  border-radius: 0;
+}
+
+.page-hero-image::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(11, 11, 15, 0.3), rgba(11, 11, 15, 0.8));
+  border-radius: 0;
 }
 
 .hero-overlay {
@@ -416,12 +441,32 @@ body {
     padding: 18px 20px;
   }
 
+  .hero {
+    height: 85vh;
+    padding: 40px 20px;
+  }
+
   .hero-content h1 {
     font-size: 40px;
   }
 
   .hero-content p {
     font-size: 16px;
+  }
+
+  /* Improve page hero images on wider tablets */
+  .page-hero-image {
+    height: 42vh;
+    min-height: 300px;
+    margin-bottom: 45px;
+  }
+
+  .page-hero {
+    padding: 18px 20px;
+  }
+
+  .blog-cover img {
+    height: 320px;
   }
 
   .section {
@@ -442,6 +487,16 @@ body {
 
   .cta-box h2 {
     font-size: 34px;
+  }
+
+  .story-layout {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .chapters-panel {
+    position: relative;
+    top: 0;
   }
 }
 
@@ -507,6 +562,11 @@ body {
 .blog-view {
   padding: 60px 0;
   max-width: 900px;
+}
+
+.blog-view .container {
+  padding: 0 70px;
+  max-width: 100%;
 }
 
 .blog-title {
@@ -654,6 +714,7 @@ body {
 
   .hero {
     height: 60vh;
+    min-height: 350px;
     padding: 20px;
   }
 
@@ -674,6 +735,53 @@ body {
 
   .btn {
     width: 100%;
+  }
+
+  /* Page Hero Image Responsive */
+  .page-hero-image {
+    height: 35vh;
+    min-height: 220px;
+    margin-bottom: 30px;
+  }
+
+  /* Blog/Story Page Responsiveness */
+  .blog-view {
+    padding: 30px 0;
+    max-width: 100%;
+  }
+
+  .story-view {
+    padding: 30px 0;
+    max-width: 100%;
+  }
+
+  .blog-view .container,
+  .story-view .container {
+    padding: 0 16px;
+  }
+
+  .blog-title {
+    font-size: 28px;
+    margin-bottom: 8px;
+  }
+
+  .story-title {
+    font-size: 28px;
+    margin-bottom: 8px;
+  }
+
+  .blog-cover img {
+    height: 220px;
+    margin-bottom: 20px;
+  }
+
+  .reader-card {
+    padding: 12px;
+    margin: 12px auto 0;
+  }
+
+  .page-hero {
+    padding: 12px 20px;
   }
 
   .section {
@@ -727,6 +835,37 @@ body {
   .footer {
     padding: 30px 16px;
     text-align: center;
+  }
+
+  /* Story layout for mobile */
+  .story-layout {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .chapters-panel {
+    position: relative;
+    top: 0;
+    height: auto;
+    padding: 18px;
+  }
+
+  .story-reader {
+    padding: 20px;
+    min-height: auto;
+  }
+
+  .chapter-text {
+    font-size: 14px;
+  }
+
+  .chapter-text p {
+    font-size: 14px;
+  }
+
+  .chapter-controls {
+    flex-direction: column;
+    gap: 10px;
   }
 }
 
@@ -1040,6 +1179,11 @@ body {
   max-width: 1100px;
 }
 
+.story-view .container {
+  padding: 0 70px;
+  max-width: 100%;
+}
+
 .story-title {
   font-family: "Playfair Display", serif;
   font-size: 42px;
@@ -1277,6 +1421,64 @@ body {
 
   .page-subtitle {
     font-size: 14px;
+  }
+
+  /* Improve hero image on tablets */
+  .page-hero-image {
+    height: 40vh;
+    min-height: 280px;
+    margin-bottom: 40px;
+  }
+
+  .page-hero {
+    padding: 20px;
+    margin-bottom: 12px;
+  }
+
+  .blog-view {
+    max-width: 900px;
+  }
+
+  .story-view {
+    max-width: 1100px;
+  }
+
+  .blog-cover img {
+    height: 280px;
+    margin-bottom: 25px;
+  }
+
+  .blog-title {
+    font-size: 34px;
+  }
+
+  .story-title {
+    font-size: 34px;
+  }
+
+  .reader-card {
+    padding: 16px;
+  }
+
+  .story-layout {
+    grid-template-columns: 1fr;
+    gap: 25px;
+    margin: 30px 0;
+  }
+
+  .chapters-panel {
+    position: relative;
+    top: 0;
+    height: fit-content;
+    padding: 20px;
+  }
+
+  .story-reader {
+    padding: 30px;
+  }
+
+  .story-reader h2 {
+    font-size: 26px;
   }
 }
 
@@ -1745,7 +1947,7 @@ body {
 
 .page-hero {
   text-align: left;
-  max-width: 1100px;
+  max-width: 100%;
   margin: 0 auto 18px;
   padding: 6px 0 18px;
 }

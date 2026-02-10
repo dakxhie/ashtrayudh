@@ -177,6 +177,14 @@ async function loadStory() {
     const bc = document.getElementById('storyBreadcrumbTitle');
     if (bc) bc.innerText = storyData.title || 'Story';
 
+    // Set hero image background
+    const heroImage = document.getElementById("storyHeroImage");
+    if (storyData.imageUrl && heroImage) {
+      heroImage.style.backgroundImage = `url('${storyData.imageUrl}')`;
+    } else if (storyData.featuredImage && heroImage) {
+      heroImage.style.backgroundImage = `url('${storyData.featuredImage}')`;
+    }
+
     // Reading meta (chapters + estimated time)
     try {
       let totalText = '';

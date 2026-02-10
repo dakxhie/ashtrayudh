@@ -48,44 +48,48 @@
   </header>
 
   <!-- BLOG VIEW -->
-  <section class="container blog-view">
+  <section class="blog-view">
 
-    <!-- Breadcrumbs -->
-    <nav class="breadcrumbs" aria-label="Breadcrumb">
-      <a href="index.html">Home</a>
-      <span class="crumb-sep">›</span>
-      <a href="blogs.html">Blogs</a>
-      <span class="crumb-sep">›</span>
-      <span id="blogBreadcrumbTitle">Loading...</span>
-    </nav>
+    <!-- Hero Image Section -->
+    <div class="page-hero-image" id="blogHeroImage" style="background: url('https://images.unsplash.com/photo-1506765515384-028b60a970df?auto=format&fit=crop&w=1920&q=90') center/cover no-repeat;"></div>
 
-    <!-- Reading Progress -->
-    <div class="reading-progress" aria-hidden="true"><div id="progressBar"></div></div>
+    <div class="container">
+      <!-- Breadcrumbs -->
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <a href="index.html">Home</a>
+        <span class="crumb-sep">›</span>
+        <a href="blogs.html">Blogs</a>
+        <span class="crumb-sep">›</span>
+        <span id="blogBreadcrumbTitle">Loading...</span>
+      </nav>
 
-    <!-- Hero (Title + Meta) -->
-    <header class="page-hero">
+      <!-- Reading Progress -->
+      <div class="reading-progress" aria-hidden="true"><div id="progressBar"></div></div>
+
+      <!-- Hero (Title + Meta) -->
+      <header class="page-hero">
       <h1 id="blogTitle" class="blog-title">Loading...</h1>
       <p id="blogMeta" class="blog-meta">&nbsp;</p>
       <div class="header-divider small"></div>
-    </header>
+      </header>
 
-    <!-- Reader Card -->
-    <div class="reader-card">
-      <div class="blog-cover">
-        <img id="blogImage" src="assets/blog1.jpg" alt="Blog Image">
+      <!-- Reader Card -->
+      <div class="reader-card">
+        <div class="blog-cover">
+          <img id="blogImage" src="assets/blog1.jpg" alt="Blog Image">
+        </div>
+
+        <article id="blogContent" class="blog-text reader-content" tabindex="0">
+          <!-- Content loads here -->
+        </article>
       </div>
 
-      <article id="blogContent" class="blog-text reader-content" tabindex="0">
-        <!-- Content loads here -->
-      </article>
+      <div style="margin-top:22px;">
+        <a href="blogs.html" class="btn secondary">
+          ← Back to Blogs
+        </a>
+      </div>
     </div>
-
-    <div style="margin-top:22px;">
-      <a href="blogs.html" class="btn secondary">
-        ← Back to Blogs
-      </a>
-    </div>
-
   </section>
 
   <!-- FOOTER -->
