@@ -7,44 +7,46 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="theme.css">
   <link rel="stylesheet" href="responsive.css">
   <link rel="stylesheet" href="motion.css">
   <link rel="stylesheet" href="ads/ads.css">
-
-
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="blog-view.css">
 </head>
 
-<body>
+<body class="page-blog-view">
+
+  <!-- Reading progress (fixed top) -->
+  <div class="bv-progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Reading progress">
+    <div class="bv-progress__bar" id="progressBar"></div>
+  </div>
 
   <!-- NAVBAR -->
-  <header class="navbar">
+  <header class="navbar navbar--editorial">
     <div class="logo">
       <a href="index.html">Astrayudh</a>
     </div>
 
-    <nav class="nav-links">
+    <nav class="nav-links" aria-label="Primary">
       <a href="index.html">Home</a>
       <a href="about.html">About</a>
       <a href="apps.html">Apps</a>
-      <a href="blogs.html" class="active">Blogs</a>
+      <a href="blogs.html" class="active" aria-current="page">Blogs</a>
       <a href="stories.html">Stories</a>
       <a href="contact.html">Contact</a>
     </nav>
 
     <a class="nav-btn" href="contact.html">Let's Talk</a>
 
-    <!-- Mobile Hamburger Menu -->
-    <button class="hamburger" id="hamburgerBtn">
+    <button class="hamburger" id="hamburgerBtn" type="button" aria-label="Open menu" aria-expanded="false">
       <span></span>
       <span></span>
       <span></span>
     </button>
 
-    <!-- Mobile Menu -->
     <div class="mobile-menu" id="mobileMenu">
       <a href="index.html" class="mobile-menu-link">Home</a>
       <a href="about.html" class="mobile-menu-link">About</a>
@@ -56,53 +58,125 @@
     </div>
   </header>
 
-  <!-- BLOG VIEW -->
-  <section class="blog-view">
+  <main class="bv-main" id="mainContent">
+    <div class="bv-shell">
 
-    <!-- Hero Image Section -->
-    <div class="page-hero-image page-hero-image--blog" id="blogHeroImage"></div>
+      <!-- Hero -->
+      <section class="bv-hero bv-animate" aria-label="Article hero">
+        <div class="bv-hero__media" id="blogHeroImage">
+          <img
+            id="blogHeroImg"
+            class="bv-hero__img"
+            src="https://images.unsplash.com/photo-1455390883993-490efaba612e?auto=format&fit=crop&w=1400&q=80"
+            alt=""
+            width="1400"
+            height="360"
+            fetchpriority="high"
+            decoding="async"
+          />
+        </div>
+        <div class="bv-hero__overlay" aria-hidden="true"></div>
+      </section>
 
-    <div class="container">
-      <!-- Breadcrumbs -->
-      <nav class="breadcrumbs" aria-label="Breadcrumb">
-        <a href="index.html">Home</a>
-        <span class="crumb-sep">›</span>
-        <a href="blogs.html">Blogs</a>
-        <span class="crumb-sep">›</span>
-        <span id="blogBreadcrumbTitle">Loading...</span>
-      </nav>
+      <div class="bv-container">
 
-      <!-- Reading Progress -->
-      <div class="reading-progress" aria-hidden="true"><div id="progressBar"></div></div>
+        <!-- Breadcrumb -->
+        <nav class="bv-breadcrumbs bv-animate" aria-label="Breadcrumb">
+          <a href="index.html">Home</a>
+          <span class="bv-breadcrumbs__sep" aria-hidden="true">/</span>
+          <a href="blogs.html">Blogs</a>
+          <span class="bv-breadcrumbs__sep" aria-hidden="true">/</span>
+          <span class="bv-breadcrumbs__current" id="blogBreadcrumbTitle">Loading…</span>
+        </nav>
 
-      <!-- Hero (Title + Meta) -->
-      <header class="page-hero" data-aos="fade-up">
-      <h1 id="blogTitle" class="blog-title">Loading...</h1>
-      <p id="blogMeta" class="blog-meta">&nbsp;</p>
-      <div class="header-divider small"></div>
-      </header>
+        <!-- Article header -->
+        <header class="bv-article-header bv-animate">
+          <h1 id="blogTitle" class="bv-title">Loading…</h1>
+          <div class="bv-meta" id="blogMeta" aria-label="Article metadata"></div>
+          <div class="bv-meta-accent" aria-hidden="true"></div>
+        </header>
 
-      <!-- Reader Card -->
-      <div class="reader-card" data-aos="fade-up" data-aos-delay="150">
-        <div class="blog-cover">
-          <img id="blogImage" src="https://images.unsplash.com/photo-1455390883993-490efaba612e?auto=format&fit=crop&w=1200&q=80" alt="Blog cover image" loading="lazy">
+        <!-- Content layout: TOC + reading card -->
+        <div class="bv-layout">
+
+          <aside class="bv-toc" id="blogToc" aria-label="Table of contents" hidden>
+            <button type="button" class="bv-toc__toggle" id="tocToggle" aria-expanded="false" aria-controls="tocNav">
+              <span class="bv-toc__toggle-label">Table of contents</span>
+              <svg class="bv-toc__chevron" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+            </button>
+            <nav class="bv-toc__nav" id="tocNav"></nav>
+          </aside>
+
+          <div class="bv-content-col">
+
+            <article class="bv-reading-card bv-animate" aria-labelledby="blogTitle">
+              <div id="blogContent" class="bv-prose" tabindex="0">
+                <!-- Content loads here -->
+              </div>
+            </article>
+
+            <!-- Share -->
+            <section class="bv-share bv-animate" aria-label="Share this article">
+              <p class="bv-share__label">Share this article</p>
+              <div class="bv-share__buttons" id="shareButtons">
+                <a class="bv-share-btn" id="shareX" href="#" target="_blank" rel="noopener noreferrer" aria-label="Share on X">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                </a>
+                <a class="bv-share-btn" id="shareLinkedIn" href="#" target="_blank" rel="noopener noreferrer" aria-label="Share on LinkedIn">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 114.126 0 2.063 2.063 0 01-2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                </a>
+                <a class="bv-share-btn" id="shareFacebook" href="#" target="_blank" rel="noopener noreferrer" aria-label="Share on Facebook">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                </a>
+                <button type="button" class="bv-share-btn" id="shareCopy" aria-label="Copy link">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+                </button>
+              </div>
+            </section>
+
+            <!-- Author -->
+            <section class="bv-author bv-animate" id="authorCard" aria-label="About the author">
+              <div class="bv-author__avatar" aria-hidden="true">
+                <span>A</span>
+              </div>
+              <div class="bv-author__body">
+                <p class="bv-author__label">Written by</p>
+                <h2 class="bv-author__name" id="authorName">Astrayudh</h2>
+                <p class="bv-author__bio" id="authorBio">Creative studio sharing thoughtful apps, long-form blogs, and immersive stories — crafted with calm design.</p>
+                <div class="bv-author__social">
+                  <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Author on X">X</a>
+                  <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="Author on LinkedIn">LinkedIn</a>
+                  <a href="contact.html" aria-label="Contact author">Contact</a>
+                </div>
+              </div>
+            </section>
+
+            <div class="bv-ad-slot ad-slot ad-slot--native-rec" data-adsterra-native="true"></div>
+          </div>
         </div>
 
-        <article id="blogContent" class="blog-text reader-content" tabindex="0">
-          <!-- Content loads here -->
-        </article>
-      </div>
+        <!-- Related articles -->
+        <section class="bv-related bv-animate" aria-labelledby="relatedHeading">
+          <h2 id="relatedHeading" class="bv-related__heading">Related articles</h2>
+          <div id="relatedArticles" class="bv-related__grid"></div>
+        </section>
 
-      <div class="reader-actions">
-        <div class="ad-slot ad-slot--native-rec" data-adsterra-native="true"></div>
-        <a href="blogs.html" class="btn secondary">
-          ← Back to Blogs
-        </a>
+        <!-- Footer CTA -->
+        <section class="bv-footer-cta bv-animate" aria-labelledby="footerCtaHeading">
+          <h2 id="footerCtaHeading" class="bv-footer-cta__title">Enjoyed this article?</h2>
+          <p class="bv-footer-cta__text">Discover more insights, stories, and updates from Astrayudh.</p>
+          <div class="bv-footer-cta__actions">
+            <a href="blogs.html" class="bv-btn bv-btn--primary">Read More</a>
+            <a href="contact.html" class="bv-btn bv-btn--ghost">Subscribe</a>
+          </div>
+        </section>
+
       </div>
     </div>
-  </section>
+  </main>
 
-  <!-- FOOTER -->
   <footer class="footer">
     <p>© 2026 Astrayudh. Crafted with calm design.</p>
     <div class="footer-links">
@@ -110,9 +184,7 @@
     </div>
   </footer>
 
-  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
   <script type="module" src="blog-view.js"></script>
-  <script src="illustrations.js" defer></script>
   <script src="ads/adsterra-config.js"></script>
   <script src="ads/adsterra-core.js" defer></script>
   <script src="ads/adsterra-banner-300x250.js" defer></script>
@@ -121,8 +193,6 @@
   <script src="ads/adsterra-native-banner.js" defer></script>
   <script src="ads/adsterra-interstitial.js" defer></script>
   <script src="ads/adsterra-placements.js" defer></script>
-
-
   <script src="ui.js" defer></script>
 </body>
 </html>

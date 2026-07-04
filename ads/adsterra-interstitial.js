@@ -32,7 +32,7 @@
   function isMeaningfulTarget(target) {
     if (!core || core.isProtectedTarget(target)) return false;
     return !!target.closest(
-      '.content-card, .card-btn, .blog-text, .reader-content, .chapter-text, ' +
+      '.content-card, .card-btn, .blog-text, .reader-content, .bv-prose, .chapter-text, ' +
       '.hero-buttons a, .btn.primary, .breadcrumbs a, .footer-links a, ' +
       '.mobile-menu-link, .nav-links a, .card, .chapter-link'
     );
