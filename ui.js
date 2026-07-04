@@ -7,15 +7,7 @@
   var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   function initTheme() {
-    document.body.classList.add('theme-active');
-
-    if (document.querySelector('.theme-orbs')) return;
-
-    var orbs = document.createElement('div');
-    orbs.className = 'theme-orbs';
-    orbs.setAttribute('aria-hidden', 'true');
-    orbs.innerHTML = '<span></span><span></span><span></span>';
-    document.body.insertBefore(orbs, document.body.firstChild);
+    document.body.classList.add('theme-active', 'neo-theme');
   }
 
   function initMobileMenu() {
@@ -126,6 +118,76 @@
     }, { passive: true });
   }
 
+  function initIllustrations() {
+    if (typeof window.AstrayudhIllustrations === 'undefined') return;
+    window.AstrayudhIllustrations.init();
+
+    if (typeof window.AOS !== 'undefined') {
+      if (typeof window.AOS.refreshHard === 'function') {
+        window.AOS.refreshHard();
+      } else if (typeof window.AOS.refresh === 'function') {
+        window.AOS.refresh();
+      }
+    }
+  }
+
+  function initHeroDots() {
+    if (prefersReducedMotion) return;
+
+    document.querySelectorAll('.hero').forEach(function (hero) {
+      if (hero.querySelector('.hero-dots')) return;
+
+      var dots = document.createElement('div');
+      dots.className = 'hero-dots';
+      dots.setAttribute('aria-hidden', 'true');
+      dots.innerHTML = '<span></span><span></span><span></span><span></span>';
+      hero.insertBefore(dots, hero.firstChild.nextSibling);
+    });
+  }
+
+  function initCardTilt() {
+    if (prefersReducedMotion || window.matchMedia('(max-width: 900px)').matches) return;
+
+    document.querySelectorAll('.content-card').forEach(function (card) {
+      if (card.dataset.tiltBound === 'true') return;
+      card.dataset.tiltBound = 'true';
+      card.addEventListener('mousemove', function (event) {
+        var rect = card.getBoundingClientRect();
+        var x = (event.clientX - rect.left) / rect.width - 0.5;
+        var y = (event.clientY - rect.top) / rect.height - 0.5;
+        card.style.setProperty('--tilt-x', (-y * 4) + 'deg');
+        card.style.setProperty('--tilt-y', (x * 4) + 'deg');
+        card.classList.add('card-tilt');
+      });
+
+      card.addEventListener('mouseleave', function () {
+        card.classList.remove('card-tilt');
+        card.style.removeProperty('--tilt-x');
+        card.style.removeProperty('--tilt-y');
+      });
+    });
+  }
+
+  function observeDynamicIllustrations() {
+    if (!('MutationObserver' in window)) return;
+
+    var observer = new MutationObserver(function (mutations) {
+      var shouldInit = false;
+
+      mutations.forEach(function (mutation) {
+        mutation.addedNodes.forEach(function (node) {
+          if (node.nodeType !== 1) return;
+          if (node.matches && node.matches('[data-illustration]')) shouldInit = true;
+          if (node.querySelector && node.querySelector('[data-illustration]')) shouldInit = true;
+        });
+      });
+
+      if (shouldInit) initIllustrations();
+    });
+
+    observer.observe(document.body, { childList: true, subtree: true });
+  }
+
   function initStaggerCards() {
     var grids = document.querySelectorAll('.cards, .premium-grid-layout, .loading-grid');
     grids.forEach(function (grid) {
@@ -138,15 +200,28 @@
     });
   }
 
+  function initCardIconMotion() {
+    if (prefersReducedMotion) return;
+
+    document.querySelectorAll('.card-icon-wrap').forEach(function (wrap, index) {
+      wrap.style.animationDelay = (index * 0.12) + 's';
+    });
+  }
+
   function init() {
     initTheme();
     initMobileMenu();
     initPageTransition();
     initNavbarScroll();
+    initHeroDots();
+    initIllustrations();
     initAOS();
     initScrollReveal();
     initHeroParallax();
     initStaggerCards();
+    initCardIconMotion();
+    initCardTilt();
+    observeDynamicIllustrations();
   }
 
   if (document.readyState === 'loading') {
@@ -154,4 +229,15 @@
   } else {
     init();
   }
+
+  window.AstrayudhUI = {
+    refreshMotion: function () {
+      initIllustrations();
+      initCardIconMotion();
+      initCardTilt();
+      if (typeof window.AOS !== 'undefined') {
+        window.AOS.refresh();
+      }
+    }
+  };
 })();

@@ -14,6 +14,7 @@
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="theme.css">
   <link rel="stylesheet" href="responsive.css">
+  <link rel="stylesheet" href="motion.css">
 
 
 
@@ -61,12 +62,15 @@
   <section class="hero hero--apps hero--medium">
     <div class="hero-overlay"></div>
 
-    <div class="hero-content" data-aos="fade-up">
-      <span class="hero-eyebrow">Products</span>
-      <h1>Astrayudh Apps</h1>
-      <p>
-        Apps designed with calm interaction, premium simplicity, and modern purpose.
-      </p>
+    <div class="hero-inner">
+      <div class="hero-content" data-aos="fade-up">
+        <span class="hero-eyebrow">Products</span>
+        <h1>Astrayudh Apps</h1>
+        <p>
+          Apps designed with calm interaction, premium simplicity, and modern purpose.
+        </p>
+      </div>
+      <div class="hero-art" data-illustration="apps" data-aos="fade-left" data-aos-delay="150"></div>
     </div>
   </section>
 
@@ -83,6 +87,7 @@
     <div class="cards" data-aos="fade-up">
 
       <div class="card">
+        <div class="card-icon-wrap" data-illustration="icon-apps"></div>
         <h3>Vortix</h3>
         <p>
           A premium upcoming app designed to feel clean, fast, and powerful.
@@ -99,6 +104,7 @@
       </div>
 
       <div class="card">
+        <div class="card-icon-wrap" data-illustration="icon-creativity"></div>
         <h3>Creator Tools (Coming Soon)</h3>
         <p>
           A set of tools designed for writers, designers, and creators who want
@@ -111,6 +117,7 @@
       </div>
 
       <div class="card">
+        <div class="card-icon-wrap" data-illustration="icon-stories"></div>
         <h3>Story Experience App</h3>
         <p>
           A future Astrayudh experiment where stories are experienced like interactive
@@ -127,7 +134,8 @@
 
   <!-- DESIGN PRINCIPLES -->
   <section class="section highlight">
-    <div class="feature-box" data-aos="zoom-in">
+    <div class="feature-box feature-box--with-art" data-aos="zoom-in">
+      <div class="feature-art" data-illustration="vortix"></div>
       <h2>Design Principles</h2>
       <p>
         We build apps like we build stories — with clarity, flow, emotion, and purpose.
@@ -136,6 +144,7 @@
       <div class="cards nested-cards">
 
         <div class="card">
+          <div class="card-icon-wrap" data-illustration="icon-minimal"></div>
           <h3>Minimal UI</h3>
           <p>
             Clean layouts that reduce distractions and increase focus.
@@ -143,6 +152,7 @@
         </div>
 
         <div class="card">
+          <div class="card-icon-wrap" data-illustration="icon-fast"></div>
           <h3>Fast & Lightweight</h3>
           <p>
             Smooth performance without unnecessary features draining battery.
@@ -150,6 +160,7 @@
         </div>
 
         <div class="card">
+          <div class="card-icon-wrap" data-illustration="icon-premium"></div>
           <h3>Premium Feel</h3>
           <p>
             Every detail matters — typography, spacing, and motion.
@@ -162,7 +173,8 @@
 
   <!-- CTA -->
   <section class="cta">
-    <div class="cta-box" data-aos="fade-up">
+    <div class="cta-box cta-box--with-art" data-aos="fade-up">
+      <div class="cta-art" data-illustration="cta"></div>
       <h2>Want to collaborate?</h2>
       <p>
         If you want to build an app, a story platform, or a creative digital experience,
@@ -183,6 +195,8 @@
   <!-- AOS Script -->
   <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
   <script src="ad-guard.js" defer></script>
+  <script src="illustrations.js" defer></script>
+
   <script src="ui.js" defer></script>
 </body>
 </html>

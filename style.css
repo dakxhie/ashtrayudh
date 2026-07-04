@@ -4,25 +4,25 @@
    =========================== */
 
 :root {
-  --bg: #0b0b0f;
-  --bg2: #101017;
-  --card: rgba(255, 255, 255, 0.04);
-  --card-border: rgba(255, 255, 255, 0.08);
+  --bg: #2a2d35;
+  --bg2: #24272e;
+  --card: #2a2d35;
+  --card-border: transparent;
 
-  --text: #f5f5f5;
-  --muted: #b9b9c6;
+  --text: #eceef3;
+  --muted: #a3a9b8;
 
-  --accent: #7a1f2b;
-  --accent2: #b13a4b;
+  --accent: #9e3348;
+  --accent2: #c04d62;
 
-  --radius-sm: 10px;
+  --radius-sm: 12px;
   --radius: 18px;
   --radius-lg: 24px;
   --radius-pill: 999px;
 
-  --shadow-sm: 0 8px 24px rgba(0, 0, 0, 0.35);
-  --shadow: 0 15px 40px rgba(0, 0, 0, 0.55);
-  --shadow-lg: 0 25px 60px rgba(0, 0, 0, 0.65);
+  --shadow-sm: 4px 4px 10px rgba(0, 0, 0, 0.42), -4px -4px 10px rgba(255, 255, 255, 0.07);
+  --shadow: 8px 8px 18px rgba(0, 0, 0, 0.42), -8px -8px 18px rgba(255, 255, 255, 0.07);
+  --shadow-lg: 12px 12px 28px rgba(0, 0, 0, 0.45), -12px -12px 28px rgba(255, 255, 255, 0.08);
 
   --space-xs: 8px;
   --space-sm: 12px;
@@ -46,7 +46,7 @@ html {
 }
 
 body {
-  background: radial-gradient(circle at top, #15151f, #0b0b0f);
+  background: var(--bg);
   color: var(--text);
   font-family: "Poppins", sans-serif;
   line-height: 1.7;
@@ -78,9 +78,9 @@ body.page-enter {
   top: 0;
   z-index: 999;
 
-  background: rgba(10, 10, 15, 0.75);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  background: var(--bg);
+  border-bottom: none;
+  box-shadow: var(--shadow-sm);
 }
 
 .logo {
@@ -2195,9 +2195,19 @@ body {
 
 .results-count {
   padding: 6px 12px;
-  background: rgba(255, 255, 255, 0.03);
   border-radius: var(--radius-pill);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.blogs-controls {
+  padding: 20px 24px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  align-items: center;
+}
+
+.breadcrumbs a:hover {
+  text-decoration: none;
 }
 
 .blog-view {
@@ -2335,9 +2345,8 @@ body {
 }
 
 .navbar--scrolled {
-  background: rgba(10, 10, 15, 0.94);
+  background: var(--bg2);
   box-shadow: var(--shadow-sm);
-  border-bottom-color: rgba(255, 255, 255, 0.1);
 }
 
 /* Section headings */

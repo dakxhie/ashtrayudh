@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="theme.css">
   <link rel="stylesheet" href="responsive.css">
+  <link rel="stylesheet" href="motion.css">
 
 
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -56,22 +57,28 @@
   <!-- HERO -->
   <section class="hero hero--stories">
     <div class="hero-overlay"></div>
-    <div class="hero-content" data-aos="fade-up">
-      <span class="hero-eyebrow">Fiction</span>
-      <h1>Stories</h1>
-      <p>Fiction, worlds, and chapters crafted with emotion — Astrayudh stories are meant to be felt.</p>
+    <div class="hero-inner">
+      <div class="hero-content" data-aos="fade-up">
+        <span class="hero-eyebrow">Fiction</span>
+        <h1>Stories</h1>
+        <p>Fiction, worlds, and chapters crafted with emotion — Astrayudh stories are meant to be felt.</p>
+      </div>
+      <div class="hero-art" data-illustration="stories" data-aos="fade-left" data-aos-delay="150"></div>
     </div>
   </section>
 
   <!-- PREMIUM HEADER -->
   <section class="container premium-page-header compact" data-aos="fade-up">
-    <div class="header-content">
-      <p class="page-eyebrow">Discover</p>
-      <h2 class="page-title">All Stories</h2>
-      <p class="page-subtitle">
-        Serialized fiction and immersive chapters — written to be felt, not just read.
-      </p>
-      <div class="header-divider"></div>
+    <div class="page-header-row">
+      <div class="header-content">
+        <p class="page-eyebrow">Discover</p>
+        <h2 class="page-title">All Stories</h2>
+        <p class="page-subtitle">
+          Serialized fiction and immersive chapters — written to be felt, not just read.
+        </p>
+        <div class="header-divider"></div>
+      </div>
+      <div class="page-header-art" data-illustration="icon-stories"></div>
     </div>
   </section>
 
@@ -108,7 +115,7 @@
   <section class="container blogs-section">
     <div id="storiesGrid" class="premium-grid-layout"></div>
     <div id="emptyState" class="empty-state" style="display:none;">
-      <div class="empty-state-icon" aria-hidden="true">✦</div>
+      <div class="empty-state-art" data-illustration="empty"></div>
       <p>No stories found matching your search.</p>
     </div>
   </section>
@@ -128,6 +135,8 @@
   <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 <script type="module" src="stories.js"></script>
     <script src="ad-guard.js" defer></script>
+  <script src="illustrations.js" defer></script>
+
   <script src="ui.js" defer></script>
 </body>
 </html>

@@ -14,6 +14,7 @@
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="theme.css">
   <link rel="stylesheet" href="responsive.css">
+  <link rel="stylesheet" href="motion.css">
 
 
 
@@ -61,19 +62,24 @@
   <section class="hero hero--contact hero--short">
     <div class="hero-overlay"></div>
 
-    <div class="hero-content" data-aos="fade-up">
-      <span class="hero-eyebrow">Get in Touch</span>
-      <h1>Contact Astrayudh</h1>
-      <p>
-        Want to collaborate, suggest ideas, or connect?  
-        Send a message — we’ll reply soon.
-      </p>
+    <div class="hero-inner">
+      <div class="hero-content" data-aos="fade-up">
+        <span class="hero-eyebrow">Get in Touch</span>
+        <h1>Contact Astrayudh</h1>
+        <p>
+          Want to collaborate, suggest ideas, or connect?  
+          Send a message — we’ll reply soon.
+        </p>
+      </div>
+      <div class="hero-art" data-illustration="contact" data-aos="fade-left" data-aos-delay="150"></div>
     </div>
   </section>
 
   <!-- CONTACT FORM -->
   <section class="container contact-section">
-    <div class="contact-box">
+    <div class="contact-layout">
+      <div class="contact-art" data-illustration="cta" data-aos="fade-right"></div>
+      <div class="contact-box" data-aos="fade-left">
     <h2>Send a Message</h2>
     <p>Fill the form below and Astrayudh will respond via email.</p>
 
@@ -98,6 +104,7 @@
       </p>
 
     </form>
+      </div>
     </div>
   </section>
 
@@ -112,6 +119,8 @@
   <!-- Scripts -->
   <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
   <script src="ad-guard.js" defer></script>
+  <script src="illustrations.js" defer></script>
+
   <script src="ui.js" defer></script>
 </body>
 </html>

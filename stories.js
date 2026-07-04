@@ -14,9 +14,13 @@ function renderStories(startIndex = 0) {
 
   if (filteredStories.length === 0) {
     storiesGrid.innerHTML = "";
-    document.getElementById("emptyState").style.display = "block";
+    const emptyState = document.getElementById("emptyState");
+    emptyState.style.display = "block";
     document.getElementById("paginationSection").style.display = "none";
     document.getElementById("resultsCount").style.display = "none";
+    if (window.AstrayudhIllustrations) {
+      window.AstrayudhIllustrations.init(emptyState);
+    }
     return;
   }
 
@@ -90,6 +94,10 @@ function renderStories(startIndex = 0) {
     currentPage = endIndex;
   } else {
     paginationSection.style.display = "none";
+  }
+
+  if (window.AstrayudhUI) {
+    window.AstrayudhUI.refreshMotion();
   }
 }
 
@@ -185,7 +193,10 @@ async function loadStories() {
     console.error("[STORIES] ❌ Error loading stories:", error);
     console.error("[STORIES] Error message:", error.message);
     console.error("[STORIES] Error code:", error.code);
-    storiesGrid.innerHTML = `<div class="empty-state"><p>Failed to load stories. Please refresh the page.</p></div>`;
+    storiesGrid.innerHTML = `<div class="empty-state"><div class="empty-state-art" data-illustration="empty"></div><p>Failed to load stories. Please refresh the page.</p></div>`;
+    if (window.AstrayudhIllustrations) {
+      window.AstrayudhIllustrations.init(storiesGrid);
+    }
   }
 }
 

@@ -14,6 +14,7 @@
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="theme.css">
   <link rel="stylesheet" href="responsive.css">
+  <link rel="stylesheet" href="motion.css">
 
 
 
@@ -61,18 +62,21 @@
   <section class="hero hero--home">
     <div class="hero-overlay"></div>
 
-    <div class="hero-content" data-aos="fade-up">
-      <span class="hero-eyebrow">Creative Studio</span>
-      <h1>We design digital stories that feel human.</h1>
-      <p>
-        Astrayudh is a creative studio where apps, storytelling, and calm design
-        come together to build meaningful digital experiences.
-      </p>
+    <div class="hero-inner">
+      <div class="hero-content" data-aos="fade-up">
+        <span class="hero-eyebrow">Creative Studio</span>
+        <h1>We design digital stories that feel human.</h1>
+        <p>
+          Astrayudh is a creative studio where apps, storytelling, and calm design
+          come together to build meaningful digital experiences.
+        </p>
 
-      <div class="hero-buttons">
-        <a href="apps.html" class="btn primary">Explore Apps</a>
-        <a href="blogs.html" class="btn secondary">Read Blogs</a>
+        <div class="hero-buttons">
+          <a href="apps.html" class="btn primary">Explore Apps</a>
+          <a href="blogs.html" class="btn secondary">Read Blogs</a>
+        </div>
       </div>
+      <div class="hero-art" data-illustration="studio" data-aos="fade-left" data-aos-delay="150"></div>
     </div>
   </section>
 
@@ -88,16 +92,19 @@
 
     <div class="cards" data-aos="fade-up" data-aos-delay="100">
       <div class="card" data-aos="fade-up" data-aos-delay="150">
+        <div class="card-icon-wrap" data-illustration="icon-apps"></div>
         <h3>Apps</h3>
         <p>Minimal, powerful apps crafted with premium UI and smooth experience.</p>
       </div>
 
       <div class="card" data-aos="fade-up" data-aos-delay="250">
+        <div class="card-icon-wrap" data-illustration="icon-blogs"></div>
         <h3>Blogs</h3>
         <p>Thoughtful writing about creativity, technology, and storytelling.</p>
       </div>
 
       <div class="card" data-aos="fade-up" data-aos-delay="350">
+        <div class="card-icon-wrap" data-illustration="icon-stories"></div>
         <h3>Stories</h3>
         <p>Serialized fiction designed to feel cinematic and immersive.</p>
       </div>
@@ -106,7 +113,8 @@
 
   <!-- FEATURE SECTION -->
   <section class="section highlight">
-    <div class="feature-box" data-aos="zoom-in">
+    <div class="feature-box feature-box--with-art" data-aos="zoom-in">
+      <div class="feature-art" data-illustration="vortix"></div>
       <h2>Featured App — Vortix</h2>
       <p>
         A modern upcoming app designed with calm interaction, clean design,
@@ -118,7 +126,8 @@
 
   <!-- CTA -->
   <section class="cta">
-    <div class="cta-box" data-aos="fade-up">
+    <div class="cta-box cta-box--with-art" data-aos="fade-up">
+      <div class="cta-art" data-illustration="cta"></div>
       <h2>Want to build something meaningful?</h2>
       <p>
         Let’s create an experience that feels premium, modern, and unforgettable.
@@ -138,6 +147,8 @@
   <!-- AOS Script -->
   <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
     <script src="ad-guard.js" defer></script>
+  <script src="illustrations.js" defer></script>
+
   <script src="ui.js" defer></script>
 </body>
 </html>

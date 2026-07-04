@@ -1,0 +1,392 @@
+/* ===================================================
+   Astrayudh — Motion & Illustration layer
+   Load after theme.css
+   =================================================== */
+
+/* ---- Hero split layout ---- */
+.hero-inner {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(24px, 5vw, 56px);
+  flex-wrap: wrap;
+  width: 100%;
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0 clamp(20px, 4vw, 40px);
+  min-height: inherit;
+}
+
+.hero .hero-inner {
+  width: 100%;
+}
+
+.hero-inner .hero-content {
+  flex: 1 1 340px;
+  max-width: 560px;
+  margin: 0;
+}
+
+.hero-art {
+  flex: 0 1 300px;
+  max-width: 340px;
+  min-width: 220px;
+  padding: 20px;
+  border-radius: var(--neo-radius-lg, 24px);
+  background: var(--neo-surface, #2a2d35);
+  box-shadow: var(--neo-raised, 8px 8px 18px rgba(0,0,0,.42), -8px -8px 18px rgba(255,255,255,.07));
+  opacity: 0;
+  transform: translateY(20px) scale(0.96);
+  transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero-art.illus-mount--visible,
+.hero-art[data-illustration].illus-mount--visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.hero-art .illus-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  animation: illusFloat 7s ease-in-out infinite;
+}
+
+/* ---- Illustration mounts ---- */
+.illus-mount {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.illus-mount--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.illus-svg--icon {
+  width: 48px;
+  height: 48px;
+}
+
+.illus-svg--feature {
+  width: 140px;
+  height: auto;
+  margin: 0 auto 20px;
+  animation: illusFloat 8s ease-in-out infinite;
+}
+
+.illus-svg--empty {
+  width: 120px;
+  height: auto;
+  margin: 0 auto 16px;
+  animation: illusPulse 4s ease-in-out infinite;
+}
+
+/* ---- Card icons ---- */
+.card-icon,
+.card-icon-wrap {
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 16px;
+  background: var(--neo-bg-deep, #24272e);
+  box-shadow: var(--neo-inset-sm, inset 2px 2px 6px rgba(0,0,0,.42), inset -2px -2px 6px rgba(255,255,255,.07));
+  margin-bottom: 18px;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.35s ease;
+}
+
+.card:hover .card-icon-wrap,
+.card:hover .card-icon {
+  transform: translateY(-3px) scale(1.04);
+  box-shadow: var(--neo-raised-sm);
+}
+
+.card-icon-wrap .illus-svg--icon {
+  animation: illusBob 5s ease-in-out infinite;
+}
+
+.card-icon-wrap .illus-svg,
+.card-icon-wrap svg {
+  width: 32px;
+  height: 32px;
+}
+
+.card-icon-wrap .illus-svg--icon:nth-child(1) { animation-delay: 0s; }
+
+/* ---- Feature / CTA with art ---- */
+.feature-box--with-art,
+.cta-box--with-art {
+  position: relative;
+  overflow: hidden;
+}
+
+.feature-art,
+.cta-art {
+  margin-bottom: 8px;
+}
+
+.feature-box--with-art .feature-art,
+.cta-box--with-art .cta-art {
+  display: flex;
+  justify-content: center;
+}
+
+/* ---- Contact split ---- */
+.contact-layout {
+  display: grid;
+  grid-template-columns: minmax(240px, 1fr) minmax(300px, 1.2fr);
+  gap: clamp(24px, 4vw, 48px);
+  align-items: center;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.contact-art {
+  padding: 28px;
+  border-radius: var(--neo-radius-lg, 24px);
+  background: var(--neo-surface, #2a2d35);
+  box-shadow: var(--neo-raised);
+}
+
+.contact-art .illus-svg {
+  width: 100%;
+  max-width: 280px;
+  margin: 0 auto;
+  display: block;
+  animation: illusFloat 7s ease-in-out infinite;
+}
+
+/* ---- Page header art ---- */
+.page-header-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.page-header-art {
+  flex: 0 0 100px;
+  padding: 12px;
+  border-radius: 18px;
+  background: var(--neo-surface, #2a2d35);
+  box-shadow: var(--neo-raised-sm);
+}
+
+.page-header-art .illus-svg {
+  width: 76px;
+  height: auto;
+  display: block;
+  animation: illusBob 6s ease-in-out infinite;
+}
+
+/* ---- Empty state ---- */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.empty-state-art {
+  margin-bottom: 8px;
+}
+
+.empty-state-icon {
+  display: none;
+}
+
+/* ---- SVG motion primitives ---- */
+.illus-draw {
+  stroke-dasharray: 420;
+  stroke-dashoffset: 420;
+  animation: illusDraw 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.illus-draw--d1 { animation-delay: 0.15s; }
+.illus-draw--d2 { animation-delay: 0.3s; }
+.illus-draw--d3 { animation-delay: 0.45s; }
+
+.illus-float--1 { animation: illusBob 5s ease-in-out infinite; }
+.illus-float--2 { animation: illusBob 5.5s ease-in-out 0.6s infinite; }
+
+.illus-orbit--1 { animation: illusOrbit 6s linear infinite; transform-origin: center; }
+.illus-orbit--2 { animation: illusOrbit 7s linear 0.5s infinite reverse; transform-origin: center; }
+.illus-orbit--3 { animation: illusOrbit 8s linear 1s infinite; transform-origin: center; }
+
+.illus-spark--1 { animation: illusSpark 2.8s ease-in-out infinite; }
+.illus-spark--2 { animation: illusSpark 3.2s ease-in-out 0.8s infinite; }
+
+/* ---- Button micro-interaction ---- */
+.btn,
+.nav-btn {
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.3s ease,
+    filter 0.25s ease !important;
+}
+
+.btn.primary:hover,
+.nav-btn:hover {
+  animation: btnPulse 0.55s ease;
+}
+
+/* ---- Content card hover tilt ---- */
+.content-card {
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.4s ease !important;
+}
+
+.content-card.card-tilt {
+  transform: perspective(800px) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg)) translateY(-4px);
+}
+
+/* ---- Section divider motion ---- */
+.header-divider {
+  animation: dividerGrow 1s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
+}
+
+/* ---- Floating accent dots (hero bg) ---- */
+.hero-dots {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.hero-dots span {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(192, 77, 98, 0.45);
+  animation: dotDrift 12s ease-in-out infinite alternate;
+}
+
+.hero-dots span:nth-child(1) { top: 18%; left: 12%; animation-delay: 0s; }
+.hero-dots span:nth-child(2) { top: 62%; left: 8%; animation-delay: -2s; opacity: 0.5; }
+.hero-dots span:nth-child(3) { top: 28%; right: 14%; animation-delay: -4s; }
+.hero-dots span:nth-child(4) { bottom: 22%; right: 20%; animation-delay: -6s; opacity: 0.6; }
+
+/* ---- Keyframes ---- */
+@keyframes illusFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes illusBob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+@keyframes illusPulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.03); opacity: 0.92; }
+}
+
+@keyframes illusDraw {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes illusOrbit {
+  0% { transform: rotate(0deg) translateY(-3px); }
+  100% { transform: rotate(360deg) translateY(-3px); }
+}
+
+@keyframes illusSpark {
+  0%, 100% { opacity: 0.35; transform: scale(0.85); }
+  50% { opacity: 1; transform: scale(1.15); }
+}
+
+@keyframes btnPulse {
+  0% { transform: translateY(-2px) scale(1); }
+  50% { transform: translateY(-3px) scale(1.02); }
+  100% { transform: translateY(-2px) scale(1); }
+}
+
+@keyframes dividerGrow {
+  from { transform: scaleX(0); opacity: 0; }
+  to { transform: scaleX(1); opacity: 1; }
+}
+
+@keyframes dotDrift {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(12px, -18px); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ---- Reduced motion ---- */
+@media (prefers-reduced-motion: reduce) {
+  .illus-draw {
+    stroke-dashoffset: 0;
+    animation: none;
+  }
+
+  .hero-art .illus-svg,
+  .illus-svg--feature,
+  .illus-svg--empty,
+  .contact-art .illus-svg,
+  .page-header-art .illus-svg,
+  .card-icon-wrap .illus-svg--icon,
+  .illus-float--1,
+  .illus-float--2,
+  .illus-orbit--1,
+  .illus-orbit--2,
+  .illus-orbit--3,
+  .illus-spark--1,
+  .illus-spark--2,
+  .hero-dots span {
+    animation: none !important;
+  }
+
+  .hero-art,
+  .illus-mount {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .content-card.card-tilt {
+    transform: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-inner {
+    flex-direction: column;
+    padding-top: 24px;
+    padding-bottom: 24px;
+  }
+
+  .hero-art {
+    order: -1;
+    max-width: 260px;
+    flex-basis: auto;
+  }
+
+  .contact-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-art {
+    max-width: 320px;
+    margin: 0 auto;
+  }
+
+  .page-header-art {
+    display: none;
+  }
+}

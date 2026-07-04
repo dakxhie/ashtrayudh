@@ -14,9 +14,13 @@ function renderBlogs(startIndex = 0) {
 
   if (filteredBlogs.length === 0) {
     blogsGrid.innerHTML = "";
-    document.getElementById("emptyState").style.display = "block";
+    const emptyState = document.getElementById("emptyState");
+    emptyState.style.display = "block";
     document.getElementById("paginationSection").style.display = "none";
     document.getElementById("resultsCount").style.display = "none";
+    if (window.AstrayudhIllustrations) {
+      window.AstrayudhIllustrations.init(emptyState);
+    }
     return;
   }
 
@@ -89,6 +93,10 @@ function renderBlogs(startIndex = 0) {
     currentPage = endIndex;
   } else {
     paginationSection.style.display = "none";
+  }
+
+  if (window.AstrayudhUI) {
+    window.AstrayudhUI.refreshMotion();
   }
 }
 
@@ -185,7 +193,10 @@ async function loadBlogs() {
     console.error("[BLOGS] ❌ Error loading blogs:", error);
     console.error("[BLOGS] Error message:", error.message);
     console.error("[BLOGS] Error code:", error.code);
-    blogsGrid.innerHTML = `<div class="empty-state"><p>Failed to load blogs. Please refresh the page.</p></div>`;
+    blogsGrid.innerHTML = `<div class="empty-state"><div class="empty-state-art" data-illustration="empty"></div><p>Failed to load blogs. Please refresh the page.</p></div>`;
+    if (window.AstrayudhIllustrations) {
+      window.AstrayudhIllustrations.init(blogsGrid);
+    }
   }
 }
 
