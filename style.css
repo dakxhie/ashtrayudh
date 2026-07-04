@@ -2513,6 +2513,153 @@ body {
   font-family: "Poppins", sans-serif;
 }
 
+/* ================================
+   HOME VISUALS
+================================ */
+
+.home-showcase {
+  padding: 0 70px 20px;
+  max-width: 1250px;
+  margin: -24px auto 0;
+  position: relative;
+  z-index: 2;
+}
+
+.home-showcase-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.showcase-card {
+  position: relative;
+  display: block;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  min-height: 180px;
+  box-shadow: var(--shadow);
+  text-decoration: none;
+  transition: transform var(--transition-slow), box-shadow var(--transition);
+}
+
+.showcase-card img {
+  width: 100%;
+  height: 100%;
+  min-height: 180px;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.45s ease;
+}
+
+.showcase-card span {
+  position: absolute;
+  left: 16px;
+  bottom: 14px;
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  background: rgba(42, 45, 53, 0.82);
+  color: var(--text);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+}
+
+.showcase-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.showcase-card:hover img {
+  transform: scale(1.04);
+}
+
+.card--visual {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: inherit;
+  padding: 0;
+  overflow: hidden;
+}
+
+.card--visual:hover {
+  color: inherit;
+}
+
+.card-image--home {
+  height: 150px;
+  width: 100%;
+  margin: 0;
+  border-radius: 0;
+  background-size: cover;
+  background-position: center;
+}
+
+.card--visual .card-icon-wrap {
+  margin: 18px 28px 0;
+}
+
+.card--visual h3,
+.card--visual p {
+  padding-left: 28px;
+  padding-right: 28px;
+}
+
+.card--visual p {
+  padding-bottom: 28px;
+}
+
+.feature-box--visual {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 28px;
+  align-items: center;
+  text-align: left;
+}
+
+.feature-visual img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-radius: var(--radius);
+  display: block;
+  box-shadow: var(--shadow-sm);
+}
+
+.card-image {
+  background-color: rgba(255, 255, 255, 0.04);
+}
+
+.skeleton-image {
+  background: linear-gradient(
+    110deg,
+    rgba(255, 255, 255, 0.04) 8%,
+    rgba(255, 255, 255, 0.08) 18%,
+    rgba(255, 255, 255, 0.04) 33%
+  );
+  background-size: 200% 100%;
+}
+
+@media (max-width: 900px) {
+  .home-showcase {
+    padding: 0 24px 12px;
+    margin-top: 0;
+  }
+
+  .home-showcase-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .feature-box--visual {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .feature-visual img {
+    height: 180px;
+  }
+}
+
 .chapters-panel {
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-sm);

@@ -1,4 +1,5 @@
 import { getPublishedStories } from "./firestoreService.js";
+import { resolveStoryImage, escapeCssUrl } from "./images.js";
 
 let allStories = [];
 let filteredStories = [];
@@ -65,7 +66,7 @@ function renderStories(startIndex = 0) {
       }
     }
     
-    const cover = story.coverImageUrl || "assets/default-story.jpg";
+    const cover = escapeCssUrl(resolveStoryImage(story, index));
 
     card.innerHTML = `
       <div class="card-image" style="background-image:url('${cover}')"></div>

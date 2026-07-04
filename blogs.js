@@ -1,4 +1,5 @@
 import { getPublishedBlogs } from "./firestoreService.js";
+import { resolveBlogImage, escapeCssUrl } from "./images.js";
 
 let allBlogs = [];
 let filteredBlogs = [];
@@ -42,7 +43,7 @@ function renderBlogs(startIndex = 0) {
     card.style.animation = `fadeIn 0.6s ease forwards`;
     card.style.animationDelay = `${(index % itemsPerPage) * 0.1}s`;
 
-    const image = blog.imageUrl || "assets/default-blog.jpg";
+    const image = escapeCssUrl(resolveBlogImage(blog, index));
     const title = blog.title || "Untitled Blog";
     const subtitle = blog.subtitle || "No subtitle";
     

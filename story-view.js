@@ -1,4 +1,5 @@
 import { getStoryWithChapters } from "./firestoreService.js";
+import { resolveStoryImage } from "./images.js";
 
 function insertChapterAds(articleEl) {
   if (!articleEl) return;
@@ -200,12 +201,9 @@ async function loadStory() {
     const bc = document.getElementById('storyBreadcrumbTitle');
     if (bc) bc.innerText = storyData.title || 'Story';
 
-    // Set hero image background
     const heroImage = document.getElementById("storyHeroImage");
-    if (storyData.imageUrl && heroImage) {
-      heroImage.style.backgroundImage = `url('${storyData.imageUrl}')`;
-    } else if (storyData.featuredImage && heroImage) {
-      heroImage.style.backgroundImage = `url('${storyData.featuredImage}')`;
+    if (heroImage) {
+      heroImage.style.backgroundImage = `url('${resolveStoryImage(storyData)}')`;
     }
 
     // Reading meta (chapters + estimated time)

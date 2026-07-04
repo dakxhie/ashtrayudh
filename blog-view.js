@@ -1,4 +1,5 @@
 import { getBlogById } from "./firestoreService.js";
+import { resolveBlogImage } from "./images.js";
 
 function insertArticleAds(articleEl) {
   if (!articleEl) return;
@@ -98,29 +99,19 @@ async function loadBlog() {
     const bc = document.getElementById("blogBreadcrumbTitle");
     if (bc) bc.innerText = blog.title || "Blog";
     
-    // Set hero image background
+    const coverImage = resolveBlogImage(blog);
     const heroImage = document.getElementById("blogHeroImage");
-    if (blog.imageUrl && heroImage) {
-      heroImage.style.backgroundImage = `url('${blog.imageUrl}')`;
-    } else if (blog.featuredImage && heroImage) {
-      heroImage.style.backgroundImage = `url('${blog.featuredImage}')`;
+    if (heroImage) {
+      heroImage.style.backgroundImage = `url('${coverImage}')`;
     }
-    
-    // Handle image loading
+
     const blogCoverDiv = document.querySelector(".blog-cover");
-    if (blog.imageUrl) {
-      blogImage.src = blog.imageUrl;
-      blogImage.alt = blog.title || "Blog cover image";
-      blogImage.onerror = function() {
-        if (blogCoverDiv) blogCoverDiv.style.display = "none";
-      };
-      blogImage.onload = function() {
-        if (blogCoverDiv) blogCoverDiv.style.display = "block";
-      };
-    } else {
-      // Hide image container if no image
-      if (blogCoverDiv) blogCoverDiv.style.display = "none";
-    }
+    blogImage.src = coverImage;
+    blogImage.alt = blog.title || "Blog cover image";
+    blogImage.onerror = function () {
+      blogImage.src = resolveBlogImage(blog, 1);
+    };
+    if (blogCoverDiv) blogCoverDiv.style.display = "block";
 
     // Render content
     let html = "";

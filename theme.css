@@ -179,9 +179,9 @@ body.theme-active > * {
 .hero-overlay {
   background: linear-gradient(
     180deg,
-    rgba(36, 39, 46, 0.55) 0%,
-    rgba(36, 39, 46, 0.82) 55%,
-    rgba(42, 45, 53, 0.96) 100%
+    rgba(36, 39, 46, 0.35) 0%,
+    rgba(36, 39, 46, 0.62) 55%,
+    rgba(42, 45, 53, 0.82) 100%
   ) !important;
 }
 
