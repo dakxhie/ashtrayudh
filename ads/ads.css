@@ -1,0 +1,93 @@
+/* Adsterra ad slots */
+
+.ad-slot {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 20px auto;
+  padding: 12px;
+  border-radius: 18px;
+  background: var(--neo-surface, #2a2d35);
+  box-shadow: var(--neo-inset-sm, inset 2px 2px 6px rgba(0, 0, 0, 0.42), inset -2px -2px 6px rgba(255, 255, 255, 0.07));
+  overflow: hidden;
+}
+
+.ad-slot--hidden-viewport,
+.ad-slot--failed {
+  display: none !important;
+  margin: 0;
+  padding: 0;
+  min-height: 0;
+}
+
+.ad-slot__iframe {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+}
+
+.ad-slot--300x250 {
+  max-width: 320px;
+}
+
+.ad-slot--mobile-320x50 {
+  max-width: 340px;
+  margin: 10px auto 0;
+  padding: 6px;
+}
+
+.ad-slot--sidebar-160x600 {
+  width: 160px;
+  margin: 24px auto 0;
+  padding: 8px;
+  min-height: 600px;
+}
+
+.ad-slot--native {
+  max-width: 100%;
+  min-height: 120px;
+}
+
+.ad-slot--native-inline,
+.ad-slot--article-end {
+  margin: 28px auto;
+}
+
+.ad-slot--native-rec {
+  max-width: 680px;
+  margin: 32px auto 16px;
+}
+
+.ad-slot--native-grid {
+  grid-column: 1 / -1;
+}
+
+.ad-slot--between-cards {
+  grid-column: 1 / -1;
+  max-width: 320px;
+}
+
+.chapters-panel .ad-slot--sidebar-160x600 {
+  position: sticky;
+  top: 120px;
+}
+
+@media (max-width: 1023px) {
+  .ad-slot--sidebar-160x600 {
+    display: none !important;
+  }
+}
+
+@media (min-width: 768px) {
+  .ad-slot--mobile-320x50 {
+    display: none !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .ad-slot {
+    margin: 14px auto;
+    padding: 8px;
+  }
+}

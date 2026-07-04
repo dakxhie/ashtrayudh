@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="theme.css">
   <link rel="stylesheet" href="responsive.css">
   <link rel="stylesheet" href="motion.css">
+  <link rel="stylesheet" href="ads/ads.css">
 
 
   <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
@@ -100,12 +101,11 @@
 
       <h3>4. Advertising</h3>
       <p>
-        Astrayudh shows interstitial advertisements only on blog pages
-        (the blogs listing and individual blog articles) through Monetag.
-        No other page on this website displays ads.
-        We do not use banner, native, rewarded, sticky, pop-up, floating, or anchor ads anywhere.
-        Interstitial ads appear only after meaningful user interaction, never on page load,
-        with a maximum of two per visit and cooldown periods between displays.
+        Astrayudh uses Adsterra (Website ID: 5892372) to display advertisements.
+        Formats include Social Bar interstitials, native banners, 300×250 banners,
+        320×50 mobile banners, and 160×600 desktop sidebar banners.
+        Social Bar interstitials load only after meaningful user interaction, never on page load,
+        with a maximum of two displays per page and cooldown periods between triggers.
       </p>
 
       <h3>5. Cookies</h3>
@@ -149,8 +149,16 @@
   </footer>
 
   <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
-  <script src="ad-guard.js" defer></script>
   <script src="illustrations.js" defer></script>
+  <script src="ads/adsterra-config.js"></script>
+  <script src="ads/adsterra-core.js" defer></script>
+  <script src="ads/adsterra-banner-300x250.js" defer></script>
+  <script src="ads/adsterra-banner-mobile.js" defer></script>
+  <script src="ads/adsterra-sidebar-160x600.js" defer></script>
+  <script src="ads/adsterra-native-banner.js" defer></script>
+  <script src="ads/adsterra-interstitial.js" defer></script>
+  <script src="ads/adsterra-placements.js" defer></script>
+
 
   <script src="ui.js" defer></script>
 </body>

@@ -1,5 +1,27 @@
 import { getBlogById } from "./firestoreService.js";
 
+function insertArticleAds(articleEl) {
+  if (!articleEl) return;
+
+  const paragraphs = articleEl.querySelectorAll("p");
+  if (paragraphs.length >= 4) {
+    const mid = Math.floor(paragraphs.length / 2);
+    const nativeSlot = document.createElement("div");
+    nativeSlot.className = "ad-slot ad-slot--native-inline";
+    nativeSlot.setAttribute("data-adsterra-native", "true");
+    paragraphs[mid].after(nativeSlot);
+  }
+
+  const endBanner = document.createElement("div");
+  endBanner.className = "ad-slot ad-slot--300x250 ad-slot--article-end";
+  endBanner.setAttribute("data-adsterra-300x250", "true");
+  articleEl.appendChild(endBanner);
+
+  if (window.AdsterraPlacements) {
+    window.AdsterraPlacements.mountExistingSlots();
+  }
+}
+
 function getBlogId() {
   const params = new URLSearchParams(window.location.search);
   return params.get("id");
@@ -127,6 +149,8 @@ async function loadBlog() {
     }
 
     blogContent.innerHTML = html || "<p>No content available.</p>";
+
+    insertArticleAds(blogContent);
 
     // Estimate reading time (words / 200 wpm)
     try {

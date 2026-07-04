@@ -85,6 +85,20 @@ function renderStories(startIndex = 0) {
     });
 
     storiesGrid.appendChild(card);
+
+    if ((index + 1) % 3 === 0 && index < visibleStories.length - 1) {
+      const adWrap = document.createElement("div");
+      adWrap.className = "ad-slot ad-slot--native-grid";
+      adWrap.setAttribute("data-adsterra-native", "true");
+      storiesGrid.appendChild(adWrap);
+    }
+
+    if ((index + 1) % 6 === 0 && index < visibleStories.length - 1) {
+      const bannerWrap = document.createElement("div");
+      bannerWrap.className = "ad-slot ad-slot--between-cards";
+      bannerWrap.setAttribute("data-adsterra-300x250", "true");
+      storiesGrid.appendChild(bannerWrap);
+    }
   });
 
   // Show/hide load more button
@@ -94,6 +108,10 @@ function renderStories(startIndex = 0) {
     currentPage = endIndex;
   } else {
     paginationSection.style.display = "none";
+  }
+
+  if (window.AdsterraPlacements) {
+    window.AdsterraPlacements.mountExistingSlots();
   }
 
   if (window.AstrayudhUI) {
