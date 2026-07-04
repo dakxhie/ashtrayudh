@@ -5,11 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Astrayudh Blog</title>
 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-
-  <!-- Monetag Multitag Ads -->
-  <script src="https://quge5.com/88/tag.min.js" data-zone="211579" async data-cfasync="false"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -54,7 +53,7 @@
   <section class="blog-view">
 
     <!-- Hero Image Section -->
-    <div class="page-hero-image" id="blogHeroImage" style="background: url('https://images.unsplash.com/photo-1506765515384-028b60a970df?auto=format&fit=crop&w=1920&q=90') center/cover no-repeat;"></div>
+    <div class="page-hero-image page-hero-image--blog" id="blogHeroImage"></div>
 
     <div class="container">
       <!-- Breadcrumbs -->
@@ -87,7 +86,7 @@
         </article>
       </div>
 
-      <div style="margin-top:22px;">
+      <div class="reader-actions">
         <a href="blogs.html" class="btn secondary">
           ← Back to Blogs
         </a>
@@ -98,43 +97,14 @@
   <!-- FOOTER -->
   <footer class="footer">
     <p>© 2026 Astrayudh. Crafted with calm design.</p>
+    <div class="footer-links">
+      <a href="privacy.html">Privacy Policy</a>
+    </div>
   </footer>
 
   <!-- MODULE SCRIPT -->
   <script type="module" src="blog-view.js"></script>
-
-  <!-- Mobile Menu Toggle Script -->
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const hamburgerBtn = document.getElementById('hamburgerBtn');
-      const mobileMenu = document.getElementById('mobileMenu');
-      const menuLinks = document.querySelectorAll('.mobile-menu-link');
-
-      // Toggle mobile menu on hamburger click
-      if (hamburgerBtn) {
-        hamburgerBtn.addEventListener('click', function() {
-          hamburgerBtn.classList.toggle('active');
-          mobileMenu.classList.toggle('active');
-        });
-      }
-
-      // Close mobile menu when a link is clicked
-      menuLinks.forEach(link => {
-        link.addEventListener('click', function() {
-          hamburgerBtn.classList.remove('active');
-          mobileMenu.classList.remove('active');
-        });
-      });
-
-      // Close mobile menu when clicking outside
-      document.addEventListener('click', function(event) {
-        if (!event.target.closest('.navbar')) {
-          hamburgerBtn.classList.remove('active');
-          mobileMenu.classList.remove('active');
-        }
-      });
-    });
-  </script>
-
+  <script src="interstitial-ads.js" defer></script>
+  <script src="ui.js" defer></script>
 </body>
 </html>

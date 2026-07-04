@@ -15,9 +15,6 @@
 
   <!-- AOS Animations -->
   <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
-
-  <!-- Monetag Multitag Ads -->
-  <script src="https://quge5.com/88/tag.min.js" data-zone="211579" async data-cfasync="false"></script>
 </head>
 
 <body>
@@ -57,7 +54,7 @@
   </header>
 
   <!-- HERO -->
-  <section class="hero" style="height: 70vh; background: url('https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;">
+  <section class="hero hero--apps hero--medium">
     <div class="hero-overlay"></div>
 
     <div class="hero-content" data-aos="fade-up">
@@ -87,11 +84,11 @@
           Built for simplicity and modern users.
         </p>
 
-        <p style="margin-top: 12px; color: #b9b9c6; font-size: 14px;">
-          Status: <b style="color:white;">In Development</b>
+        <p class="card-status">
+          Status: <strong>In Development</strong>
         </p>
 
-        <div style="margin-top: 18px;">
+        <div class="card-actions">
           <a class="btn primary" href="blogs.html">Read Related Blogs</a>
         </div>
       </div>
@@ -103,8 +100,8 @@
           a clean and focused digital workspace.
         </p>
 
-        <p style="margin-top: 12px; color: #b9b9c6; font-size: 14px;">
-          Status: <b style="color:white;">Planning</b>
+        <p class="card-status">
+          Status: <strong>Planning</strong>
         </p>
       </div>
 
@@ -115,8 +112,8 @@
           cinematic chapters.
         </p>
 
-        <p style="margin-top: 12px; color: #b9b9c6; font-size: 14px;">
-          Status: <b style="color:white;">Concept</b>
+        <p class="card-status">
+          Status: <strong>Concept</strong>
         </p>
       </div>
 
@@ -131,7 +128,7 @@
         We build apps like we build stories — with clarity, flow, emotion, and purpose.
       </p>
 
-      <div class="cards" style="margin-top: 40px;">
+      <div class="cards nested-cards">
 
         <div class="card">
           <h3>Minimal UI</h3>
@@ -186,39 +183,6 @@
       once: true
     });
   </script>
-
-  <!-- Mobile Menu Toggle Script -->
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const hamburgerBtn = document.getElementById('hamburgerBtn');
-      const mobileMenu = document.getElementById('mobileMenu');
-      const menuLinks = document.querySelectorAll('.mobile-menu-link');
-
-      // Toggle mobile menu on hamburger click
-      if (hamburgerBtn) {
-        hamburgerBtn.addEventListener('click', function() {
-          hamburgerBtn.classList.toggle('active');
-          mobileMenu.classList.toggle('active');
-        });
-      }
-
-      // Close mobile menu when a link is clicked
-      menuLinks.forEach(link => {
-        link.addEventListener('click', function() {
-          hamburgerBtn.classList.remove('active');
-          mobileMenu.classList.remove('active');
-        });
-      });
-
-      // Close mobile menu when clicking outside
-      document.addEventListener('click', function(event) {
-        if (!event.target.closest('.navbar')) {
-          hamburgerBtn.classList.remove('active');
-          mobileMenu.classList.remove('active');
-        }
-      });
-    });
-  </script>
-
+  <script src="ui.js" defer></script>
 </body>
 </html>

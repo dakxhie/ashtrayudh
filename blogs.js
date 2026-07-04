@@ -125,6 +125,23 @@ function filterAndSortBlogs() {
   renderBlogs(0);
 }
 
+function renderLoadingSkeleton() {
+  return `
+    <div class="loading-grid">
+      ${[1, 2, 3].map(() => `
+        <div class="skeleton-card">
+          <div class="skeleton-image"></div>
+          <div class="skeleton-body">
+            <div class="skeleton-line short"></div>
+            <div class="skeleton-line medium"></div>
+            <div class="skeleton-line long"></div>
+          </div>
+        </div>
+      `).join('')}
+    </div>
+  `;
+}
+
 async function loadBlogs() {
   const blogsGrid = document.getElementById("blogsGrid");
   if (!blogsGrid) {
@@ -132,7 +149,7 @@ async function loadBlogs() {
     return;
   }
 
-  blogsGrid.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 60px 20px;"><p style="color:rgba(255,255,255,0.6); font-size: 16px;">Loading blogs...</p></div>`;
+  blogsGrid.innerHTML = renderLoadingSkeleton();
 
   try {
     console.log("[BLOGS] 🔄 Starting to load published blogs from Firestore...");
@@ -168,7 +185,7 @@ async function loadBlogs() {
     console.error("[BLOGS] ❌ Error loading blogs:", error);
     console.error("[BLOGS] Error message:", error.message);
     console.error("[BLOGS] Error code:", error.code);
-    blogsGrid.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 40px;"><p style="color:rgba(255,255,255,0.6);">Failed to load blogs. Please refresh the page.</p></div>`;
+    blogsGrid.innerHTML = `<div class="empty-state"><p>Failed to load blogs. Please refresh the page.</p></div>`;
   }
 }
 

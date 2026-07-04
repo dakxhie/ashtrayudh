@@ -15,9 +15,6 @@
 
   <!-- AOS -->
   <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
-
-  <!-- Monetag Multitag Ads -->
-  <script src="https://quge5.com/88/tag.min.js" data-zone="211579" async data-cfasync="false"></script>
 </head>
 
 <body>
@@ -57,7 +54,7 @@
   </header>
 
   <!-- HERO -->
-  <section class="hero" style="height: 65vh; background: url('https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;">
+  <section class="hero hero--contact hero--short">
     <div class="hero-overlay"></div>
 
     <div class="hero-content" data-aos="fade-up">
@@ -70,28 +67,28 @@
   </section>
 
   <!-- CONTACT FORM -->
-  <section class="container">
+  <section class="container contact-section">
     <div class="contact-box">
     <h2>Send a Message</h2>
     <p>Fill the form below and Astrayudh will respond via email.</p>
 
     <!-- Formspree Connected -->
-    <form class="contact-form" action="https://formspree.io/f/manlgpye" method="POST">
+    <form class="contact-form" action="https://formspree.io/f/manlgpye" method="POST" data-no-ad>
 
-      <label>Your Name</label>
-      <input type="text" name="name" placeholder="Enter your name" required>
+      <label for="contactName">Your Name</label>
+      <input type="text" id="contactName" name="name" placeholder="Enter your name" required>
 
-      <label>Your Email</label>
-      <input type="email" name="email" placeholder="Enter your email" required>
+      <label for="contactEmail">Your Email</label>
+      <input type="email" id="contactEmail" name="email" placeholder="Enter your email" required>
 
-      <label>Your Message</label>
-      <textarea name="message" rows="6" placeholder="Write your message..." required></textarea>
+      <label for="contactMessage">Your Message</label>
+      <textarea id="contactMessage" name="message" rows="6" placeholder="Write your message..." required></textarea>
 
-      <button type="submit" class="btn primary" style="width:100%; margin-top:20px;">
+      <button type="submit" class="btn primary btn-block">
         Send Message
       </button>
 
-      <p style="margin-top:15px; font-size:13px; color:#b9b9c6; text-align:center;">
+      <p class="contact-note">
         Your message is secure and will only be used to reply back.
       </p>
 
@@ -115,37 +112,6 @@
       once: true
     });
   </script>
-  <!-- Mobile Menu Toggle Script -->
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const hamburgerBtn = document.getElementById('hamburgerBtn');
-      const mobileMenu = document.getElementById('mobileMenu');
-      const menuLinks = document.querySelectorAll('.mobile-menu-link');
-
-      // Toggle mobile menu on hamburger click
-      if (hamburgerBtn) {
-        hamburgerBtn.addEventListener('click', function() {
-          hamburgerBtn.classList.toggle('active');
-          mobileMenu.classList.toggle('active');
-        });
-      }
-
-      // Close mobile menu when a link is clicked
-      menuLinks.forEach(link => {
-        link.addEventListener('click', function() {
-          hamburgerBtn.classList.remove('active');
-          mobileMenu.classList.remove('active');
-        });
-      });
-
-      // Close mobile menu when clicking outside
-      document.addEventListener('click', function(event) {
-        if (!event.target.closest('.navbar')) {
-          hamburgerBtn.classList.remove('active');
-          mobileMenu.classList.remove('active');
-        }
-      });
-    });
-  </script>
+  <script src="ui.js" defer></script>
 </body>
 </html>

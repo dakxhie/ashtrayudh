@@ -5,12 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Stories | Astrayudh</title>
 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
-
-  <!-- Monetag Multitag Ads -->
-  <script src="https://quge5.com/88/tag.min.js" data-zone="211579" async data-cfasync="false"></script>
 </head>
 
 <body>
@@ -51,7 +50,7 @@
   </header>
 
   <!-- HERO -->
-  <section class="hero" style="background: url('https://images.unsplash.com/photo-1507842072343-583f20270319?auto=format&fit=crop&w=1920&q=90') center/cover no-repeat;">
+  <section class="hero hero--stories">
     <div class="hero-overlay"></div>
     <div class="hero-content" data-aos="fade-up">
       <h1>Stories</h1>
@@ -60,11 +59,12 @@
   </section>
 
   <!-- PREMIUM HEADER -->
-  <section class="container premium-page-header" data-aos="fade-up">
+  <section class="container premium-page-header compact" data-aos="fade-up">
     <div class="header-content">
-      <h1 class="page-title">Stories</h1>
+      <p class="page-eyebrow">Discover</p>
+      <h2 class="page-title">All Stories</h2>
       <p class="page-subtitle">
-        Fiction, worlds, and chapters crafted with emotion — Astrayudh stories are meant to be felt.
+        Serialized fiction and immersive chapters — written to be felt, not just read.
       </p>
       <div class="header-divider"></div>
     </div>
@@ -103,6 +103,7 @@
   <section class="container blogs-section">
     <div id="storiesGrid" class="premium-grid-layout"></div>
     <div id="emptyState" class="empty-state" style="display:none;">
+      <div class="empty-state-icon" aria-hidden="true">✦</div>
       <p>No stories found matching your search.</p>
     </div>
   </section>
@@ -114,45 +115,19 @@
 
   <footer class="footer">
     <p>© 2026 Astrayudh. Crafted with calm design.</p>
+    <div class="footer-links">
+      <a href="privacy.html">Privacy Policy</a>
+    </div>
   </footer>
 
   <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
   <script>
-    AOS.init();
-  </script>
-  <script type="module" src="stories.js"></script>
-  
-  <!-- Mobile Menu Toggle Script -->
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const hamburgerBtn = document.getElementById('hamburgerBtn');
-      const mobileMenu = document.getElementById('mobileMenu');
-      const menuLinks = document.querySelectorAll('.mobile-menu-link');
-
-      // Toggle mobile menu on hamburger click
-      if (hamburgerBtn) {
-        hamburgerBtn.addEventListener('click', function() {
-          hamburgerBtn.classList.toggle('active');
-          mobileMenu.classList.toggle('active');
-        });
-      }
-
-      // Close mobile menu when a link is clicked
-      menuLinks.forEach(link => {
-        link.addEventListener('click', function() {
-          hamburgerBtn.classList.remove('active');
-          mobileMenu.classList.remove('active');
-        });
-      });
-
-      // Close mobile menu when clicking outside
-      document.addEventListener('click', function(event) {
-        if (!event.target.closest('.navbar')) {
-          hamburgerBtn.classList.remove('active');
-          mobileMenu.classList.remove('active');
-        }
-      });
+    AOS.init({
+      duration: 1000,
+      once: true
     });
   </script>
+  <script type="module" src="stories.js"></script>
+  <script src="ui.js" defer></script>
 </body>
 </html>

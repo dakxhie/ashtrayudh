@@ -15,9 +15,6 @@
 
   <!-- Animate On Scroll Library -->
   <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
-
-  <!-- Monetag Multitag Ads -->
-  <script src="https://quge5.com/88/tag.min.js" data-zone="211579" async data-cfasync="false"></script>
 </head>
 
 <body>
@@ -57,7 +54,7 @@
   </header>
 
   <!-- HERO -->
-  <section class="hero" style="background: url('https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1920&q=90') center/cover no-repeat;">
+  <section class="hero hero--home">
     <div class="hero-overlay"></div>
 
     <div class="hero-content" data-aos="fade-up">
@@ -141,39 +138,6 @@
       once: true
     });
   </script>
-
-  <!-- Mobile Menu Toggle Script -->
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const hamburgerBtn = document.getElementById('hamburgerBtn');
-      const mobileMenu = document.getElementById('mobileMenu');
-      const menuLinks = document.querySelectorAll('.mobile-menu-link');
-
-      // Toggle mobile menu on hamburger click
-      if (hamburgerBtn) {
-        hamburgerBtn.addEventListener('click', function() {
-          hamburgerBtn.classList.toggle('active');
-          mobileMenu.classList.toggle('active');
-        });
-      }
-
-      // Close mobile menu when a link is clicked
-      menuLinks.forEach(link => {
-        link.addEventListener('click', function() {
-          hamburgerBtn.classList.remove('active');
-          mobileMenu.classList.remove('active');
-        });
-      });
-
-      // Close mobile menu when clicking outside
-      document.addEventListener('click', function(event) {
-        if (!event.target.closest('.navbar')) {
-          hamburgerBtn.classList.remove('active');
-          mobileMenu.classList.remove('active');
-        }
-      });
-    });
-  </script>
-
+  <script src="ui.js" defer></script>
 </body>
 </html>

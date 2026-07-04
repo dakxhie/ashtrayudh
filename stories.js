@@ -125,6 +125,23 @@ function filterAndSortStories() {
   renderStories(0);
 }
 
+function renderLoadingSkeleton() {
+  return `
+    <div class="loading-grid">
+      ${[1, 2, 3].map(() => `
+        <div class="skeleton-card">
+          <div class="skeleton-image"></div>
+          <div class="skeleton-body">
+            <div class="skeleton-line short"></div>
+            <div class="skeleton-line medium"></div>
+            <div class="skeleton-line long"></div>
+          </div>
+        </div>
+      `).join('')}
+    </div>
+  `;
+}
+
 async function loadStories() {
   const storiesGrid = document.getElementById("storiesGrid");
   if (!storiesGrid) {
@@ -132,7 +149,7 @@ async function loadStories() {
     return;
   }
 
-  storiesGrid.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 60px 20px;"><p style="color:rgba(255,255,255,0.6); font-size: 16px;">Loading stories...</p></div>`;
+  storiesGrid.innerHTML = renderLoadingSkeleton();
 
   try {
     console.log("[STORIES] 🔄 Starting to load published stories from Firestore...");
@@ -168,7 +185,7 @@ async function loadStories() {
     console.error("[STORIES] ❌ Error loading stories:", error);
     console.error("[STORIES] Error message:", error.message);
     console.error("[STORIES] Error code:", error.code);
-    storiesGrid.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 40px;"><p style="color:rgba(255,255,255,0.6);">Failed to load stories. Please refresh the page.</p></div>`;
+    storiesGrid.innerHTML = `<div class="empty-state"><p>Failed to load stories. Please refresh the page.</p></div>`;
   }
 }
 
