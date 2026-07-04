@@ -1,8 +1,22 @@
 /**
- * Shared UI behaviors — mobile navigation and page transitions.
+ * Astrayudh — shared UI: navigation, theme, scroll animations.
  */
 (function () {
   'use strict';
+
+  var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function initTheme() {
+    document.body.classList.add('theme-active');
+
+    if (document.querySelector('.theme-orbs')) return;
+
+    var orbs = document.createElement('div');
+    orbs.className = 'theme-orbs';
+    orbs.setAttribute('aria-hidden', 'true');
+    orbs.innerHTML = '<span></span><span></span><span></span>';
+    document.body.insertBefore(orbs, document.body.firstChild);
+  }
 
   function initMobileMenu() {
     var hamburgerBtn = document.getElementById('hamburgerBtn');
@@ -36,6 +50,7 @@
   }
 
   function initPageTransition() {
+    if (prefersReducedMotion) return;
     document.body.classList.add('page-enter');
   }
 
@@ -51,10 +66,87 @@
     window.addEventListener('scroll', onScroll, { passive: true });
   }
 
+  function initAOS() {
+    if (typeof window.AOS === 'undefined') return;
+
+    window.AOS.init({
+      duration: 900,
+      easing: 'ease-out-cubic',
+      once: true,
+      offset: 60,
+      delay: 0,
+      disable: prefersReducedMotion ? 'mobile' : false
+    });
+  }
+
+  function initScrollReveal() {
+    if (prefersReducedMotion) return;
+
+    var targets = document.querySelectorAll(
+      '.card, .content-card, .section-heading, .feature-box, .cta-box, ' +
+      '.contact-box, .privacy-box, .blogs-controls, .chapter-link, .reader-card'
+    );
+
+    targets.forEach(function (el, index) {
+      if (el.closest('[data-aos]') || el.hasAttribute('data-aos')) return;
+      el.classList.add('reveal');
+      if (index % 3 === 1) el.classList.add('reveal-delay-1');
+      if (index % 3 === 2) el.classList.add('reveal-delay-2');
+    });
+
+    if (!('IntersectionObserver' in window)) {
+      targets.forEach(function (el) { el.classList.add('reveal--visible'); });
+      return;
+    }
+
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('reveal--visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(function (el) {
+      observer.observe(el);
+    });
+  }
+
+  function initHeroParallax() {
+    if (prefersReducedMotion) return;
+
+    var hero = document.querySelector('.hero');
+    if (!hero) return;
+
+    window.addEventListener('scroll', function () {
+      var scrolled = window.scrollY;
+      if (scrolled > window.innerHeight) return;
+      hero.style.backgroundPosition = 'center ' + (scrolled * 0.25) + 'px';
+    }, { passive: true });
+  }
+
+  function initStaggerCards() {
+    var grids = document.querySelectorAll('.cards, .premium-grid-layout, .loading-grid');
+    grids.forEach(function (grid) {
+      var items = grid.children;
+      for (var i = 0; i < items.length; i++) {
+        if (!prefersReducedMotion) {
+          items[i].style.animationDelay = (i * 0.08) + 's';
+        }
+      }
+    });
+  }
+
   function init() {
+    initTheme();
     initMobileMenu();
     initPageTransition();
     initNavbarScroll();
+    initAOS();
+    initScrollReveal();
+    initHeroParallax();
+    initStaggerCards();
   }
 
   if (document.readyState === 'loading') {

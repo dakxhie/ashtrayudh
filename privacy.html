@@ -2,13 +2,17 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Privacy Policy | Astrayudh</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="theme.css">
+  <link rel="stylesheet" href="responsive.css">
+
+
   <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
 </head>
 
@@ -48,6 +52,7 @@
   <section class="hero hero--privacy hero--compact">
     <div class="hero-overlay"></div>
     <div class="hero-content" data-aos="fade-up">
+      <span class="hero-eyebrow">Legal</span>
       <h1>Privacy & Trust</h1>
       <p>Your data is sacred. Learn how we protect your privacy.</p>
     </div>
@@ -91,11 +96,12 @@
 
       <h3>4. Advertising</h3>
       <p>
-        Interstitial advertisements may appear only on blog pages (the blogs listing and individual blog articles)
-        through Monetag. We do not show banner, native, rewarded, sticky, pop-up, floating, or anchor ads.
-        Interstitial ads are shown only after meaningful user interaction, never immediately on page load,
-        and are limited to two per visit with cooldown periods between displays.
-        Ads are never shown on the contact form or admin pages.
+        Astrayudh shows interstitial advertisements only on blog pages
+        (the blogs listing and individual blog articles) through Monetag.
+        No other page on this website displays ads.
+        We do not use banner, native, rewarded, sticky, pop-up, floating, or anchor ads anywhere.
+        Interstitial ads appear only after meaningful user interaction, never on page load,
+        with a maximum of two per visit and cooldown periods between displays.
       </p>
 
       <h3>5. Cookies</h3>
@@ -139,12 +145,7 @@
   </footer>
 
   <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
-  <script>
-    AOS.init({
-      duration: 1000,
-      once: true
-    });
-  </script>
+  <script src="ad-guard.js" defer></script>
   <script src="ui.js" defer></script>
 </body>
 </html>

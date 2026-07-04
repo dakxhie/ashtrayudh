@@ -1,0 +1,384 @@
+/* ===================================================
+   Astrayudh — All-device responsive layer
+   Load after theme.css
+   =================================================== */
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  min-width: 280px;
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+}
+
+img,
+video,
+iframe {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Touch-friendly targets */
+.btn,
+.nav-btn,
+.hamburger,
+.chapter-link,
+.mobile-menu-link,
+.mobile-menu-cta,
+.search-box,
+.sort-select,
+.contact-form input,
+.contact-form textarea,
+.contact-form button,
+.load-more-btn {
+  min-height: 44px;
+}
+
+.hamburger {
+  min-width: 44px;
+}
+
+/* ---- Large tablet / small laptop ---- */
+@media (max-width: 1100px) {
+  .container,
+  .section {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+
+  .story-view .container,
+  .blog-view .container {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+}
+
+/* ---- Tablet ---- */
+@media (max-width: 900px) {
+  .navbar {
+    padding: 14px 24px !important;
+  }
+
+  .container,
+  .section {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  .hero {
+    min-height: 420px;
+    height: auto;
+    padding: 80px 24px 64px;
+  }
+
+  .hero--medium,
+  .hero--short,
+  .hero--compact {
+    min-height: 360px;
+  }
+
+  .hero-content h1 {
+    font-size: clamp(28px, 6vw, 44px);
+    line-height: 1.15;
+  }
+
+  .hero-content p {
+    font-size: 16px;
+    margin-bottom: 24px;
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    max-width: 320px;
+    margin: 0 auto;
+  }
+
+  .hero-buttons .btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .section {
+    padding-top: 64px;
+    padding-bottom: 64px;
+  }
+
+  .section-heading h2,
+  .page-title {
+    font-size: clamp(26px, 5.5vw, 36px);
+  }
+
+  .cards,
+  .premium-grid-layout {
+    gap: 18px;
+  }
+
+  .cta {
+    padding: 64px 24px;
+  }
+
+  .cta-box,
+  .feature-box {
+    padding: 40px 24px;
+  }
+
+  .contact-section {
+    padding: 48px 0 64px;
+  }
+
+  .contact-box {
+    padding: 28px 22px;
+  }
+
+  .privacy-box {
+    padding: 28px 22px;
+  }
+
+  .story-view .container,
+  .blog-view .container {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  .page-hero-image {
+    height: 38vh;
+    min-height: 220px;
+    margin-bottom: 32px;
+  }
+
+  .premium-page-header.compact {
+    padding: 36px 0 20px;
+  }
+
+  .blogs-controls {
+    padding: 16px;
+    gap: 14px;
+  }
+
+  .controls-wrapper {
+    width: 100%;
+  }
+
+  .mobile-menu {
+    right: 16px;
+    left: 16px;
+    width: auto;
+    max-width: none;
+  }
+}
+
+/* ---- Mobile ---- */
+@media (max-width: 600px) {
+  .navbar {
+    padding: 12px 16px !important;
+    gap: 8px;
+  }
+
+  .logo {
+    font-size: 22px;
+  }
+
+  .nav-btn {
+    display: none;
+  }
+
+  .container,
+  .section {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .hero {
+    padding: 72px 16px 56px;
+    min-height: 340px;
+  }
+
+  .hero-eyebrow {
+    font-size: 11px;
+    letter-spacing: 2px;
+    padding: 5px 12px;
+    margin-bottom: 12px;
+  }
+
+  .hero-content h1 {
+    font-size: clamp(26px, 8vw, 34px);
+    margin-bottom: 14px;
+  }
+
+  .hero-content p {
+    font-size: 15px;
+    line-height: 1.65;
+  }
+
+  .btn {
+    padding: 12px 20px;
+    font-size: 14px;
+  }
+
+  .card,
+  .content-card,
+  .reader-card,
+  .story-reader,
+  .chapters-panel {
+    padding: 20px 16px !important;
+  }
+
+  .card h3,
+  .card-title {
+    font-size: 18px;
+  }
+
+  .card-image {
+    height: 160px;
+  }
+
+  .card-body {
+    padding: 18px;
+  }
+
+  .card-meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .card-btn {
+    margin-left: 0;
+    align-self: flex-start;
+  }
+
+  .section-heading h2::after {
+    width: 36px;
+  }
+
+  .footer {
+    padding: 36px 16px calc(36px + env(safe-area-inset-bottom));
+  }
+
+  .story-layout {
+    gap: 20px;
+    margin: 24px 0;
+  }
+
+  .chapters-panel {
+    position: relative;
+    top: 0;
+    padding: 16px !important;
+  }
+
+  .story-reader h2,
+  .blog-title,
+  .story-title {
+    font-size: clamp(24px, 7vw, 32px);
+  }
+
+  .blog-text,
+  .chapter-text {
+    font-size: 15px;
+    line-height: 1.75;
+  }
+
+  .blog-cover img {
+    height: 220px;
+  }
+
+  .breadcrumbs {
+    font-size: 12px;
+    gap: 6px;
+  }
+
+  .reader-actions {
+    margin-top: 20px;
+    padding-top: 18px;
+  }
+
+  .chapter-controls {
+    flex-direction: column;
+  }
+
+  .chapter-controls .btn {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .results-count {
+    width: 100%;
+    text-align: center;
+  }
+
+  .pagination-section {
+    padding-bottom: 40px;
+  }
+
+  .load-more-btn {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .empty-state {
+    padding: 48px 16px;
+  }
+
+  .theme-orbs span {
+    opacity: 0.2;
+    filter: blur(60px);
+  }
+}
+
+/* ---- Very small phones ---- */
+@media (max-width: 380px) {
+  .hero-content h1 {
+    font-size: 24px;
+  }
+
+  .premium-page-header.compact .page-title {
+    font-size: 28px;
+  }
+
+  .contact-box h2 {
+    font-size: 26px;
+  }
+
+  .mobile-menu {
+    top: 62px;
+    padding: 16px;
+    gap: 14px;
+  }
+}
+
+/* ---- Landscape phones ---- */
+@media (max-height: 500px) and (orientation: landscape) {
+  .hero {
+    min-height: auto;
+    height: auto;
+    padding: 64px 24px 48px;
+  }
+
+  .hero--medium,
+  .hero--short,
+  .hero--compact {
+    min-height: auto;
+  }
+}
+
+/* ---- Print ---- */
+@media print {
+  .navbar,
+  .theme-orbs,
+  .hamburger,
+  .mobile-menu,
+  .hero-buttons,
+  .load-more-btn {
+    display: none !important;
+  }
+
+  body {
+    background: white;
+    color: black;
+  }
+}

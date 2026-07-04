@@ -2,13 +2,18 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Astrayudh Story</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="theme.css">
+  <link rel="stylesheet" href="responsive.css">
+
+
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
 </head>
 
 <body>
@@ -69,14 +74,14 @@
       <div class="reading-progress" aria-hidden="true"><div id="progressBar"></div></div>
 
       <!-- Hero (Title + Meta) -->
-      <header class="page-hero">
+      <header class="page-hero" data-aos="fade-up">
       <h1 id="storyTitle" class="story-title">Loading...</h1>
       <p id="storyDesc" class="story-desc">&nbsp;</p>
       <div class="header-divider small"></div>
       <div id="readingMeta" class="reading-meta" aria-hidden="true"></div>
       </header>
 
-      <div class="story-layout">
+      <div class="story-layout" data-aos="fade-up" data-aos-delay="100">
 
       <!-- CHAPTER LIST -->
       <aside class="chapters-panel">
@@ -116,6 +121,8 @@
 
   <!-- MODULE SCRIPT -->
   <script type="module" src="story-view.js"></script>
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <script src="ad-guard.js" defer></script>
   <script src="ui.js" defer></script>
 </body>
 </html>

@@ -1,12 +1,11 @@
 /**
- * Astrayudh Interstitial Ad Manager
- * Monetag interstitial-only — max 2 per visit, interaction-gated, graceful fallback.
+ * Astrayudh Interstitial Ad Manager — BLOG PAGES ONLY
+ * Max 2 interstitials per visit, interaction-gated, graceful fallback.
  */
 (function () {
   'use strict';
 
   var CONFIG = {
-    // Replace with a dedicated Monetag Interstitial zone ID from your dashboard for best results.
     ZONE_ID: 211579,
     SCRIPT_URL: 'https://quge5.com/88/tag.min.js',
     MAX_ADS_PER_VISIT: 2,
@@ -14,15 +13,15 @@
     SECOND_AD_MIN_TIME_MS: 120000,
     PAGE_READY_DELAY_MS: 5000,
     ALLOWED_PAGES: ['blogs.html', 'blog-view.html'],
-    SESSION_KEY: 'astrayudh_interstitial_count'
+    SESSION_KEY: 'astrayudh_blog_interstitial_count'
   };
 
   var pageLoadTime = Date.now();
   var meaningfulInteractions = 0;
   var lastAdTime = 0;
   var isShowingAd = false;
-  var sdkLoaded = false;
   var pendingTrigger = false;
+  var sdkLoaded = false;
 
   function getAdsShown() {
     try {
@@ -46,25 +45,19 @@
   function isProtectedTarget(target) {
     if (!target || !target.closest) return true;
 
-    var blocked = target.closest(
+    return !!target.closest(
       'form, input, textarea, select, button[type="submit"], ' +
       '.contact-form, .contact-box, #searchInput, #sortSelect, ' +
-      '#loadMoreBtn, .hamburger, .admin-panel, [data-no-ad]'
+      '#loadMoreBtn, .hamburger, .admin-panel, [data-no-ad], .blogs-controls'
     );
-    if (blocked) return true;
-
-    if (target.closest('form')) return true;
-    if (target.closest('a[href*="contact"]') && target.closest('.contact-form, .contact-box')) return true;
-
-    return false;
   }
 
   function isMeaningfulTarget(target) {
     if (isProtectedTarget(target)) return false;
     return !!target.closest(
-      'a.nav-links, .nav-links a, .hero-buttons a, .btn, .content-card, ' +
-      '.card, .chapter-btn, .card-btn, .mobile-menu-link, .nav-btn, ' +
-      '.cta-box a, .feature-box a, .footer-links a'
+      '.content-card, .card-btn, .blog-text, .reader-content, ' +
+      '.hero-buttons a, .btn.primary, .breadcrumbs a, .footer-links a, ' +
+      '.mobile-menu-link, .nav-links a'
     );
   }
 
@@ -93,17 +86,8 @@
     return typeof window[name] === 'function' ? window[name] : null;
   }
 
-  function unregisterServiceWorkers() {
-    if (!('serviceWorker' in navigator)) return;
-    navigator.serviceWorker.getRegistrations().then(function (regs) {
-      regs.forEach(function (reg) {
-        reg.unregister();
-      });
-    }).catch(function () { /* ignore */ });
-  }
-
   function loadSdk() {
-    if (sdkLoaded) return Promise.resolve(true);
+    if (sdkLoaded) return Promise.resolve(!!getShowFn());
 
     return new Promise(function (resolve) {
       var existing = document.querySelector('script[data-astrayudh-interstitial]');
@@ -166,13 +150,18 @@
       showFn({ type: 'preload' }).catch(function () { /* no inventory */ })
         .then(function () {
           return showFn({
-            requestVar: 'astrayudh_interstitial_' + (getAdsShown() + 1)
+            type: 'end',
+            requestVar: 'astrayudh_blog_interstitial_' + (getAdsShown() + 1)
+          });
+        })
+        .catch(function () {
+          return showFn({
+            requestVar: 'astrayudh_blog_interstitial_' + (getAdsShown() + 1)
           });
         })
         .catch(function () { /* graceful failure */ })
         .finally(function () {
-          var next = getAdsShown() + 1;
-          setAdsShown(next);
+          setAdsShown(getAdsShown() + 1);
           lastAdTime = Date.now();
           isShowingAd = false;
         });
@@ -190,21 +179,23 @@
   }
 
   function onScroll() {
-    if (meaningfulInteractions >= 1) return;
     var scrollable = document.documentElement.scrollHeight - window.innerHeight;
     if (scrollable <= 0) return;
     var ratio = window.scrollY / scrollable;
-    if (ratio >= 0.45) {
+
+    if (meaningfulInteractions === 0 && ratio >= 0.4) {
       onMeaningfulInteraction();
+      return;
+    }
+
+    if (meaningfulInteractions === 1 && ratio >= 0.75 && shouldShowSecondAd()) {
+      triggerInterstitial();
     }
   }
 
   function init() {
     if (!isAllowedPage()) return;
 
-    unregisterServiceWorkers();
-
-    // Preload SDK after page is ready (not on initial load)
     setTimeout(function () {
       if (isAllowedPage()) loadSdk();
     }, CONFIG.PAGE_READY_DELAY_MS);
