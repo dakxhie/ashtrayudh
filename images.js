@@ -45,6 +45,50 @@ function isValidRemoteUrl(url) {
   return /^https?:\/\//i.test(url) || url.startsWith("//");
 }
 
+const BLOG_COVER_ILLUSTRATIONS = [
+  "cover-blog-a",
+  "cover-blog-b",
+  "cover-blog-c",
+  "cover-blog-d",
+  "cover-blog-e"
+];
+
+const STORY_COVER_ILLUSTRATIONS = [
+  "cover-story-a",
+  "cover-story-b",
+  "cover-story-c"
+];
+
+export function hasBlogCover(blog) {
+  const candidates = [
+    blog?.imageUrl,
+    blog?.featuredImage,
+    blog?.image,
+    blog?.coverImageUrl
+  ];
+  return candidates.some(isValidRemoteUrl);
+}
+
+export function hasStoryCover(story) {
+  const candidates = [
+    story?.coverImageUrl,
+    story?.imageUrl,
+    story?.featuredImage,
+    story?.image
+  ];
+  return candidates.some(isValidRemoteUrl);
+}
+
+export function getBlogIllustrationKey(blog, index = 0) {
+  const key = blog?.id || blog?.title || index;
+  return BLOG_COVER_ILLUSTRATIONS[hashString(key) % BLOG_COVER_ILLUSTRATIONS.length];
+}
+
+export function getStoryIllustrationKey(story, index = 0) {
+  const key = story?.id || story?.title || index;
+  return STORY_COVER_ILLUSTRATIONS[hashString(key) % STORY_COVER_ILLUSTRATIONS.length];
+}
+
 export function resolveBlogImage(blog, index = 0) {
   const candidates = [
     blog?.imageUrl,
@@ -57,6 +101,13 @@ export function resolveBlogImage(blog, index = 0) {
     if (isValidRemoteUrl(url)) return url;
   }
 
+  return null;
+}
+
+/** Optional remote fallback when illustration is not desired (e.g. OG meta). */
+export function resolveBlogImageFallback(blog, index = 0) {
+  const direct = resolveBlogImage(blog, index);
+  if (direct) return direct;
   const key = blog?.id || blog?.title || index;
   return BLOG_FALLBACKS[hashString(key) % BLOG_FALLBACKS.length];
 }
@@ -73,6 +124,12 @@ export function resolveStoryImage(story, index = 0) {
     if (isValidRemoteUrl(url)) return url;
   }
 
+  return null;
+}
+
+export function resolveStoryImageFallback(story, index = 0) {
+  const direct = resolveStoryImage(story, index);
+  if (direct) return direct;
   const key = story?.id || story?.title || index;
   return STORY_FALLBACKS[hashString(key) % STORY_FALLBACKS.length];
 }

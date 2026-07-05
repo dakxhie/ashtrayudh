@@ -182,7 +182,10 @@
         });
       });
 
-      if (shouldInit) initIllustrations();
+      if (shouldInit) {
+        initIllustrations();
+        initCoverSlots();
+      }
     });
 
     observer.observe(document.body, { childList: true, subtree: true });
@@ -208,6 +211,12 @@
     });
   }
 
+  function initCoverSlots() {
+    if (window.AstrayudhCovers) {
+      window.AstrayudhCovers.init();
+    }
+  }
+
   function init() {
     initTheme();
     initMobileMenu();
@@ -215,6 +224,7 @@
     initNavbarScroll();
     initHeroDots();
     initIllustrations();
+    initCoverSlots();
     initAOS();
     initScrollReveal();
     initHeroParallax();
@@ -233,6 +243,7 @@
   window.AstrayudhUI = {
     refreshMotion: function () {
       initIllustrations();
+      initCoverSlots();
       initCardIconMotion();
       initCardTilt();
       if (typeof window.AOS !== 'undefined') {

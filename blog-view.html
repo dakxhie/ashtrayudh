@@ -63,17 +63,20 @@
 
       <!-- Hero -->
       <section class="bv-hero bv-animate" aria-label="Article hero">
-        <div class="bv-hero__media" id="blogHeroImage">
+        <div class="bv-hero__media cover-slot bv-hero__media--illus cover-slot--illus" id="blogHeroImage">
           <img
             id="blogHeroImg"
-            class="bv-hero__img"
-            src="https://images.unsplash.com/photo-1455390883993-490efaba612e?auto=format&fit=crop&w=1400&q=80"
+            class="bv-hero__img cover-slot__img"
+            data-cover-img
+            src=""
             alt=""
             width="1400"
             height="360"
             fetchpriority="high"
             decoding="async"
+            hidden
           />
+          <div class="cover-illus bv-hero__illus" data-illustration="cover-blog-a" aria-hidden="true"></div>
         </div>
         <div class="bv-hero__overlay" aria-hidden="true"></div>
       </section>
@@ -185,6 +188,8 @@
   </footer>
 
   <script type="module" src="blog-view.js"></script>
+  <script src="illustrations.js" defer></script>
+  <script src="covers.js" defer></script>
   <script src="ads/adsterra-config.js"></script>
   <script src="ads/adsterra-core.js" defer></script>
   <script src="ads/adsterra-banner-300x250.js" defer></script>

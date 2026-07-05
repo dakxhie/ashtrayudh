@@ -74,6 +74,13 @@
   height: 48px;
 }
 
+.illus-svg--cover {
+  width: 100%;
+  max-width: 420px;
+  height: auto;
+  animation: illusFloat 7s ease-in-out infinite;
+}
+
 .illus-svg--feature {
   width: 140px;
   height: auto;

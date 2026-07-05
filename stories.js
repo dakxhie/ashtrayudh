@@ -1,10 +1,37 @@
 import { getPublishedStories } from "./firestoreService.js";
-import { resolveStoryImage, escapeCssUrl } from "./images.js";
+import {
+  resolveStoryImage,
+  escapeCssUrl,
+  getStoryIllustrationKey
+} from "./images.js";
 
 let allStories = [];
 let filteredStories = [];
 let currentPage = 0;
 const itemsPerPage = 6;
+
+function buildCardCover(story, index) {
+  const image = resolveStoryImage(story, index);
+  const illustration = getStoryIllustrationKey(story, index);
+
+  if (image) {
+    return `
+      <div class="card-image cover-slot">
+        <img class="cover-slot__img" data-cover-img src="${escapeCssUrl(image)}" alt="" loading="lazy" decoding="async">
+        <div class="cover-illus" data-illustration="${illustration}" aria-hidden="true"></div>
+      </div>`;
+  }
+
+  return `
+    <div class="card-image cover-slot cover-slot--illus" data-force-illus="true">
+      <div class="cover-illus" data-illustration="${illustration}" aria-hidden="true"></div>
+    </div>`;
+}
+
+function initCardCovers(root) {
+  if (window.AstrayudhCovers) window.AstrayudhCovers.init(root);
+  if (window.AstrayudhIllustrations) window.AstrayudhIllustrations.init(root);
+}
 
 function renderStories(startIndex = 0) {
   const storiesGrid = document.getElementById("storiesGrid");
@@ -66,10 +93,8 @@ function renderStories(startIndex = 0) {
       }
     }
     
-    const cover = escapeCssUrl(resolveStoryImage(story, index));
-
     card.innerHTML = `
-      <div class="card-image" style="background-image:url('${cover}')"></div>
+      ${buildCardCover(story, index)}
       <div class="card-body">
         <span class="card-category">Story</span>
         <h2 class="card-title">${title}</h2>
@@ -114,6 +139,8 @@ function renderStories(startIndex = 0) {
   if (window.AdsterraPlacements) {
     window.AdsterraPlacements.mountExistingSlots();
   }
+
+  initCardCovers(storiesGrid);
 
   if (window.AstrayudhUI) {
     window.AstrayudhUI.refreshMotion();

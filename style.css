@@ -169,7 +169,7 @@ body.page-enter {
   justify-content: center;
   padding: 50px;
   position: relative;
-  background: url("hero.jpg") center/cover no-repeat;
+  background: linear-gradient(145deg, #1e2128 0%, #2a2d35 45%, #24272e 100%);
 }
 
 /* ===========================
@@ -2542,13 +2542,23 @@ body {
   transition: transform var(--transition-slow), box-shadow var(--transition);
 }
 
+.showcase-card__media,
 .showcase-card img {
   width: 100%;
   height: 100%;
   min-height: 180px;
-  object-fit: cover;
   display: block;
+}
+
+.showcase-card__media img,
+.showcase-card img {
+  object-fit: cover;
   transition: transform 0.45s ease;
+}
+
+.showcase-card:hover .showcase-card__media img,
+.showcase-card:hover img {
+  transform: scale(1.04);
 }
 
 .showcase-card span {
@@ -2567,10 +2577,6 @@ body {
 .showcase-card:hover {
   transform: translateY(-4px);
   box-shadow: var(--shadow-lg);
-}
-
-.showcase-card:hover img {
-  transform: scale(1.04);
 }
 
 .card--visual {
@@ -2595,6 +2601,18 @@ body {
   background-position: center;
 }
 
+.card-image--home.cover-slot {
+  position: relative;
+  overflow: hidden;
+}
+
+.card-image--home .cover-slot__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
 .card--visual .card-icon-wrap {
   margin: 18px 28px 0;
 }
@@ -2617,7 +2635,14 @@ body {
   text-align: left;
 }
 
-.feature-visual img {
+.feature-visual {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius);
+}
+
+.feature-visual img,
+.feature-visual .cover-slot__img {
   width: 100%;
   height: 220px;
   object-fit: cover;
@@ -2628,6 +2653,89 @@ body {
 
 .card-image {
   background-color: rgba(255, 255, 255, 0.04);
+}
+
+/* ---- Cover slots (image + illustration fallback) ---- */
+.cover-slot {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(145deg, #1e2128, #2a2d35);
+}
+
+.cover-slot__img,
+.cover-slot img[data-cover-img] {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cover-illus {
+  position: absolute;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: linear-gradient(145deg, rgba(30, 33, 40, 0.95), rgba(42, 45, 53, 0.88));
+}
+
+.cover-slot--illus .cover-illus {
+  display: flex;
+}
+
+.cover-slot--illus .cover-slot__img,
+.cover-slot--illus img[data-cover-img] {
+  display: none;
+}
+
+.cover-illus .illus-svg--cover {
+  width: 100%;
+  max-width: 420px;
+  height: auto;
+  animation: illusFloat 7s ease-in-out infinite;
+}
+
+.hero-bg-illus {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.22;
+  pointer-events: none;
+  padding: 40px;
+}
+
+.hero-bg-illus .illus-svg--cover {
+  width: min(720px, 90%);
+  height: auto;
+  animation: illusFloat 9s ease-in-out infinite;
+}
+
+.hero--home .hero-bg-illus,
+.hero--apps .hero-bg-illus,
+.hero--blogs .hero-bg-illus,
+.hero--stories .hero-bg-illus {
+  display: flex;
+}
+
+.content-card .card-image.cover-slot {
+  min-height: 200px;
+}
+
+.content-card .card-image .cover-illus {
+  padding: 12px;
+}
+
+.content-card .card-image .illus-svg--cover {
+  max-width: 320px;
+}
+
+.showcase-card__media.cover-slot {
+  min-height: 180px;
 }
 
 .skeleton-image {

@@ -1,5 +1,5 @@
 import { getBlogById, getPublishedBlogs } from "./firestoreService.js";
-import { resolveBlogImage } from "./images.js";
+import { resolveBlogImage, getBlogIllustrationKey } from "./images.js";
 
 const ICONS = {
   calendar: '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>',
@@ -282,15 +282,12 @@ async function loadRelatedArticles(currentId) {
     }
 
     grid.innerHTML = related
-      .map((blog) => {
-        const img = resolveBlogImage(blog);
+      .map((blog, index) => {
         const date = formatDate(blog.createdAt);
         const excerpt = blog.description || blog.subtitle || "";
         return `
           <a class="bv-related-card" href="blog-view.html?id=${blog.id}">
-            <div class="bv-related-card__media">
-              <img src="${img}" alt="" loading="lazy" decoding="async" width="400" height="180"/>
-            </div>
+            ${buildRelatedCover(blog, index)}
             <div class="bv-related-card__body">
               <span class="bv-related-card__date">${date}</span>
               <h3 class="bv-related-card__title">${blog.title || "Untitled"}</h3>
@@ -300,9 +297,34 @@ async function loadRelatedArticles(currentId) {
         `;
       })
       .join("");
+
+    initCardCovers(grid);
   } catch {
     grid.innerHTML = "";
   }
+}
+
+function buildRelatedCover(blog, index) {
+  const image = resolveBlogImage(blog, index);
+  const illustration = getBlogIllustrationKey(blog, index);
+
+  if (image) {
+    return `
+      <div class="bv-related-card__media cover-slot">
+        <img class="cover-slot__img" data-cover-img src="${image}" alt="" loading="lazy" decoding="async" width="400" height="180">
+        <div class="cover-illus" data-illustration="${illustration}" aria-hidden="true"></div>
+      </div>`;
+  }
+
+  return `
+    <div class="bv-related-card__media cover-slot cover-slot--illus" data-force-illus="true">
+      <div class="cover-illus" data-illustration="${illustration}" aria-hidden="true"></div>
+    </div>`;
+}
+
+function initCardCovers(root) {
+  if (window.AstrayudhCovers) window.AstrayudhCovers.init(root);
+  if (window.AstrayudhIllustrations) window.AstrayudhIllustrations.init(root);
 }
 
 function initFadeUpAnimations() {
@@ -333,16 +355,46 @@ function initFadeUpAnimations() {
   });
 }
 
-function setHeroImage(url, title) {
+function setHeroCover(blog, title) {
+  const heroMedia = document.getElementById("blogHeroImage");
   const heroImg = document.getElementById("blogHeroImg");
-  if (!heroImg) return;
+  const coverImage = resolveBlogImage(blog);
+  const illustration = getBlogIllustrationKey(blog);
 
-  heroImg.src = url;
-  heroImg.alt = title ? `${title} cover image` : "Article cover image";
-  heroImg.onerror = function onHeroError() {
-    heroImg.onerror = null;
-    heroImg.src = resolveBlogImage({ title }, 1);
-  };
+  if (!heroMedia) return;
+
+  heroMedia.classList.remove("bv-hero__media--illus", "cover-slot--illus");
+
+  let illus = heroMedia.querySelector(".cover-illus");
+  if (!illus) {
+    illus = document.createElement("div");
+    illus.className = "cover-illus bv-hero__illus";
+    illus.setAttribute("aria-hidden", "true");
+    heroMedia.appendChild(illus);
+  }
+
+  if (coverImage && heroImg) {
+    heroImg.hidden = false;
+    heroImg.src = coverImage;
+    heroImg.alt = title ? `${title} cover image` : "Article cover image";
+    illus.setAttribute("data-illustration", illustration);
+    heroImg.onerror = function onHeroError() {
+      heroImg.onerror = null;
+      heroImg.hidden = true;
+      heroMedia.classList.add("bv-hero__media--illus", "cover-slot--illus");
+      if (window.AstrayudhIllustrations) window.AstrayudhIllustrations.mount(illus);
+    };
+    return;
+  }
+
+  if (heroImg) {
+    heroImg.hidden = true;
+    heroImg.removeAttribute("src");
+  }
+
+  illus.setAttribute("data-illustration", illustration);
+  heroMedia.classList.add("bv-hero__media--illus", "cover-slot--illus");
+  if (window.AstrayudhIllustrations) window.AstrayudhIllustrations.mount(illus);
 }
 
 async function loadBlog() {
@@ -390,8 +442,7 @@ async function loadBlog() {
     const bc = document.getElementById("blogBreadcrumbTitle");
     if (bc) bc.textContent = title;
 
-    const coverImage = resolveBlogImage(blog);
-    setHeroImage(coverImage, title);
+    setHeroCover(blog, title);
 
     const html = renderContentBlocks(blog.content);
     blogContent.innerHTML = html || "<p>No content available.</p>";

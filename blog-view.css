@@ -172,6 +172,41 @@
   display: block;
 }
 
+.bv-hero__media.cover-slot {
+  background: linear-gradient(145deg, #12141b, #1a1d27);
+}
+
+.bv-hero__media--illus .bv-hero__img {
+  display: none;
+}
+
+.bv-hero__media--illus .cover-illus,
+.bv-hero__illus {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 32px;
+  background: linear-gradient(145deg, #12141b, #1a1d27);
+}
+
+.bv-hero__media .cover-illus .illus-svg--cover {
+  width: min(520px, 88%);
+  max-height: 100%;
+  animation: illusFloat 8s ease-in-out infinite;
+}
+
+.bv-related-card__media.cover-slot {
+  min-height: 180px;
+}
+
+.bv-related-card__media .cover-illus {
+  padding: 10px;
+}
+
+.bv-related-card__media .illus-svg--cover {
+  max-width: 280px;
+}
+
 .bv-hero__overlay {
   position: absolute;
   inset: 0;

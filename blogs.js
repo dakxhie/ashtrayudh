@@ -1,10 +1,37 @@
 import { getPublishedBlogs } from "./firestoreService.js";
-import { resolveBlogImage, escapeCssUrl } from "./images.js";
+import {
+  resolveBlogImage,
+  escapeCssUrl,
+  getBlogIllustrationKey
+} from "./images.js";
 
 let allBlogs = [];
 let filteredBlogs = [];
 let currentPage = 0;
 const itemsPerPage = 6;
+
+function buildCardCover(blog, index) {
+  const image = resolveBlogImage(blog, index);
+  const illustration = getBlogIllustrationKey(blog, index);
+
+  if (image) {
+    return `
+      <div class="card-image cover-slot">
+        <img class="cover-slot__img" data-cover-img src="${escapeCssUrl(image)}" alt="" loading="lazy" decoding="async">
+        <div class="cover-illus" data-illustration="${illustration}" aria-hidden="true"></div>
+      </div>`;
+  }
+
+  return `
+    <div class="card-image cover-slot cover-slot--illus" data-force-illus="true">
+      <div class="cover-illus" data-illustration="${illustration}" aria-hidden="true"></div>
+    </div>`;
+}
+
+function initCardCovers(root) {
+  if (window.AstrayudhCovers) window.AstrayudhCovers.init(root);
+  if (window.AstrayudhIllustrations) window.AstrayudhIllustrations.init(root);
+}
 
 function renderBlogs(startIndex = 0) {
   const blogsGrid = document.getElementById("blogsGrid");
@@ -43,7 +70,6 @@ function renderBlogs(startIndex = 0) {
     card.style.animation = `fadeIn 0.6s ease forwards`;
     card.style.animationDelay = `${(index % itemsPerPage) * 0.1}s`;
 
-    const image = escapeCssUrl(resolveBlogImage(blog, index));
     const title = blog.title || "Untitled Blog";
     const subtitle = blog.subtitle || "No subtitle";
     
@@ -68,7 +94,7 @@ function renderBlogs(startIndex = 0) {
     }
 
     card.innerHTML = `
-      <div class="card-image" style="background-image:url('${image}')"></div>
+      ${buildCardCover(blog, index)}
       <div class="card-body">
         <span class="card-category">Blog</span>
         <h2 class="card-title">${title}</h2>
@@ -113,6 +139,8 @@ function renderBlogs(startIndex = 0) {
   if (window.AdsterraPlacements) {
     window.AdsterraPlacements.mountExistingSlots();
   }
+
+  initCardCovers(blogsGrid);
 
   if (window.AstrayudhUI) {
     window.AstrayudhUI.refreshMotion();
