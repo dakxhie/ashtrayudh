@@ -13,11 +13,18 @@
     if (container.dataset.adsterraMounted === 'true') return true;
 
     var nativeCfg = config.native;
-    var srcdoc = core.buildNativeSrcdoc(nativeCfg);
-    if (!srcdoc) return false;
+    if (!nativeCfg) return false;
 
     container.classList.add('ad-slot--native');
-    return core.renderIframe(container, srcdoc, '100%', 280, 'ad-slot__iframe--native');
+    return core.renderUnit(container, {
+      key: nativeCfg.unitKey,
+      unitKey: nativeCfg.unitKey,
+      width: '100%',
+      height: 250,
+      label: 'Native banner',
+      containerId: nativeCfg.containerId,
+      invokeUrl: nativeCfg.invokeUrl
+    }, 'ad-slot__iframe--native');
   }
 
   function create(label) {

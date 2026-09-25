@@ -13,11 +13,10 @@
     if (container.dataset.adsterraMounted === 'true') return true;
 
     var unit = config.banner300x250;
-    var srcdoc = core.buildAtOptionsSrcdoc(unit);
-    if (!srcdoc) return false;
+    if (!unit) return false;
 
     container.classList.add('ad-slot--300x250');
-    return core.renderIframe(container, srcdoc, unit.width, unit.height, 'ad-slot__iframe--300x250');
+    return core.renderUnit(container, unit, 'ad-slot__iframe--300x250');
   }
 
   function create(label) {

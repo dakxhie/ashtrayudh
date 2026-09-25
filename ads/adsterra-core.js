@@ -61,7 +61,7 @@
     if (!unit || !unit.key) return null;
 
     var invokeUrl = unit.invokeUrl || (
-      'https://www.highperformanceformat.com/' + unit.key + '/invoke.js'
+      'https://www.highrevenueformat.com/' + unit.key + '/invoke.js'
     );
 
     return (
@@ -90,6 +90,40 @@
       '<script async="async" data-cfasync="false" src="' + nativeCfg.invokeUrl + '"><\/script>' +
       '</body></html>'
     );
+  }
+
+  function isMock(unit) {
+    if (config.mock) return true;
+    var key = unit && (unit.key || unit.unitKey || '');
+    return String(key).indexOf('MOCK') === 0;
+  }
+
+  function renderPlaceholder(container, unit) {
+    if (!container || container.dataset.adsterraMounted === 'true') return false;
+
+    var width = unit.width || '100%';
+    var height = unit.height || 90;
+    var box = document.createElement('div');
+    box.className = 'ad-mock';
+    box.style.width = typeof width === 'number' ? width + 'px' : width;
+    box.style.height = typeof height === 'number' ? height + 'px' : height;
+    box.innerHTML =
+      '<span class="ad-mock__type">' + (unit.label || unit.format || 'Banner') + '</span>' +
+      '<span class="ad-mock__size">' + width + '×' + height + '</span>' +
+      '<span class="ad-mock__id">' + (unit.key || unit.unitKey || 'MOCK') + '</span>';
+
+    container.innerHTML = '';
+    container.appendChild(box);
+    container.dataset.adsterraMounted = 'true';
+    container.dataset.adsterraMock = 'true';
+    return true;
+  }
+
+  function renderUnit(container, unit, className) {
+    if (!container || !unit) return false;
+    if (isMock(unit)) return renderPlaceholder(container, unit);
+    var srcdoc = unit.containerId ? buildNativeSrcdoc(unit) : buildAtOptionsSrcdoc(unit);
+    return renderIframe(container, srcdoc, unit.width || '100%', unit.height || 250, className);
   }
 
   function renderIframe(container, srcdoc, width, height, className) {
@@ -147,6 +181,9 @@
     loadScriptOnce: loadScriptOnce,
     buildAtOptionsSrcdoc: buildAtOptionsSrcdoc,
     buildNativeSrcdoc: buildNativeSrcdoc,
+    isMock: isMock,
+    renderPlaceholder: renderPlaceholder,
+    renderUnit: renderUnit,
     renderIframe: renderIframe,
     unmount: unmount,
     isProtectedTarget: isProtectedTarget,

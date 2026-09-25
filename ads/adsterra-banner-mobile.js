@@ -26,11 +26,10 @@
     if (container.dataset.adsterraMounted === 'true') return true;
 
     var unit = config.bannerMobile320x50;
-    var srcdoc = core.buildAtOptionsSrcdoc(unit);
-    if (!srcdoc) return false;
+    if (!unit) return false;
 
     container.classList.add('ad-slot--mobile-320x50');
-    return core.renderIframe(container, srcdoc, unit.width, unit.height, 'ad-slot__iframe--mobile');
+    return core.renderUnit(container, unit, 'ad-slot__iframe--mobile');
   }
 
   function create(label) {

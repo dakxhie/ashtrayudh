@@ -26,11 +26,10 @@
     if (container.dataset.adsterraMounted === 'true') return true;
 
     var unit = config.sidebar160x600;
-    var srcdoc = core.buildAtOptionsSrcdoc(unit);
-    if (!srcdoc) return false;
+    if (!unit) return false;
 
     container.classList.add('ad-slot--sidebar-160x600');
-    return core.renderIframe(container, srcdoc, unit.width, unit.height, 'ad-slot__iframe--sidebar');
+    return core.renderUnit(container, unit, 'ad-slot__iframe--sidebar');
   }
 
   function create(label) {

@@ -40,6 +40,7 @@
 
   function canShow() {
     if (!config.enabled) return false;
+    if (interstitialCfg.everyClick) return !isLoading;
     if (getAdsShown() >= (interstitialCfg.maxPerPage || 2)) return false;
     if (isLoading || pendingTrigger) return false;
     if (Date.now() - pageLoadTime < (interstitialCfg.pageReadyDelayMs || 5000)) return false;
@@ -95,6 +96,11 @@
   }
 
   function onClick(event) {
+    if (interstitialCfg.everyClick) {
+      if (!core || core.isProtectedTarget(event.target)) return;
+      onMeaningfulInteraction();
+      return;
+    }
     if (!isMeaningfulTarget(event.target)) return;
     onMeaningfulInteraction();
   }
@@ -115,7 +121,7 @@
   }
 
   function init() {
-    if (!config.enabled) return;
+    if (!config.enabled || config.mock) return;
 
     document.addEventListener('click', onClick, { passive: true, capture: true });
 
